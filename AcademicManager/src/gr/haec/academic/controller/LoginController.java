@@ -1,7 +1,7 @@
 package gr.haec.academic.controller;
 
-import gr.haec.academic.model.AuthenticateUser;
 import gr.haec.academic.model.Person;
+
 import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;

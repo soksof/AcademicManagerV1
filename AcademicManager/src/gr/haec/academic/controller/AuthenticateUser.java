@@ -1,4 +1,4 @@
-package gr.haec.academic.model;
+package gr.haec.academic.controller;
 
 /**
  * Check login credentials of user from database
