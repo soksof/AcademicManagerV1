@@ -30,11 +30,11 @@ public class LoginController extends HttpServlet {
  
 		AuthenticateUser authenticator = new AuthenticateUser();
 		int personID = authenticator.authenticate(username, password);
-		if (personID!=-1) {//Did not find the user
-			rd = request.getRequestDispatcher("/success.jsp");
+		if (personID!=-1) {//found a user
 			//Maybe create a Person instance
 			request.setAttribute("personID", personID);
-		} else {
+			rd = request.getRequestDispatcher("/success.jsp");
+		} else {//Did not find the user
 			rd = request.getRequestDispatcher("/error.jsp");
 			//alert("Error Password or Username")
 		}
