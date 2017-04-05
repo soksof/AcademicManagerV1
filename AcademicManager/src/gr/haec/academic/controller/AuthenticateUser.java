@@ -1,6 +1,8 @@
 package gr.haec.academic.controller;
 
-import java.sql.Connection;
+import gr.haec.academic.model.Person;
+import gr.haec.academic.model.Role;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -17,21 +19,22 @@ public class AuthenticateUser{
 	 * @param password The password the user has provided
 	 * @return The personID from the database if authentication is successfull, else returns -1
 	 */
-	public int authenticate(String username, String password) {
+	public Person authenticate(String username, String password) {
 		//Connection conn=ConnectionFactory.getConnection();
 		DbConnection conn = new DbConnection("jdbc:mysql://localhost/academicmanagerdb", "root", "");
 		try {
-			PreparedStatement stm=conn.getConnection().prepareStatement("SELECT personID from person where username=? AND password=?");
+			PreparedStatement stm=conn.getConnection().prepareStatement("SELECT * from person where username=? AND password=?");
 			stm.setString(1, username);
 			stm.setString(2, password);
 			ResultSet rs=stm.executeQuery();
-
+ 
 			while(rs.next()){
-				return rs.getInt("personID");
+				Person newPerson=new Person(rs.getInt("personID"),rs.getString("name"),rs.getString("surname"), Role.valueOf(rs.getString("role")));
+				return newPerson;
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return -1;
+		return null;
 	}
 }

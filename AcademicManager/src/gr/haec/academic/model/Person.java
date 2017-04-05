@@ -120,4 +120,10 @@ public class Person {
 		this.iban = iban;
 		this.role = role;
 	}
+	public Person(int personID, String name, String surname,Role role){
+		this.personID = personID;
+		this.name = name;
+		this.surname = surname;
+		this.role = role;
+	}
 }
