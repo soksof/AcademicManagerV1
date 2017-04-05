@@ -7,4 +7,24 @@
     <res-type>javax.sql.Datasource</res-type>
     <res-auth>Container</res-auth>
   </resource-ref>
-</web-app>
+  <servlet>
+    <description></description>
+    <display-name>LoginController</display-name>
+    <servlet-name>LoginController</servlet-name>
+    <servlet-class>gr.haec.academic.controller.LoginController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LoginController</servlet-name>
+    <url-pattern>/LoginController</url-pattern>
+  </servlet-mapping>
+    <servlet>
+    <description></description>
+    <display-name>StudentView</display-name>
+    <servlet-name>StudentView</servlet-name>
+    <servlet-class>gr.haec.academic.view.StudentView</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>StudentView</servlet-name>
+    <url-pattern>/StudentView</url-pattern>
+  </servlet-mapping>
+  </web-app>

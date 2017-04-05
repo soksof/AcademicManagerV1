@@ -3,19 +3,22 @@ package gr.haec.academic.controller;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-import javax.annotation.Resource;
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 public class ConnectionFactory {
-	@Resource(name="jdbc/AcademicManagerDB")
 	private DataSource ds;
 	private static Connection conn;
 	private static ConnectionFactory instance;
 
 	protected ConnectionFactory(){
 		try {
+			Context ctx=new InitialContext();
+			ds=(DataSource)ctx.lookup("jdbc/AcademicManagerDB");
 			conn=ds.getConnection();
-		} catch (SQLException e) {
+		} catch (SQLException | NamingException e) {
 			e.printStackTrace();
 		}
 	}
@@ -33,7 +36,7 @@ public class ConnectionFactory {
 	 * Returns the connection to the database
 	 * @return
 	 */
-	public static Connection getConnetion(){
+	public static Connection getConnection(){
 		return getInstance().conn;
 	}
 }
