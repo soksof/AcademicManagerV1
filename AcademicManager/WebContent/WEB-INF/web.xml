@@ -17,4 +17,14 @@
     <servlet-name>LoginController</servlet-name>
     <url-pattern>/LoginController</url-pattern>
   </servlet-mapping>
-</web-app>
+    <servlet>
+    <description></description>
+    <display-name>StudentView</display-name>
+    <servlet-name>StudentView</servlet-name>
+    <servlet-class>gr.haec.academic.view.StudentView</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>StudentView</servlet-name>
+    <url-pattern>/StudentView</url-pattern>
+  </servlet-mapping>
+  </web-app>
