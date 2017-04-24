@@ -11,6 +11,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * Controller class for login screen
@@ -34,7 +35,8 @@ public class LoginController extends HttpServlet {
 		Person p1 = authenticator.authenticate(username, password);
 		if (p1!=null) {//found a user
 			//Maybe create a Person instance
-			request.setAttribute("person", p1);
+			HttpSession session = request.getSession();
+			session.setAttribute("person", p1);
 			if(p1.getRole().equals(Role.secretary)){
 				rd = request.getRequestDispatcher("/home_secr.jsp");
 			}
@@ -64,7 +66,8 @@ public class LoginController extends HttpServlet {
 		Person p1 = authenticator.authenticate(username, password);
 		if (p1!=null) {//found a user
 			//Maybe create a Person instance
-			request.setAttribute("person", p1);
+			HttpSession session = request.getSession();
+			session.setAttribute("person", p1);
 			if(p1.getRole().equals(Role.secretary)){
 				rd = request.getRequestDispatcher("/home_secr.jsp");
 			}

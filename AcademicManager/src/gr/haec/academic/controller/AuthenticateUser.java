@@ -2,6 +2,7 @@ package gr.haec.academic.controller;
 
 import gr.haec.academic.model.Person;
 import gr.haec.academic.model.Role;
+import gr.haec.academic.model.Sex;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -21,7 +22,7 @@ public class AuthenticateUser{
 	 */
 	public Person authenticate(String username, String password) {
 		//Connection conn=ConnectionFactory.getConnection();
-		DbConnection conn = new DbConnection("jdbc:mysql://localhost/academicmanagerdb", "root", "");
+		DbConnection conn = new DbConnection("jdbc:mysql://localhost/academicmanagerdb", "root", "root");
 		try {
 			PreparedStatement stm=conn.getConnection().prepareStatement("SELECT * from person where username=? AND password=?");
 			stm.setString(1, username);
@@ -29,7 +30,7 @@ public class AuthenticateUser{
 			ResultSet rs=stm.executeQuery();
  
 			while(rs.next()){
-				Person newPerson=new Person(rs.getInt("personID"),rs.getString("name"),rs.getString("surname"), Role.valueOf(rs.getString("role")));
+				Person newPerson=new Person(rs.getInt("personID"),rs.getString("name"),rs.getString("surname"),rs.getString("email"),rs.getString("phone"),Sex.valueOf(rs.getString("sex")),rs.getString("address"),rs.getDate("dob"),rs.getString("username"),rs.getString("taxNumber"),rs.getString("iban"), Role.valueOf(rs.getString("role")));
 				return newPerson;
 			}
 		} catch (SQLException e) {
