@@ -120,4 +120,26 @@ public class Person {
 		this.iban = iban;
 		this.role = role;
 	}
+	//constructor to use for session variable person
+	public Person(int personID, String name, String surname, String email, String phone, Sex sex, String address,
+			Date dob, String username, String taxNumber, String iban, Role role) {
+		this.personID = personID;
+		this.name = name;
+		this.surname = surname;
+		this.email = email;
+		this.phone = phone;
+		this.sex = sex;
+		this.address = address;
+		this.dob = dob;
+		this.username = username;
+		this.taxNumber = taxNumber;
+		this.iban = iban;
+		this.role = role;
+	}
+	public Person(int personID, String name, String surname,Role role){
+		this.personID = personID;
+		this.name = name;
+		this.surname = surname;
+		this.role = role;
+	}
 }

@@ -1,6 +1,7 @@
 package gr.haec.academic.controller;
 
 import gr.haec.academic.model.Person;
+import gr.haec.academic.model.Role;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -10,6 +11,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * Controller class for login screen
@@ -30,11 +32,20 @@ public class LoginController extends HttpServlet {
 		RequestDispatcher rd = null;
  
 		AuthenticateUser authenticator = new AuthenticateUser();
-		int personID = authenticator.authenticate(username, password);
-		if (personID!=-1) {//found a user
+		Person p1 = authenticator.authenticate(username, password);
+		if (p1!=null) {//found a user
 			//Maybe create a Person instance
-			request.setAttribute("personID", personID);
-			rd = request.getRequestDispatcher("/StudentView");
+			HttpSession session = request.getSession();
+			session.setAttribute("person", p1);
+			if(p1.getRole().equals(Role.secretary)){
+				rd = request.getRequestDispatcher("/home_secr.jsp");
+			}
+			else if(p1.getRole().equals(Role.teacher)){
+				rd = request.getRequestDispatcher("/home_teach.jsp");
+			}
+			else if(p1.getRole().equals(Role.student)){
+				rd = request.getRequestDispatcher("/home_stud.jsp");
+			}
 		} else {//Did not find the user
 			PrintWriter out=response.getWriter();
 			out.println("<script language='javascript' type='text/javascript'>");
@@ -52,11 +63,20 @@ public class LoginController extends HttpServlet {
 		RequestDispatcher rd = null;
  
 		AuthenticateUser authenticator = new AuthenticateUser();
-		int personID = authenticator.authenticate(username, password);
-		if (personID!= -1) {
-			rd = request.getRequestDispatcher("/StudentView");
+		Person p1 = authenticator.authenticate(username, password);
+		if (p1!=null) {//found a user
 			//Maybe create a Person instance
-			request.setAttribute("personID", personID);
+			HttpSession session = request.getSession();
+			session.setAttribute("person", p1);
+			if(p1.getRole().equals(Role.secretary)){
+				rd = request.getRequestDispatcher("/home_secr.jsp");
+			}
+			else if(p1.getRole().equals(Role.teacher)){
+				rd = request.getRequestDispatcher("/home_teach.jsp");
+			}
+			else if(p1.getRole().equals(Role.student)){
+				rd = request.getRequestDispatcher("/home_stud.jsp");
+			}
 		} else {
 			PrintWriter out=response.getWriter();
 			out.println("<script language='javascript' type='text/javascript'>");
