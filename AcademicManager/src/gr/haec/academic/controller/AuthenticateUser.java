@@ -22,7 +22,7 @@ public class AuthenticateUser{
 	 */
 	public Person authenticate(String username, String password) {
 		//Connection conn=ConnectionFactory.getConnection();
-		DbConnection conn = new DbConnection("jdbc:mysql://localhost/academicmanagerdb", "root", "root");
+		DbConnection conn = new DbConnection("jdbc:mysql://localhost/academicmanagerdb", "root", "");
 		try {
 			PreparedStatement stm=conn.getConnection().prepareStatement("SELECT * from person where username=? AND password=?");
 			stm.setString(1, username);
