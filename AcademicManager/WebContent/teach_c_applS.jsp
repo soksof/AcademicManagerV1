@@ -8,6 +8,14 @@
     <title>AcademicManager</title>
 </head>
 <body>
+<sql:query var="info" dataSource="jdbc/AcademicManagerDB">
+select * from teacher 
+inner join person on person.personID=teacher.teacherID
+inner join courseteacherapplication on teacher.teacherID=courseteacherapplication.teacherID
+inner join course on courseteacherapplication.courseID=course.courseID
+inner join coursecore on coursecore.idcourseCore=course.idCourseCore
+where teacher.status="Teacher Course Applicant" and person.role="teacher"; 
+ </sql:query>
 <c:set var="person" value='${sessionScope["person"]}'/>
 <div id="pagewrap">
 
@@ -61,25 +69,25 @@
 		<form>
 		<table>
 		 <tr>
-			<th>TeacherID</th>
-			<th>Name</th>
-			<th>Surname</th>
-			<th>Course</th>
-			<th>Date</th>
-			<th>Info</th>
-			<th>Accept</th>
-		  </tr>
-		 <tr>
-			<td>5542</td>
-			<td>Stella</td>
-			<td>Paliou</td>
-			<td>Finance I</td>
-			<td>9/9/2016</td>
-			<td><input type="button" value="CV" onClick="popUp('popup.html')"></td>
-			<td><input type="submit" value="accept"></td>
+		 <c:forEach var="inf" items="${info.rows}" >
+		 <br>
+			TeacherID:<c:out value="${inf.teacherID}"/>
+			<br>
+			Name:<c:out value="${inf.name}" />
+			<br>
+			Surname:<c:out value="${inf.surname}" />
+			<br>
+			Course:<c:out value="${inf.title}" />
+			<br>
+			Date:<c:out value="${inf.applicationDate}" />
+			<br>
+			<input type="button" value="CV" onClick=>
+			<input type="submit" value="accept">
+			<br>
+			</c:forEach>
 		  </tr>
 		</table>
-	<form>
+	</form>
 	</section>
 
 		

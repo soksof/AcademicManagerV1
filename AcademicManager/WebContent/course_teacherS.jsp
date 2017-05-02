@@ -8,6 +8,14 @@
     <title>AcademicManager</title>
 </head>
 <body>
+<sql:query var="info" dataSource="jdbc/AcademicManagerDB">
+select * from teacher 
+inner join person on person.personID=teacher.teacherID
+inner join courseteacher on teacher.teacherID=courseteacher.teacherID
+inner join course on courseteacher.courseID=course.courseID 
+inner join coursecore on coursecore.idcourseCore=course.idCourseCore
+where teacher.status="Course Teacher" and person.role="teacher";    
+ </sql:query>
 <c:set var="person" value='${sessionScope["person"]}'/>
 <div id="pagewrap">
 
@@ -58,13 +66,23 @@
 	<h3>All Course Teachers</h3>
 		<table>
 		  <tr>
-			<th>TeacherID</th>
-			<th>Name</th>
-			<th>Surname</th>
-			<th>Course</th>
-			<th>Start Date</th>
-			<th>End Date</th>
-			<th>Status</th>
+		  <c:forEach var="inf" items="${info.rows}" >
+			<br>
+			TeacherID:<c:out value="${inf.teacherID}"/>
+			<br>
+			Name:<c:out value="${inf.name}" />
+			<br>
+			Surname:<c:out value="${inf.surname}" />
+			<br>
+			Tilte:<c:out value="${inf.title}" />
+			<br>
+			Start Date:<c:out value="${inf.startDate}" />
+			<br>
+			End Date:<c:out value="${inf.endDate}" />
+			<br>
+			Status:<c:out value="${inf.status}" />
+			<br>
+			</c:forEach>
 		  </tr>
 		
 		</table>

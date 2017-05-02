@@ -21,7 +21,7 @@
 		<h1>Hello <c:out value="${person.getName()}" /> </h1>
 	</div>
 	<div id="header-right">	
-	<h4>Logged in as<c:out value="${person.getUsername()}" /></h4>
+	<h4>Logged in as <c:out value="${person.getUsername()}" /></h4>
 			<button  onclick="location.href='index.html'" type="button">Log Out</button>
 	</div>
 	</header>
