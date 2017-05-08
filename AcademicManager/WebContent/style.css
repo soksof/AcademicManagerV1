@@ -1,0 +1,314 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans);
+
+body { 
+  font-family: 'Open Sans', sans-serif;
+  color: #000;
+}
+
+h1,h4{
+	color:#fff;
+}
+
+p,h2,.p_foot {
+	color:#000;
+}
+
+/***** STRUCTURE ******/
+
+#pagewrap {
+	padding: 5px;
+	width: 1060px;
+	margin: 20px auto;
+}
+
+header{
+	height: 100px;
+	padding: 0 15px;
+}
+
+	/** HEADER **/
+	#header-left{
+		float:left;
+	}
+	#header-right{
+		text-align:right;	
+	}
+
+#left {
+	width: 170px;
+	float: left;
+	padding: 5px 15px;
+}
+
+#middle {
+	width: 784px; /* Account for margins + border values */
+	min-height:340px;
+	float: left;
+	padding: 5px 15px;
+	margin: 0px 5px 5px 5px;
+}
+
+
+footer {
+	clear: both;
+	padding: 0 15px;
+	text-align: center ;
+	color:#fff;
+}
+
+/************************************************************************************
+				RESPONSIVE CSS - MEDIA QUERIES
+*************************************************************************************/
+/* for 980px or less */
+@media screen and (max-width: 980px) {
+	
+	#pagewrap {
+		width: 94%;
+	
+	}
+		#left {
+		margin-left:25%;
+		width: 50%;
+		float: none;
+	}
+	
+	#middle {
+		width: auto;
+		float: none;
+		margin-left: 0px;
+	}
+}
+
+/* for 700px or less */
+@media screen and (max-width: 600px) {
+
+	#left {
+		width: auto;
+		float: none;
+	}
+	
+	#middle {
+		width: auto;
+		float: none;
+		margin-left: 0px;
+	}
+}
+
+/* for 480px or less */
+@media screen and (max-width: 480px) {
+
+	header {
+		height: auto;
+	}
+	h1 {
+		font-size: 2em;
+	}
+
+}
+header,footer{
+	background:black;
+}
+
+#middle {
+	background: #f0efef;
+}
+header, #left, #middle {
+	margin-bottom: 5px;
+}
+
+/****** ALL ELEMENTS WITH BORDERS ******/
+#pagewrap, #middle, header,footer {
+	border: solid 1px #ccc;
+}
+
+/* ---------------------------------------------
+ 				SIDE MENU
+--------------------------------------------- */
+/** Disable menu link **/
+#linkdisabled{
+	pointer-events: none;
+	cursor:default;
+}
+menu_box{
+	clear:both;
+}
+.menu {
+  margin: 0 auto;
+  padding: 0;
+  width:95%;
+}
+
+.menu li { list-style: none; }
+
+.menu li a {
+  display: table;
+  margin-top: 1px;
+  padding: 14px 10px;
+  width:95%;
+  background: #000;
+  text-decoration: none;
+  text-align: left;
+  vertical-align: middle;
+  color: #fff;
+  overflow: hidden;
+  -webkit-transition-property: background;
+  -webkit-transition-duration: 0.4s;
+  -webkit-transition-timing-function: ease-out;
+  transition-property: background;
+  transition-duration: 0.4s;
+  transition-timing-function: ease-out;
+}
+
+.menu > li:first-child a { margin-top: 0; }
+
+.menu li a:hover {
+  background: #0D518E;
+  -webkit-transition-property: background;
+  -webkit-transition-duration: 0.2s;
+  -webkit-transition-timing-function: ease-out;
+  transition-property: background;
+  transition-duration: 0.2s;
+  transition-timing-function: ease-out;
+}
+
+.menu li ul {
+  margin: 0;
+  padding: 0;
+}
+
+.menu li li a {
+  display: block;
+  margin-top: 0;
+  padding: 0 10px;
+  height: 0;
+  background: #1466B8;
+  color: #fff;
+  /*color: #1466B8;*/
+  -webkit-transition-property: all;
+  -webkit-transition-duration: 0.5s;
+  -webkit-transition-timing-function: ease-out;
+  transition-property: all;
+  transition-duration: 0.5s;
+  transition-timing-function: ease-out;
+}
+
+.menu > li:hover li a {
+  display: table;
+  margin-top: 1px;
+  padding: 10px;
+  width:95%;
+  height: 1em;
+  -webkit-transition-property: all;
+  -webkit-transition-duration: 0.3s;
+  -webkit-transition-timing-function: ease-out;
+  transition-property: all;
+  transition-duration: 0.3s;
+  transition-timing-function: ease-out;
+}
+
+.menu > li:hover li a:hover {
+  background: #275591;
+  -webkit-transition-property: background;
+  -webkit-transition-duration: 0.2s;
+  -webkit-transition-timing-function: ease-out;
+  transition-property: background;
+  transition-duration: 0.2s;
+  transition-timing-function: ease-out;
+}
+
+/*********** BUTTONS AND LINKS THAT LOOK LIKE BUTTON ************/
+a.button,.submit_button {
+	cursor:pointer; /*forces the cursor to change to a hand when the button is hovered*/
+	padding:5px 25px; /*add some padding to the inside of the button*/
+	background:#000; /*the color of the button*/
+	border:1px solid #f3f3f3; /*required or the default border for the browser will appear*/
+	/*give the button curved corners, alter the size as required*/
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	/*give the button a drop shadow*/
+	-webkit-box-shadow: 0 0 3px rgba(0,0,0, .75);
+	-moz-box-shadow: 0 0 3px rgba(0,0,0, .75);
+	box-shadow: 0 0 3px rgba(0,0,0, .75);
+	/*style the text*/
+	color:#fff;
+	font-size:1.1em;
+	text-decoration: none;
+	margin-top: 10px;
+}
+/*** SMALLER BUTTON ***/
+#small_button{
+	cursor:pointer; /*forces the cursor to change to a hand when the button is hovered*/
+	padding:3px 6px; /*add some padding to the inside of the button*/
+	background:#fff; /*the color of the button*/
+	border:1px solid #f3f3f3; /*required or the default border for the browser will appear*/
+	/*give the button curved corners, alter the size as required*/
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	/*give the button a drop shadow*/
+	-webkit-box-shadow: 0 0 3px rgba(0,0,0, .75);
+	-moz-box-shadow: 0 0 3px rgba(0,0,0, .75);
+	box-shadow: 0 0 3px rgba(0,0,0, .75);
+	/*style the text*/
+	color:#000;
+	font-size:0.8em;
+	text-decoration: none;
+	margin-top: auto;
+}
+
+/************* INPUT FORMAT ******************/
+
+#input1{
+ border-radius: 5px;
+ border: 1px solid #000;
+ padding:10px;
+ display:block;
+}
+
+/****************** LOGIN PAGE ********************/
+
+section.left{
+	width: 20%;
+	float:left;
+	padding-top:10%;
+	padding-left:20%;
+	}
+section.right{
+	padding-top:15%;
+	width: 50%;
+	float:right;
+	}
+	
+/************** LISTS **********/
+
+#course-list{
+	list-style-type:none;
+}
+
+/*******************TABLES*****************************/
+
+table{
+	margin-top:20px;
+	margin-bottom:20px;
+    font-family: arial, sans-serif;
+    width: 100%;
+}
+
+td{
+	text-align: left;
+    padding: 8px;
+    margin:1px;
+	}
+	
+th{
+	text-align: center;
+    padding: 8px;
+    margin:1px;
+}
+
+tr:nth-child(even) {
+    background-color: #fff;
+}
+
+
