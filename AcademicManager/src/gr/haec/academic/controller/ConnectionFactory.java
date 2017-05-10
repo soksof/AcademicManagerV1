@@ -16,7 +16,8 @@ public class ConnectionFactory {
 	protected ConnectionFactory(){
 		try {
 			Context ctx=new InitialContext();
-			ds=(DataSource)ctx.lookup("jdbc/AcademicManagerDB");
+			Context envContext = (Context) ctx.lookup("java:comp/env");
+			ds=(DataSource)envContext.lookup("jdbc/AcademicManagerDB");
 			conn=ds.getConnection();
 		} catch (SQLException | NamingException e) {
 			e.printStackTrace();

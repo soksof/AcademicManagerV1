@@ -1,15 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Context>
-    
-    <!-- Editable user database that can also be used by
-         UserDatabaseRealm to authenticate users
-    -->
-    <Resource name="jdbc/AcademicManagerDB" auth="Container" type="javax.sql.DataSource"
-              factory="org.apache.tomcat.jdbc.pool.DataSourceFactory"
-			  driverClassName="com.mysql.jdbc.Driver"
-			  username="root" password="root"
-			  maxTotal="-1" maxIdle="30"
-			  url="jdbc:mysql://localhost:3306/academicmanagerdb"
-			  defaultAutocommit="true">
+	<Resource name="jdbc/AcademicManagerDB" auth="Container"
+		type="javax.sql.DataSource" driverClassName="com.mysql.jdbc.Driver"
+		username="root" password="root" maxActive="100" maxIdle="30" maxWait="1000"
+		url="jdbc:mysql://localhost:3306/academicmanagerdb">
 	</Resource>
-  </Context>
+</Context>

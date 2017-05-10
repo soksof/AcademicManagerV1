@@ -4,6 +4,7 @@ import gr.haec.academic.model.Person;
 import gr.haec.academic.model.Role;
 import gr.haec.academic.model.Sex;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -21,10 +22,9 @@ public class AuthenticateUser{
 	 * @return The personID from the database if authentication is successfull, else returns -1
 	 */
 	public Person authenticate(String username, String password) {
-		//Connection conn=ConnectionFactory.getConnection();
-		DbConnection conn = new DbConnection("jdbc:mysql://localhost/academicmanagerdb", "root", "");
+		Connection conn=ConnectionFactory.getConnection();
 		try {
-			PreparedStatement stm=conn.getConnection().prepareStatement("SELECT * from person where username=? AND password=?");
+			PreparedStatement stm=conn.prepareStatement("SELECT * from person where username=? AND password=?");
 			stm.setString(1, username);
 			stm.setString(2, password);
 			ResultSet rs=stm.executeQuery();
