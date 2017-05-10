@@ -8,12 +8,18 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-public class ConnectionFactory {
-	private DataSource ds;
-	private Connection conn;
-	private static ConnectionFactory instance;
+public class ConnectionFactory{
 
 	protected ConnectionFactory(){
+	}
+	/**
+	 * Returns the connection to the database
+	 * @return
+	 */
+	public static Connection getConnection(){
+		DataSource ds;
+		Connection conn = null;
+
 		try {
 			Context ctx=new InitialContext();
 			Context envContext = (Context) ctx.lookup("java:comp/env");
@@ -22,22 +28,6 @@ public class ConnectionFactory {
 		} catch (SQLException | NamingException e) {
 			e.printStackTrace();
 		}
-	}
-	/**
-	 * Returns an instance of the ConnectionFactory
-	 * @return the single ConnectionFactory instance
-	 * @throws SQLException
-	 */
-	public static ConnectionFactory getInstance(){
-		if(instance==null)
-			instance=new ConnectionFactory();
-		return instance;
-	}
-	/**
-	 * Returns the connection to the database
-	 * @return
-	 */
-	public static Connection getConnection(){
-		return getInstance().conn;
+		return conn;
 	}
 }
