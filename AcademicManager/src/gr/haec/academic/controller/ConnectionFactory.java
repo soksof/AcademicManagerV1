@@ -10,7 +10,7 @@ import javax.sql.DataSource;
 
 public class ConnectionFactory {
 	private DataSource ds;
-	private static Connection conn;
+	private Connection conn;
 	private static ConnectionFactory instance;
 
 	protected ConnectionFactory(){
