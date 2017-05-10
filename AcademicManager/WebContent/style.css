@@ -116,7 +116,7 @@ header, #left, #middle {
 	margin-bottom: 5px;
 }
 
-/****** ALL ELEMENTS WITH BORDERS ******/
+/*--------- ALL ELEMENTS WITH BORDERS ------------*/
 #pagewrap, #middle, header,footer {
 	border: solid 1px #ccc;
 }
@@ -124,11 +124,7 @@ header, #left, #middle {
 /* ---------------------------------------------
  				SIDE MENU
 --------------------------------------------- */
-/** Disable menu link **/
-#linkdisabled{
-	pointer-events: none;
-	cursor:default;
-}
+
 menu_box{
 	clear:both;
 }
@@ -216,8 +212,19 @@ menu_box{
   transition-timing-function: ease-out;
 }
 
+/********* DISABLED LINK *******/
+
+/** Disable link -- <a id="linkdisabled" href="">Link_name</a> **/
+#linkdisabled{
+	pointer-events: none;
+	cursor:default;
+}
+
 /*********** BUTTONS AND LINKS THAT LOOK LIKE BUTTON ************/
-a.button,.submit_button {
+
+/* class="submitbutton" for buttons --
+ <a href="..." class="button">  for links */
+a.button,.submitbutton {
 	cursor:pointer; /*forces the cursor to change to a hand when the button is hovered*/
 	padding:5px 25px; /*add some padding to the inside of the button*/
 	background:#000; /*the color of the button*/
@@ -237,7 +244,8 @@ a.button,.submit_button {
 	margin-top: 10px;
 }
 /*** SMALLER BUTTON ***/
-#small_button{
+/* id="smallbutton" for log_out and info buttons*/
+#smallbutton{
 	cursor:pointer; /*forces the cursor to change to a hand when the button is hovered*/
 	padding:3px 6px; /*add some padding to the inside of the button*/
 	background:#fff; /*the color of the button*/
@@ -257,17 +265,8 @@ a.button,.submit_button {
 	margin-top: auto;
 }
 
-/************* INPUT FORMAT ******************/
-
-#input1{
- border-radius: 5px;
- border: 1px solid #000;
- padding:10px;
- display:block;
-}
-
 /****************** LOGIN PAGE ********************/
-
+/* class="left" and class="right" to divide section in login page */
 section.left{
 	width: 20%;
 	float:left;
@@ -279,10 +278,19 @@ section.right{
 	width: 50%;
 	float:right;
 	}
-	
+
+/************* INPUT FORMAT ******************/
+/* input box with round corners -- id="input1"*/
+#input1{
+ border-radius: 5px;
+ border: 1px solid #000;
+ padding:10px;
+ display:block;
+}
+
 /************** LISTS **********/
 
-#course-list{
+#list_nostyle{
 	list-style-type:none;
 }
 
@@ -292,7 +300,9 @@ table{
 	margin-top:20px;
 	margin-bottom:20px;
     font-family: arial, sans-serif;
-    width: 100%;
+    width: 98%;
+    border:2px solid;
+    border-radius:5px;
 }
 
 td{
