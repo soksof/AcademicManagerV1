@@ -1,5 +1,6 @@
 package gr.haec.academic.controller;
 
+import gr.haec.academic.db.PersonDao;
 import gr.haec.academic.model.Person;
 import gr.haec.academic.model.Role;
 
@@ -31,7 +32,7 @@ public class LoginController extends HttpServlet {
 		String password = request.getParameter("password");
 		RequestDispatcher rd = null;
  
-		AuthenticateUser authenticator = new AuthenticateUser();
+		PersonDao authenticator = new PersonDao();
 		Person p1 = authenticator.authenticate(username, password);
 		if (p1!=null) {//found a user
 			//Maybe create a Person instance
@@ -62,7 +63,7 @@ public class LoginController extends HttpServlet {
 		String password = request.getParameter("password");
 		RequestDispatcher rd = null;
  
-		AuthenticateUser authenticator = new AuthenticateUser();
+		PersonDao authenticator = new PersonDao();
 		Person p1 = authenticator.authenticate(username, password);
 		if (p1!=null) {//found a user
 			//Maybe create a Person instance

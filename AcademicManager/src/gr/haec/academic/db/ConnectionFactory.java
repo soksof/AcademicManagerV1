@@ -1,4 +1,4 @@
-package gr.haec.academic.controller;
+package gr.haec.academic.db;
 
 import java.sql.Connection;
 import java.sql.SQLException;
