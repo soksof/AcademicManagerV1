@@ -75,8 +75,7 @@ public class Teacher extends Person {
 	}
 	
 	public Teacher(int personID, String name, String surname, String email, String phone, Sex sex, String address,
-			Date dob, String username, String password, String taxNumber, String iban, Role role) {
-		super(personID, name, surname, email, phone, sex, address, dob, username, password, taxNumber, iban, role);
+			Date dob, String username, String taxNumber, String iban, Role role) {
+		super(personID, name, surname, email, phone, sex, address, dob, username, taxNumber, iban, role);
 	}
-	
 }
