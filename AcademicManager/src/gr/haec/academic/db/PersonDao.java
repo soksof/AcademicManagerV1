@@ -155,5 +155,31 @@ public class PersonDao {
 		}
 		return students;
 	}
+	
+	/**
+	 * Returns all students from the database that are currently registered to an active course
+	 * 
+	 * @return A List with all the students that are currently registered to an active course (if none the list will be empty)
+	 *@author Stella
+	 */
+	public List<Person> getActiveStudents(){
+		Connection conn = ConnectionFactory.getConnection();
+		List<Person> students = new ArrayList<Person>();
+		try {
+			PreparedStatement stm = conn.prepareStatement("SELECT * FROM person WHERE personID IN (SELECT DISTINCT personID FROM person JOIN course WHERE status='active' AND role='student'");
+			ResultSet rs = stm.executeQuery();
+			
+			while (rs.next()) {
+				Person newPerson = new Person(rs.getInt("personID"), rs.getString("name"), rs.getString("surname"),
+						rs.getString("email"), rs.getString("phone"), Sex.valueOf(rs.getString("sex")),
+						rs.getString("address"), rs.getDate("dob"), rs.getString("username"), rs.getString("taxNumber"),
+						rs.getString("iban"), Role.valueOf(rs.getString("role")));
+				students.add(newPerson);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return students;
+	}
 
 }
