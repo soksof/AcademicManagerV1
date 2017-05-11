@@ -130,5 +130,30 @@ public class PersonDao {
 		}
 		return null;
 	}
+	
+	/**
+	 * Returns all students from the database with given name as name or surname
+	 * @param name - given name
+	 * @return A List with all the students with given name(if none the list will be empty)
+	 */
+	public List<Person> getStudentsByName(String name) {
+		Connection conn = ConnectionFactory.getConnection();
+		List<Person> students = new ArrayList<Person>();
+		try {
+			PreparedStatement stm = conn.prepareStatement("SELECT * FROM person WHERE role='student' AND (name=? OR surname=?)");
+			ResultSet rs = stm.executeQuery();
+			
+			while (rs.next()) {
+				Person newPerson = new Person(rs.getInt("personID"), rs.getString("name"), rs.getString("surname"),
+						rs.getString("email"), rs.getString("phone"), Sex.valueOf(rs.getString("sex")),
+						rs.getString("address"), rs.getDate("dob"), rs.getString("username"), rs.getString("taxNumber"),
+						rs.getString("iban"), Role.valueOf(rs.getString("role")));
+				students.add(newPerson);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return students;
+	}
 
 }
