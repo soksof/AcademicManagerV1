@@ -181,5 +181,32 @@ public class PersonDao {
 		}
 		return students;
 	}
+	
+	/**
+	 * Returns all teachers that have applied to teach a course (any course)
+	 * 
+	 * @return A List with all the teachers that have applied to teach any course (if none the list will be empty)
+	 *@author Stella
+	 */
+	public List<Person> getApplicantCourseTeachers(){
+		Connection conn = ConnectionFactory.getConnection();
+		List<Person> teachers = new ArrayList<Person>();
+		try {
+			PreparedStatement stm = conn.prepareStatement("SELECT * from person  WHERE personID IN (SELECT distinct personID FROM person JOIN courseteacherapplication WHERE personID=teacherID");
+			ResultSet rs = stm.executeQuery();
+			
+			while (rs.next()) {
+				Person newPerson = new Person(rs.getInt("personID"), rs.getString("name"), rs.getString("surname"),
+						rs.getString("email"), rs.getString("phone"), Sex.valueOf(rs.getString("sex")),
+						rs.getString("address"), rs.getDate("dob"), rs.getString("username"), rs.getString("taxNumber"),
+						rs.getString("iban"), Role.valueOf(rs.getString("role")));
+				teachers.add(newPerson);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return teachers;
+		
+	}
 
 }
