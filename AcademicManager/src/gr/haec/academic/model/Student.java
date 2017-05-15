@@ -112,7 +112,7 @@ public class Student extends Person {
 			Date dob, String username, String password, String taxNumber, String iban, Role role, int courseID,
 			Date applicationDate, String evaluation, float assignmentGrades, float finalGrade, int assignmentID, float grades, Date submitDate, 
 			int teacherID, int studentID, String evaluationTeacher) {
-		super(personID, name, surname, email, phone, sex, address, dob, username, password, taxNumber, iban, role);
+		super(personID, name, surname, email, phone, sex, address, dob, username, taxNumber, iban, role);
 		this.courseID = courseID;
 		this.applicationDate = applicationDate;
 		this.evaluation = evaluation;
@@ -127,8 +127,8 @@ public class Student extends Person {
 	}
 	
 	public Student(int personID, String name, String surname, String email, String phone, Sex sex, String address,
-			Date dob, String username, String password, String taxNumber, String iban, Role role) {
-		super(personID, name, surname, email, phone, sex, address, dob, username, password, taxNumber, iban, role);
+			Date dob, String username, String taxNumber, String iban, Role role) {
+		super(personID, name, surname, email, phone, sex, address, dob, username, taxNumber, iban, role);
 	}
 }
 	

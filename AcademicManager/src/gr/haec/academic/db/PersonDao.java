@@ -3,6 +3,7 @@ package gr.haec.academic.db;
 import gr.haec.academic.model.Person;
 import gr.haec.academic.model.Role;
 import gr.haec.academic.model.Sex;
+import gr.haec.academic.model.Student;
 import gr.haec.academic.model.Teacher;
 
 import java.sql.Connection;
@@ -233,6 +234,34 @@ public class PersonDao {
 			e.printStackTrace();
 		}
 		return teachers;
+	}
+
+	/**
+	 * Returns a Student with a given ID
+	 * 
+	 * @param id
+	 *  The person id
+	 * @return The Student instance from the database with given ID, else returns null
+	 */
+		public Student getStudent(int id) {
+		
+		Connection conn = ConnectionFactory.getConnection();
+		try {
+			PreparedStatement stm = conn.prepareStatement("SELECT * FROM person WHERE personID=? AND role='student'");
+			stm.setInt(1, id);
+			ResultSet rs = stm.executeQuery();
+	
+			while (rs.next()) {
+				Student newStudent = new Student(rs.getInt("personID"), rs.getString("name"), rs.getString("surname"),
+						rs.getString("email"), rs.getString("phone"), Sex.valueOf(rs.getString("sex")),
+						rs.getString("address"), rs.getDate("dob"), rs.getString("username"), rs.getString("taxNumber"),
+						rs.getString("iban"), Role.valueOf(rs.getString("role")));
+				return newStudent;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 }
