@@ -12,7 +12,6 @@
 <link rel="stylesheet" href="style.css">
 <title>Teacher's Home</title>
 </head>
-
 <c:set var="person" value='${sessionScope["person"]}' />
 <body>
 
@@ -42,8 +41,7 @@
 				<ul>
 					<li><a href="apply.jsp">Apply</a></li>
 					<li><a href="">Course History</a></li>
-				</ul>
-				</li>
+				</ul></li>
 			<li><a href="">Reports</a>
 				<ul>
 					<li><a href="">Students List For Each Course</a></li>
@@ -51,8 +49,7 @@
 				</ul></li>
 			<li><a href="">Student Evaluation</a></li>
 			<li><a href="">Messages</a>
-			<li><a href="">Account Settings</a>
-			</li>
+			<li><a href="">Account Settings</a></li>
 		</ul>
 		</nav> </aside>
 

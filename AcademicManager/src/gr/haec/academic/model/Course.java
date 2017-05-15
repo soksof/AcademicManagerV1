@@ -4,22 +4,25 @@ import java.sql.Date;
 
 public class Course {
 
-	private int courseID;
-	private String title;
-	private Date startDate;
-	private Date endDate;
-	private Status status;
-	private int totalHours;
-	private String timetable;
-	private String description;
-	private String syllabus;
-	private int prereqCourseID;
-	private int cost;
-	private int discount;
-	private String classroom;
-	private int maxStudents;
-	private int minStudents;
-	private int credits;
+	protected int courseID;
+	protected String title;
+	protected Date startDate;
+	protected Date endDate;
+	protected Status status;
+	protected int totalHours;
+	protected String timetable;
+	protected String description;
+	protected String syllabus;
+	protected int prereqCoreCourse;
+	protected String courseCore;
+	protected int idCourseCore;
+	protected int cost;
+	protected int discount;
+	protected String classroom;
+	protected int maxStudents;
+	protected int minStudents;
+	protected int credits;
+	protected Field field;
 	protected int assignmentID;
 	private String assignmentDescription;
 	protected Date startDateAssignment;
@@ -28,7 +31,14 @@ public class Course {
 	protected String evaluation;
 	protected Date evaluationDate;
 	
+	public Field getField() {
+	return field;
+	}
 	
+	public void setField(Field field) {
+		this.field = field;
+	}
+		
 	public int getCourseID() {
 		return courseID;
 	}
@@ -84,10 +94,10 @@ public class Course {
 		this.syllabus = syllabus;
 	}
 	public int getPrereqCourseID() {
-		return prereqCourseID;
+		return prereqCoreCourse;
 	}
-	public void setPrereqCourseID(int prereqCourseID) {
-		this.prereqCourseID = prereqCourseID;
+	public void setPrereqCourseID(int prereqCoreCourse) {
+		this.prereqCoreCourse = prereqCoreCourse ;
 	}
 	public int getCost() {
 		return cost;
@@ -167,12 +177,23 @@ public class Course {
 	public void setEvaluationDate(Date evaluationDate) {
 		this.evaluationDate = evaluationDate;
 	}
-
+	public String getcourseCore() {
+		return timetable;
+	}
+	public void setcourseCore(String courseCore) {
+		this.courseCore = courseCore;
+	}
+public int getIdCourseCore() {
+	return idCourseCore;
+}
+public void setIdCourseCore(int idCourseCore) {
+	this.idCourseCore = idCourseCore;
+}
 	
 	public Course(int courseID, String title, Date startDate,Date endDate, Status status, int totalHours, String timetable, 
-			String description, String syllabus, int prereqCourseID, int cost, int discount, String classroom, int maxStudents, 
+			String description, String syllabus, int prereqCoreCourse, int cost, int discount, String classroom, int maxStudents, 
 			int minStudents, int credits, int assignmentID, String assignmentDescription, Date startDateAssignment, Date endDateAssignment, 
-			int studentID, String evaluation, Date evaluationDate){
+			int studentID, String evaluation, Date evaluationDate,int idCourseCore,Field field){
 		this.courseID=courseID;
 		this.title=title;
 		this.startDate=startDate;
@@ -182,7 +203,7 @@ public class Course {
 		this.timetable=timetable;
 		this.description=description;
 		this.syllabus=syllabus;
-		this.prereqCourseID=prereqCourseID;
+		this.prereqCoreCourse=prereqCoreCourse;
 		this.cost=cost;
 		this.discount=discount;
 		this.classroom=classroom;
@@ -195,7 +216,8 @@ public class Course {
 		this.endDateAssignment=endDateAssignment;
 		this.studentID=studentID;	
 		this.evaluation=evaluation;
-		this.evaluationDate=evaluationDate;		
+		this.evaluationDate=evaluationDate;
+		this.idCourseCore=idCourseCore;
+		this.field=field;
 	}
-	
 }

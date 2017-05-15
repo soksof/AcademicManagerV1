@@ -15,7 +15,7 @@ inner join courseteacher on teacher.teacherID=courseteacher.teacherID
 inner join course on courseteacher.courseID=course.courseID 
 inner join coursecore on coursecore.idcourseCore=course.idCourseCore
 where teacher.status="Course Teacher" and person.role="teacher";    
- </sql:query>
+</sql:query>
 <c:set var="person" value='${sessionScope["person"]}'/>
 <div id="pagewrap">
 
