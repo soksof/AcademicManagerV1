@@ -288,5 +288,30 @@ public class PersonDao {
 			}
 			return teachers;
 		}
-
+		
+		/**
+		 * Returns all teachers from the database that teach the course with id courseID
+		 * @param courseID
+		 * @return A List with all the teachers of the course with id courseID (if none the list will be empty)
+		 */
+		public List<Person> getCourseTeacher(int courseID){
+			Connection conn = ConnectionFactory.getConnection();
+			List<Person> teachers = new ArrayList<Person>();
+			try {
+				PreparedStatement stm = conn.prepareStatement("SELECT * FROM person JOIN courseteacher WHERE personID=teacherID AND courseID=?");
+				ResultSet rs = stm.executeQuery();
+				
+				while (rs.next()) {
+					Person newPerson = new Person(rs.getInt("personID"), rs.getString("name"), rs.getString("surname"),
+							rs.getString("email"), rs.getString("phone"), Sex.valueOf(rs.getString("sex")),
+							rs.getString("address"), rs.getDate("dob"), rs.getString("username"), rs.getString("taxNumber"),
+							rs.getString("iban"), Role.valueOf(rs.getString("role")));
+					teachers.add(newPerson);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			return teachers;
+		}
+		
 }
