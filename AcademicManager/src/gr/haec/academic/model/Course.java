@@ -23,13 +23,7 @@ public class Course {
 	protected int minStudents;
 	protected int credits;
 	protected Field field;
-	protected int assignmentID;
-	private String assignmentDescription;
-	protected Date startDateAssignment;
-	protected Date endDateAssignment;
-	protected int studentID;
-	protected String evaluation;
-	protected Date evaluationDate;
+	protected int personID;
 	
 	public Field getField() {
 	return field;
@@ -135,47 +129,11 @@ public class Course {
 	public void setCredits(int credits) {
 		this.credits = credits;
 	}
-	public int getAssignmentID() {
-		return assignmentID;
+	public int getPersonID() {
+		return personID;
 	}
-	public void setAssignmentID(int assignmentID) {
-		this.assignmentID = assignmentID;
-	}
-	public String getAssignmentDescription() {
-		return assignmentDescription;
-	}
-	public void setAssignmentDescription(String assignmentDescription) {
-		this.assignmentDescription = assignmentDescription;
-	}
-	public Date getStartDateAssignment() {
-		return startDateAssignment;
-	}
-	public void setStartDateAssignment(Date startDateAssignment) {
-		this.startDateAssignment = startDateAssignment;
-	}
-	public Date getEndDateAssignment() {
-		return endDateAssignment;
-	}
-	public void setEndDateAssignment(Date endDateAssignment) {
-		this.endDateAssignment = endDateAssignment;
-	}
-	public int getStudentID() {
-		return studentID;
-	}
-	public void setStudentID(int studentID) {
-		this.studentID = studentID;
-	}
-	public String getEvaluation() {
-		return evaluation;
-	}
-	public void setEvaluation(String evaluation) {
-		this.evaluation = evaluation;
-	}
-	public Date getEvaluationDate() {
-		return evaluationDate;
-	}
-	public void setEvaluationDate(Date evaluationDate) {
-		this.evaluationDate = evaluationDate;
+	public void setPersonID(int personID) {
+		this.personID = personID;
 	}
 	public String getcourseCore() {
 		return timetable;
@@ -192,8 +150,7 @@ public void setIdCourseCore(int idCourseCore) {
 	
 	public Course(int courseID, String title, Date startDate,Date endDate, Status status, int totalHours, String timetable, 
 			String description, String syllabus, int prereqCoreCourse, int cost, int discount, String classroom, int maxStudents, 
-			int minStudents, int credits, int assignmentID, String assignmentDescription, Date startDateAssignment, Date endDateAssignment, 
-			int studentID, String evaluation, Date evaluationDate,int idCourseCore,Field field){
+			int minStudents, int credits, int personID,int idCourseCore,Field field){
 		this.courseID=courseID;
 		this.title=title;
 		this.startDate=startDate;
@@ -210,13 +167,7 @@ public void setIdCourseCore(int idCourseCore) {
 		this.maxStudents=maxStudents;
 		this.minStudents=minStudents;
 		this.credits=credits;
-		this.assignmentID=assignmentID;
-		this.assignmentDescription=assignmentDescription;
-		this.startDateAssignment=startDateAssignment;
-		this.endDateAssignment=endDateAssignment;
-		this.studentID=studentID;	
-		this.evaluation=evaluation;
-		this.evaluationDate=evaluationDate;
+		this.personID=personID;	
 		this.idCourseCore=idCourseCore;
 		this.field=field;
 	}
