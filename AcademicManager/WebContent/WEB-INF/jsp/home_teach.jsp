@@ -12,25 +12,14 @@
 <link rel="stylesheet" href="style.css">
 <title>Teacher's Home</title>
 </head>
+
 <c:set var="person" value='${sessionScope["person"]}' />
 <body>
 
 	<div id="pagewrap">
 
 		<header>
-		<div id="header-left">
-			<h1>
-				Hello,
-				<c:out value="${person.getName()}" />
-			</h1>
-		</div>
-		<div id="header-right">
-			<h4>
-				Logged in as
-				<c:out value="${person.getUsername()}" />
-			</h4>
-			<button class="button_logout" type="button">Log Out</button>
-		</div>
+			<jsp:include page="_header.jsp"></jsp:include>
 		</header>
 
 		<aside id="left"> <!-- Side Menu accordion --> <nav
@@ -81,8 +70,7 @@
 
 
 		<footer>
-		<h4>Contact us</h4>
-		<p>22 Massalias Str. Athens, Greece 106 80, Tel: +30 210 3680950</p>
+			<jsp:include page="_footer.jsp"></jsp:include>
 		</footer>
 
 	</div>
