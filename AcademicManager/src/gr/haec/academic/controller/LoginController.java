@@ -43,13 +43,13 @@ public class LoginController extends HttpServlet {
 			HttpSession session = request.getSession();
 			session.setAttribute("person", p1);
 			if(p1.getRole().equals(Role.secretary)){
-				rd = request.getRequestDispatcher("/home_secr.jsp");
+				rd = request.getRequestDispatcher("/WEB-INF/jsp/home_secr.jsp");
 			}
 			else if(p1.getRole().equals(Role.teacher)){
-				rd = request.getRequestDispatcher("/home_teach.jsp");
+				rd = request.getRequestDispatcher("/WEB-INF/jsp/home_teach.jsp");
 			}
 			else if(p1.getRole().equals(Role.student)){
-				rd = request.getRequestDispatcher("/home_stud.jsp");
+				rd = request.getRequestDispatcher("/WEB-INF/jsp/home_stud.jsp");
 			}
 			rd.forward(request, response);
 		} else {
