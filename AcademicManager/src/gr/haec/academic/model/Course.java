@@ -8,14 +8,14 @@ public class Course {
 	protected String title;
 	protected Date startDate;
 	protected Date endDate;
-	protected Status status;
+	protected CourseStatus status;
 	protected int totalHours;
 	protected String timetable;
 	protected String description;
 	protected String syllabus;
 	protected int prereqCoreCourse;
 	protected String courseCore;
-	protected int idCourseCore;
+	protected String idCourseCore;
 	protected int cost;
 	protected int discount;
 	protected String classroom;
@@ -23,8 +23,7 @@ public class Course {
 	protected int minStudents;
 	protected int credits;
 	protected Field field;
-	protected int personID;
-	
+
 	public Field getField() {
 	return field;
 	}
@@ -57,10 +56,10 @@ public class Course {
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
 	}
-	public Status getStatus() {
+	public CourseStatus getStatus() {
 		return status;
 	}
-	public void setStatus(Status status) {
+	public void setStatus(CourseStatus status) {
 		this.status = status;
 	}
 	public int getTotalHours() {
@@ -129,28 +128,22 @@ public class Course {
 	public void setCredits(int credits) {
 		this.credits = credits;
 	}
-	public int getPersonID() {
-		return personID;
-	}
-	public void setPersonID(int personID) {
-		this.personID = personID;
-	}
 	public String getcourseCore() {
 		return timetable;
 	}
 	public void setcourseCore(String courseCore) {
 		this.courseCore = courseCore;
 	}
-public int getIdCourseCore() {
+public String getIdCourseCore() {
 	return idCourseCore;
 }
-public void setIdCourseCore(int idCourseCore) {
+public void setIdCourseCore(String idCourseCore) {
 	this.idCourseCore = idCourseCore;
 }
 	
-	public Course(int courseID, String title, Date startDate,Date endDate, Status status, int totalHours, String timetable, 
+	public Course(int courseID, String title, Date startDate,Date endDate, CourseStatus status, int totalHours, String timetable, 
 			String description, String syllabus, int prereqCoreCourse, int cost, int discount, String classroom, int maxStudents, 
-			int minStudents, int credits, int personID,int idCourseCore,Field field){
+			int minStudents, int credits, String idCourseCore,Field field){
 		this.courseID=courseID;
 		this.title=title;
 		this.startDate=startDate;
@@ -167,7 +160,6 @@ public void setIdCourseCore(int idCourseCore) {
 		this.maxStudents=maxStudents;
 		this.minStudents=minStudents;
 		this.credits=credits;
-		this.personID=personID;	
 		this.idCourseCore=idCourseCore;
 		this.field=field;
 	}
