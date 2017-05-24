@@ -142,4 +142,10 @@ public class Person {
 		this.surname = surname;
 		this.role = role;
 	}
+	/**
+	 * Overriding toString method
+	 */
+	public String toString(){
+		return this.name+" "+this.surname+" is a "+this.role;
+	}
 }
