@@ -113,4 +113,30 @@ public class CourseDao {
 		}
 		return studentCourses;
 	}
+	/**
+	 * Returns a list with all courses  
+	 * @return a list with the informations of the courses
+	 */
+	public List<Course> getAllCourses() {
+		Connection conn = ConnectionFactory.getConnection();
+		List<Course> courses = new ArrayList<Course>();
+		try {
+			PreparedStatement stm = conn.prepareStatement(
+					"SELECT * FROM course ");
+			ResultSet rs = stm.executeQuery();
+			while (rs.next()) {
+				Course newCourse = new Course(rs.getInt("courseID"), rs.getString("title"), rs.getDate("startDate"),
+						rs.getDate("endDate"), Status.valueOf(rs.getString("status")), rs.getInt("totalHours"),
+						rs.getString("timetable"), rs.getString("description"), rs.getString("syllabus"),
+						rs.getInt("prereqCoreCourse"), rs.getInt("cost"), rs.getInt("discount"),
+						rs.getString("classroom"), rs.getInt("maxStudents"), rs.getInt("minStudents"),
+						rs.getInt("credits"), rs.getInt("personID"), rs.getInt("idCourseCore"),
+						Field.valueOf(rs.getString("field")));
+				courses.add(newCourse);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return courses;
+	}
 }
