@@ -3,7 +3,6 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page import="gr.haec.academic.controller.LoginController" %>
-<%@ page import="gr.haec.academic.controller.AuthenticateUser" %>
 
 <html>
 <head>

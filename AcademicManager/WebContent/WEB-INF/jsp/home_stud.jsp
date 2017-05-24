@@ -2,7 +2,7 @@
 <%@ page import="gr.haec.academic.model.Person" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
+<!DOCTYPE html>
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -11,7 +11,6 @@
 </head>
 <body>
  
- <c:set var="person" value='${sessionScope["person"]}'/>
 <div id="pagewrap">
 
 	<header>
@@ -46,31 +45,9 @@
 	
 	<section id="middle">
 	<!--Αρχική σελίδα του φοιτητή-->
-	<h3>Personal Information</h3>
-	<p>
-		Student: <c:out value="${person.getName()}"/>
-		<c:out value="${person.getSurname()}"/>
-		<br>
-		StudentID: <c:out value="${person.getPersonID()}"/>
-		<br>
-		Email: <c:out value="${person.getEmail()}"/>
-		<br>
-		Phone: <c:out value="${person.getPhone()}"/>
-		<br>
-		Date of Birth: <c:out value="${person.getDob()}" />
-		<br>
-		TaxNumber: <c:out value="${person.getTaxNumber()}"/>
-		<br>
-		IBAN: <c:out value="${person.getIban()}"/>
-		<br>
-		Address: <c:out value="${person.getAddress()}"/>
-		<br>
-		Sex: <c:out value="${person.getSex()}"/>
-	</p>
+    <jsp:include page="viewperson.jsp"></jsp:include>
 	</section>
 
-
-	
 	<footer>
 		<jsp:include page="_footer.jsp"></jsp:include>
 	</footer>
