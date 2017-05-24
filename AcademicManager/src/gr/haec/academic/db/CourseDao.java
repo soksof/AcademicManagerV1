@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import gr.haec.academic.model.Course;
+import gr.haec.academic.model.CourseStatus;
 import gr.haec.academic.model.Field;
-import gr.haec.academic.model.Status;
 
 /**
  * sql queries regarding the course data taking
@@ -34,7 +34,7 @@ public class CourseDao {
 
 			while (rs.next()) {
 				Course newCourse = new Course(rs.getInt("courseID"), rs.getString("title"), rs.getDate("startDate"),
-						rs.getDate("endDate"), Status.valueOf(rs.getString("status")), rs.getInt("totalHours"),
+						rs.getDate("endDate"), CourseStatus.valueOf(rs.getString("status")), rs.getInt("totalHours"),
 						rs.getString("timetable"), rs.getString("description"), rs.getString("syllabus"),
 						rs.getInt("prereqCoreCourse"), rs.getInt("cost"), rs.getInt("discount"),
 						rs.getString("classroom"), rs.getInt("maxStudents"), rs.getInt("minStudents"),
@@ -67,7 +67,7 @@ public class CourseDao {
 			ResultSet rs = stm.executeQuery();
 			while (rs.next()) {
 				Course newCourse = new Course(rs.getInt("courseID"), rs.getString("title"), rs.getDate("startDate"),
-						rs.getDate("endDate"), Status.valueOf(rs.getString("status")), rs.getInt("totalHours"),
+						rs.getDate("endDate"), CourseStatus.valueOf(rs.getString("status")), rs.getInt("totalHours"),
 						rs.getString("timetable"), rs.getString("description"), rs.getString("syllabus"),
 						rs.getInt("prereqCoreCourse"), rs.getInt("cost"), rs.getInt("discount"),
 						rs.getString("classroom"), rs.getInt("maxStudents"), rs.getInt("minStudents"),
@@ -100,7 +100,7 @@ public class CourseDao {
 			ResultSet rs = stm.executeQuery();
 			while (rs.next()) {
 				Course newCourse = new Course(rs.getInt("courseID"), rs.getString("title"), rs.getDate("startDate"),
-						rs.getDate("endDate"), Status.valueOf(rs.getString("status")), rs.getInt("totalHours"),
+						rs.getDate("endDate"), CourseStatus.valueOf(rs.getString("status")), rs.getInt("totalHours"),
 						rs.getString("timetable"), rs.getString("description"), rs.getString("syllabus"),
 						rs.getInt("prereqCoreCourse"), rs.getInt("cost"), rs.getInt("discount"),
 						rs.getString("classroom"), rs.getInt("maxStudents"), rs.getInt("minStudents"),
@@ -126,7 +126,7 @@ public class CourseDao {
 			ResultSet rs = stm.executeQuery();
 			while (rs.next()) {
 				Course newCourse = new Course(rs.getInt("courseID"), rs.getString("title"), rs.getDate("startDate"),
-						rs.getDate("endDate"), Status.valueOf(rs.getString("status")), rs.getInt("totalHours"),
+						rs.getDate("endDate"), CourseStatus.valueOf(rs.getString("status")), rs.getInt("totalHours"),
 						rs.getString("timetable"), rs.getString("description"), rs.getString("syllabus"),
 						rs.getInt("prereqCoreCourse"), rs.getInt("cost"), rs.getInt("discount"),
 						rs.getString("classroom"), rs.getInt("maxStudents"), rs.getInt("minStudents"),
