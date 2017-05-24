@@ -36,9 +36,9 @@ public class CourseDao {
 				Course newCourse = new Course(rs.getInt("courseID"), rs.getString("title"), rs.getDate("startDate"),
 						rs.getDate("endDate"), CourseStatus.valueOf(rs.getString("status")), rs.getInt("totalHours"),
 						rs.getString("timetable"), rs.getString("description"), rs.getString("syllabus"),
-						rs.getInt("prereqCoreCourse"), rs.getInt("cost"), rs.getInt("discount"),
+						rs.getString("prereqCoreCourse"), rs.getInt("cost"), rs.getInt("discount"),
 						rs.getString("classroom"), rs.getInt("maxStudents"), rs.getInt("minStudents"),
-						rs.getInt("credits"), rs.getString("idCourseCore"),
+						rs.getInt("credits"), rs.getInt("idCourseCore"),rs.getString("courseCore"),
 						Field.valueOf(rs.getString("field")));
 				return newCourse;
 			}
@@ -69,9 +69,9 @@ public class CourseDao {
 				Course newCourse = new Course(rs.getInt("courseID"), rs.getString("title"), rs.getDate("startDate"),
 						rs.getDate("endDate"), CourseStatus.valueOf(rs.getString("status")), rs.getInt("totalHours"),
 						rs.getString("timetable"), rs.getString("description"), rs.getString("syllabus"),
-						rs.getInt("prereqCoreCourse"), rs.getInt("cost"), rs.getInt("discount"),
+						rs.getString("prereqCoreCourse"), rs.getInt("cost"), rs.getInt("discount"),
 						rs.getString("classroom"), rs.getInt("maxStudents"), rs.getInt("minStudents"),
-						rs.getInt("credits"), rs.getString("idCourseCore"),
+						rs.getInt("credits"), rs.getInt("idCourseCore"),rs.getString("courseCore"),
 						Field.valueOf(rs.getString("field")));
 				courses.add(newCourse);
 			}
@@ -102,9 +102,9 @@ public class CourseDao {
 				Course newCourse = new Course(rs.getInt("courseID"), rs.getString("title"), rs.getDate("startDate"),
 						rs.getDate("endDate"), CourseStatus.valueOf(rs.getString("status")), rs.getInt("totalHours"),
 						rs.getString("timetable"), rs.getString("description"), rs.getString("syllabus"),
-						rs.getInt("prereqCoreCourse"), rs.getInt("cost"), rs.getInt("discount"),
+						rs.getString("prereqCoreCourse"), rs.getInt("cost"), rs.getInt("discount"),
 						rs.getString("classroom"), rs.getInt("maxStudents"), rs.getInt("minStudents"),
-						rs.getInt("credits"), rs.getString("idCourseCore"),
+						rs.getInt("credits"), rs.getInt("idCourseCore"),rs.getString("courseCore"),
 						Field.valueOf(rs.getString("field")));
 				studentCourses.add(newCourse);
 			}
@@ -129,9 +129,9 @@ public class CourseDao {
 				Course newCourse = new Course(rs.getInt("courseID"), rs.getString("title"), rs.getDate("startDate"),
 						rs.getDate("endDate"), CourseStatus.valueOf(rs.getString("status")), rs.getInt("totalHours"),
 						rs.getString("timetable"), rs.getString("description"), rs.getString("syllabus"),
-						rs.getInt("prereqCoreCourse"), rs.getInt("cost"), rs.getInt("discount"),
+						rs.getString("prereqCoreCourse"), rs.getInt("cost"), rs.getInt("discount"),
 						rs.getString("classroom"), rs.getInt("maxStudents"), rs.getInt("minStudents"),
-						rs.getInt("credits"), rs.getString("idCourseCore"),
+						rs.getInt("credits"),rs.getInt("idCourseCore"),rs.getString("courseCore"),
 						Field.valueOf(rs.getString("field")));
 				courses.add(newCourse);
 			}

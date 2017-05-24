@@ -13,9 +13,9 @@ public class Course {
 	protected String timetable;
 	protected String description;
 	protected String syllabus;
-	protected int prereqCoreCourse;
+	protected String prereqCoreCourse;
 	protected String courseCore;
-	protected String idCourseCore;
+	protected int idCourseCore;
 	protected int cost;
 	protected int discount;
 	protected String classroom;
@@ -86,10 +86,10 @@ public class Course {
 	public void setSyllabus(String syllabus) {
 		this.syllabus = syllabus;
 	}
-	public int getPrereqCourseID() {
+	public String getPrereqCourseID() {
 		return prereqCoreCourse;
 	}
-	public void setPrereqCourseID(int prereqCoreCourse) {
+	public void setPrereqCourseID(String prereqCoreCourse) {
 		this.prereqCoreCourse = prereqCoreCourse ;
 	}
 	public int getCost() {
@@ -134,16 +134,16 @@ public class Course {
 	public void setcourseCore(String courseCore) {
 		this.courseCore = courseCore;
 	}
-public String getIdCourseCore() {
+public int getIdCourseCore() {
 	return idCourseCore;
 }
-public void setIdCourseCore(String idCourseCore) {
+public void setIdCourseCore(int idCourseCore) {
 	this.idCourseCore = idCourseCore;
 }
 	
 	public Course(int courseID, String title, Date startDate,Date endDate, CourseStatus status, int totalHours, String timetable, 
-			String description, String syllabus, int prereqCoreCourse, int cost, int discount, String classroom, int maxStudents, 
-			int minStudents, int credits, String idCourseCore,Field field){
+			String description, String syllabus, String prereqCoreCourse, int cost, int discount, String classroom, int maxStudents, 
+			int minStudents, int credits, int idCourseCore, String courseCore,Field field){
 		this.courseID=courseID;
 		this.title=title;
 		this.startDate=startDate;
@@ -161,6 +161,7 @@ public void setIdCourseCore(String idCourseCore) {
 		this.minStudents=minStudents;
 		this.credits=credits;
 		this.idCourseCore=idCourseCore;
+		this.courseCore=courseCore;
 		this.field=field;
 	}
 }

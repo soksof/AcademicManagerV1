@@ -24,7 +24,7 @@ public class CoursesList extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		CourseDao d= new CourseDao();
 		List<Course> list = d.getAllCourses();
-		request.setAttribute("courselist",list);
+		request.setAttribute("courseList",list);
 		RequestDispatcher rd; 
 		rd=request.getRequestDispatcher("/WEB-INF/jsp/courseList.jsp");
 		rd.forward(request, response);
