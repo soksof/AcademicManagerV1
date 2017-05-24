@@ -8,7 +8,7 @@ public class Course {
 	protected String title;
 	protected Date startDate;
 	protected Date endDate;
-	protected Status status;
+	protected CourseStatus status;
 	protected int totalHours;
 	protected String timetable;
 	protected String description;
@@ -57,10 +57,10 @@ public class Course {
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
 	}
-	public Status getStatus() {
+	public CourseStatus getStatus() {
 		return status;
 	}
-	public void setStatus(Status status) {
+	public void setStatus(CourseStatus status) {
 		this.status = status;
 	}
 	public int getTotalHours() {
@@ -148,7 +148,7 @@ public void setIdCourseCore(int idCourseCore) {
 	this.idCourseCore = idCourseCore;
 }
 	
-	public Course(int courseID, String title, Date startDate,Date endDate, Status status, int totalHours, String timetable, 
+	public Course(int courseID, String title, Date startDate,Date endDate, CourseStatus status, int totalHours, String timetable, 
 			String description, String syllabus, int prereqCoreCourse, int cost, int discount, String classroom, int maxStudents, 
 			int minStudents, int credits, int personID,int idCourseCore,Field field){
 		this.courseID=courseID;
