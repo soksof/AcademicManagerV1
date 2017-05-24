@@ -38,7 +38,7 @@ public class CourseDao {
 						rs.getString("timetable"), rs.getString("description"), rs.getString("syllabus"),
 						rs.getInt("prereqCoreCourse"), rs.getInt("cost"), rs.getInt("discount"),
 						rs.getString("classroom"), rs.getInt("maxStudents"), rs.getInt("minStudents"),
-						rs.getInt("credits"), rs.getInt("personID"), rs.getInt("idCourseCore"),
+						rs.getInt("credits"), rs.getString("idCourseCore"),
 						Field.valueOf(rs.getString("field")));
 				return newCourse;
 			}
@@ -71,7 +71,7 @@ public class CourseDao {
 						rs.getString("timetable"), rs.getString("description"), rs.getString("syllabus"),
 						rs.getInt("prereqCoreCourse"), rs.getInt("cost"), rs.getInt("discount"),
 						rs.getString("classroom"), rs.getInt("maxStudents"), rs.getInt("minStudents"),
-						rs.getInt("credits"), rs.getInt("personID"), rs.getInt("idCourseCore"),
+						rs.getInt("credits"), rs.getString("idCourseCore"),
 						Field.valueOf(rs.getString("field")));
 				courses.add(newCourse);
 			}
@@ -104,7 +104,7 @@ public class CourseDao {
 						rs.getString("timetable"), rs.getString("description"), rs.getString("syllabus"),
 						rs.getInt("prereqCoreCourse"), rs.getInt("cost"), rs.getInt("discount"),
 						rs.getString("classroom"), rs.getInt("maxStudents"), rs.getInt("minStudents"),
-						rs.getInt("credits"), rs.getInt("personID"), rs.getInt("idCourseCore"),
+						rs.getInt("credits"), rs.getString("idCourseCore"),
 						Field.valueOf(rs.getString("field")));
 				studentCourses.add(newCourse);
 			}
@@ -122,7 +122,8 @@ public class CourseDao {
 		List<Course> courses = new ArrayList<Course>();
 		try {
 			PreparedStatement stm = conn.prepareStatement(
-					"SELECT * FROM course ");
+					"SELECT * FROM course " 
+							+ "inner join coursecore on coursecore.idcourseCore=course.idCourseCore");
 			ResultSet rs = stm.executeQuery();
 			while (rs.next()) {
 				Course newCourse = new Course(rs.getInt("courseID"), rs.getString("title"), rs.getDate("startDate"),
@@ -130,7 +131,7 @@ public class CourseDao {
 						rs.getString("timetable"), rs.getString("description"), rs.getString("syllabus"),
 						rs.getInt("prereqCoreCourse"), rs.getInt("cost"), rs.getInt("discount"),
 						rs.getString("classroom"), rs.getInt("maxStudents"), rs.getInt("minStudents"),
-						rs.getInt("credits"), rs.getInt("personID"), rs.getInt("idCourseCore"),
+						rs.getInt("credits"), rs.getString("idCourseCore"),
 						Field.valueOf(rs.getString("field")));
 				courses.add(newCourse);
 			}
