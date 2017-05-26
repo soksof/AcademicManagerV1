@@ -1,5 +1,6 @@
 package gr.haec.academic.db;
 
+import gr.haec.academic.model.Field;
 import gr.haec.academic.model.Person;
 import gr.haec.academic.model.Role;
 import gr.haec.academic.model.Sex;
@@ -110,19 +111,19 @@ public class PersonDao {
 	 * @return A List with all the teachers (if none the list will be empty)
 	 */
 	
-	public List<Person> getAllTeachers() {
+	public List<Teacher> getAllTeachers() {
 		Connection conn = ConnectionFactory.getConnection();
-		List<Person> teachers = new ArrayList<Person>();
+		List<Teacher> teachers = new ArrayList<Teacher>();
 		try {
 			PreparedStatement stm = conn.prepareStatement("SELECT * from person where role='teacher'");
 			ResultSet rs = stm.executeQuery();
 			
 			while (rs.next()) {
-				Person newPerson = new Person(rs.getInt("personID"), rs.getString("name"), rs.getString("surname"),
+				Teacher newTeacher = new Teacher (rs.getInt("personID"), rs.getString("name"), rs.getString("surname"),
 						rs.getString("email"), rs.getString("phone"), Sex.valueOf(rs.getString("sex")),
 						rs.getString("address"), rs.getDate("dob"), rs.getString("username"), rs.getString("taxNumber"),
-						rs.getString("iban"), Role.valueOf(rs.getString("role")));
-				teachers.add(newPerson);
+						rs.getString("iban"), Role.valueOf(rs.getString("role")),rs.getString("cv"),Field.valueOf(rs.getString("field")));
+				teachers.add(newTeacher);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -216,19 +217,19 @@ public class PersonDao {
 	 * @return A List with all the teachers that have applied to teach any course (if none the list will be empty)
 	 *@author Stella
 	 */
-	public List<Person> getApplicantCourseTeachers(){
+	public List<Teacher> getApplicantCourseTeachers(){
 		Connection conn = ConnectionFactory.getConnection();
-		List<Person> teachers = new ArrayList<Person>();
+		List<Teacher> teachers = new ArrayList<Teacher>();
 		try {
 			PreparedStatement stm = conn.prepareStatement("SELECT * from person  WHERE personID IN (SELECT distinct personID FROM person JOIN courseteacherapplication WHERE personID=teacherID");
 			ResultSet rs = stm.executeQuery();
 			
 			while (rs.next()) {
-				Person newPerson = new Person(rs.getInt("personID"), rs.getString("name"), rs.getString("surname"),
+				Teacher newTeacher = new Teacher (rs.getInt("personID"), rs.getString("name"), rs.getString("surname"),
 						rs.getString("email"), rs.getString("phone"), Sex.valueOf(rs.getString("sex")),
 						rs.getString("address"), rs.getDate("dob"), rs.getString("username"), rs.getString("taxNumber"),
-						rs.getString("iban"), Role.valueOf(rs.getString("role")));
-				teachers.add(newPerson);
+						rs.getString("iban"), Role.valueOf(rs.getString("role")),rs.getString("cv"),Field.valueOf(rs.getString("field")));
+				teachers.add(newTeacher);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -243,19 +244,19 @@ public class PersonDao {
 	 * @return A List with all people that have applied to register as teachers (if none the list will be empty)
 	 *@author Stella
 	 */
-	public List<Person> getApplicantTeachers(){
+	public List<Teacher> getApplicantTeachers(){
 		Connection conn = ConnectionFactory.getConnection();
-		List<Person> teachers = new ArrayList<Person>();
+		List<Teacher> teachers = new ArrayList<Teacher>();
 		try {
 			PreparedStatement stm = conn.prepareStatement("SELECT * FROM person JOIN teacher WHERE personID=teacherID AND status='Teacher Applicant'");
 			ResultSet rs = stm.executeQuery();
 			
 			while (rs.next()) {
-				Person newPerson = new Person(rs.getInt("personID"), rs.getString("name"), rs.getString("surname"),
+				Teacher newTeacher = new Teacher (rs.getInt("personID"), rs.getString("name"), rs.getString("surname"),
 						rs.getString("email"), rs.getString("phone"), Sex.valueOf(rs.getString("sex")),
 						rs.getString("address"), rs.getDate("dob"), rs.getString("username"), rs.getString("taxNumber"),
-						rs.getString("iban"), Role.valueOf(rs.getString("role")));
-				teachers.add(newPerson);
+						rs.getString("iban"), Role.valueOf(rs.getString("role")),rs.getString("cv"),Field.valueOf(rs.getString("field")));
+				teachers.add(newTeacher);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -296,19 +297,19 @@ public class PersonDao {
 		 * @param name - given name
 		 * @return A List with all the teachers with given name(if none the list will be empty)
 		 */
-		public List<Person> getTeachersByName(String name) {
+		public List<Teacher> getTeachersByName(String name) {
 			Connection conn = ConnectionFactory.getConnection();
-			List<Person> teachers = new ArrayList<Person>();
+			List<Teacher> teachers = new ArrayList<Teacher>();
 			try {
 				PreparedStatement stm = conn.prepareStatement("SELECT * FROM person WHERE role='teacher' AND (name=? OR surname=?)");
 				ResultSet rs = stm.executeQuery();
 				
 				while (rs.next()) {
-					Person newPerson = new Person(rs.getInt("personID"), rs.getString("name"), rs.getString("surname"),
+					Teacher newTeacher = new Teacher (rs.getInt("personID"), rs.getString("name"), rs.getString("surname"),
 							rs.getString("email"), rs.getString("phone"), Sex.valueOf(rs.getString("sex")),
 							rs.getString("address"), rs.getDate("dob"), rs.getString("username"), rs.getString("taxNumber"),
-							rs.getString("iban"), Role.valueOf(rs.getString("role")));
-					teachers.add(newPerson);
+							rs.getString("iban"), Role.valueOf(rs.getString("role")),rs.getString("cv"),Field.valueOf(rs.getString("field")));
+					teachers.add(newTeacher);
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -321,19 +322,19 @@ public class PersonDao {
 		 * @param courseID
 		 * @return A List with all the teachers of the course with id courseID (if none the list will be empty)
 		 */
-		public List<Person> getCourseTeacher(int courseID){
+		public List<Teacher> getCourseTeacher(int courseID){
 			Connection conn = ConnectionFactory.getConnection();
-			List<Person> teachers = new ArrayList<Person>();
+			List<Teacher> teachers = new ArrayList<Teacher>();
 			try {
 				PreparedStatement stm = conn.prepareStatement("SELECT * FROM person JOIN courseteacher WHERE personID=teacherID AND courseID=?");
 				ResultSet rs = stm.executeQuery();
 				
 				while (rs.next()) {
-					Person newPerson = new Person(rs.getInt("personID"), rs.getString("name"), rs.getString("surname"),
+					Teacher newTeacher = new Teacher (rs.getInt("personID"), rs.getString("name"), rs.getString("surname"),
 							rs.getString("email"), rs.getString("phone"), Sex.valueOf(rs.getString("sex")),
 							rs.getString("address"), rs.getDate("dob"), rs.getString("username"), rs.getString("taxNumber"),
-							rs.getString("iban"), Role.valueOf(rs.getString("role")));
-					teachers.add(newPerson);
+							rs.getString("iban"), Role.valueOf(rs.getString("role")),rs.getString("cv"),Field.valueOf(rs.getString("field")));
+					teachers.add(newTeacher);
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -347,19 +348,19 @@ public class PersonDao {
 		 * @return A List with all the teachers that are currently teaching an active course (if none the list will be empty)
 		 *@author Stella
 		 */
-		public List<Person> getActiveTeachers(){
+		public List<Teacher> getActiveTeachers(){
 			Connection conn = ConnectionFactory.getConnection();
-			List<Person> teachers = new ArrayList<Person>();
+			List<Teacher> teachers = new ArrayList<Teacher>();
 			try {
 				PreparedStatement stm = conn.prepareStatement("SELECT * FROM person WHERE personID IN (SELECT DISTINCT personID FROM person JOIN course WHERE status='active' AND role='teacher'");
 				ResultSet rs = stm.executeQuery();
 				
 				while (rs.next()) {
-					Person newPerson = new Person(rs.getInt("personID"), rs.getString("name"), rs.getString("surname"),
+					Teacher newTeacher = new Teacher (rs.getInt("personID"), rs.getString("name"), rs.getString("surname"),
 							rs.getString("email"), rs.getString("phone"), Sex.valueOf(rs.getString("sex")),
 							rs.getString("address"), rs.getDate("dob"), rs.getString("username"), rs.getString("taxNumber"),
-							rs.getString("iban"), Role.valueOf(rs.getString("role")));
-					teachers.add(newPerson);
+							rs.getString("iban"), Role.valueOf(rs.getString("role")),rs.getString("cv"),Field.valueOf(rs.getString("field")));
+					teachers.add(newTeacher);
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();

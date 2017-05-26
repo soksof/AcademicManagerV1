@@ -17,7 +17,7 @@
     <servlet-name>LoginController</servlet-name>
     <url-pattern>/LoginController</url-pattern>
   </servlet-mapping>
-    <servlet>
+  <servlet>
     <description></description>
     <display-name>StudentView</display-name>
     <servlet-name>StudentView</servlet-name>
@@ -27,14 +27,14 @@
     <servlet-name>StudentView</servlet-name>
     <url-pattern>/StudentView</url-pattern>
   </servlet-mapping>
-   <servlet>
-  <description> </description>
-  <display-name>LogoutServlet</display-name>  
-    <servlet-name>LogoutServlet</servlet-name>  
-    <servlet-class>gr.haec.academic.controller.LogoutServlet</servlet-class>  
-  </servlet>  
-  <servlet-mapping>  
-    <servlet-name>LogoutServlet</servlet-name>  
-    <url-pattern>/LogoutServlet</url-pattern>  
+  <servlet>
+    <description> </description>
+    <display-name>LogoutServlet</display-name>
+    <servlet-name>LogoutServlet</servlet-name>
+    <servlet-class>gr.haec.academic.controller.LogoutServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LogoutServlet</servlet-name>
+    <url-pattern>/LogoutServlet</url-pattern>
   </servlet-mapping>
-  </web-app>
+</web-app>

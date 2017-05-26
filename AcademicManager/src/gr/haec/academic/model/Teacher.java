@@ -3,13 +3,14 @@ package gr.haec.academic.model;
 import java.util.Date;
 
 public class Teacher extends Person {
-
+	
 	protected Status status;
 	protected String cv;
 	protected Field field;
 	protected int courseID;
 	protected Date applicationDate;
 	protected String CourseTeacherApplicationcol;
+	
 	
 	public Status getStatus() {
 		return status;
@@ -72,6 +73,13 @@ public class Teacher extends Person {
 		this.applicationDate=applicationDate;
 		this.CourseTeacherApplicationcol=CourseTeacherApplicationcol;
 		
+	}
+	
+	public Teacher(int personID, String name, String surname, String email, String phone, Sex sex, String address,
+			Date dob, String username, String taxNumber, String iban, Role role,String cv, Field field) {
+		super(personID, name, surname, email, phone, sex, address, dob, username, taxNumber, iban, role);
+		this.cv = cv;
+		this.field = field;		
 	}
 	
 	public Teacher(int personID, String name, String surname, String email, String phone, Sex sex, String address,
