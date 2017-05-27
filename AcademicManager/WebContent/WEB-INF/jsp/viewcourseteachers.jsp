@@ -16,7 +16,6 @@
 		<th>Surname</th>
 		<th>CV</th>
 		<th>Field</th>
-		<th>Status</th>
 	</tr>
 	
 	<c:forEach items="${teacherList}" var="cteach">
