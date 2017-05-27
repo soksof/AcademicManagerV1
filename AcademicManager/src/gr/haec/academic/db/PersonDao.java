@@ -368,4 +368,29 @@ public class PersonDao {
 			return teachers;
 		}
 		
+		/**
+		 * Returns all course teachers.
+		 * 
+		 * @return A List with all teachers that teach a course (if none the list will be empty)
+		 *@author Stella
+		 */
+		public List<Teacher> getCourseTeachers(){
+			Connection conn = ConnectionFactory.getConnection();
+			List<Teacher> teachers = new ArrayList<Teacher>();
+			try {
+				PreparedStatement stm = conn.prepareStatement("SELECT * FROM person JOIN teacher WHERE personID=teacherID AND status='Course Teacher'");
+				ResultSet rs = stm.executeQuery();
+				
+				while (rs.next()) {
+					Teacher newTeacher = new Teacher (rs.getInt("personID"), rs.getString("name"), rs.getString("surname"),
+							rs.getString("email"), rs.getString("phone"), Sex.valueOf(rs.getString("sex")),
+							rs.getString("address"), rs.getDate("dob"), rs.getString("username"), rs.getString("taxNumber"),
+							rs.getString("iban"), Role.valueOf(rs.getString("role")),rs.getString("cv"),Field.valueOf(rs.getString("field")));
+					teachers.add(newTeacher);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			return teachers;
+		}
 }
