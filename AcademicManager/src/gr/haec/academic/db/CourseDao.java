@@ -10,6 +10,9 @@ import java.util.List;
 import gr.haec.academic.model.Course;
 import gr.haec.academic.model.CourseStatus;
 import gr.haec.academic.model.Field;
+import gr.haec.academic.model.Role;
+import gr.haec.academic.model.Sex;
+import gr.haec.academic.model.Teacher;
 
 /**
  * sql queries regarding the course data taking
@@ -36,9 +39,9 @@ public class CourseDao {
 				Course newCourse = new Course(rs.getInt("courseID"), rs.getString("title"), rs.getDate("startDate"),
 						rs.getDate("endDate"), CourseStatus.valueOf(rs.getString("status")), rs.getInt("totalHours"),
 						rs.getString("timetable"), rs.getString("description"), rs.getString("syllabus"),
-						rs.getInt("prereqCoreCourse"), rs.getInt("cost"), rs.getInt("discount"),
+						rs.getString("prereqCoreCourse"), rs.getInt("cost"), rs.getInt("discount"),
 						rs.getString("classroom"), rs.getInt("maxStudents"), rs.getInt("minStudents"),
-						rs.getInt("credits"), rs.getString("idCourseCore"),
+						rs.getInt("credits"), rs.getInt("idCourseCore"),rs.getString("courseCore"),
 						Field.valueOf(rs.getString("field")));
 				return newCourse;
 			}
@@ -69,9 +72,9 @@ public class CourseDao {
 				Course newCourse = new Course(rs.getInt("courseID"), rs.getString("title"), rs.getDate("startDate"),
 						rs.getDate("endDate"), CourseStatus.valueOf(rs.getString("status")), rs.getInt("totalHours"),
 						rs.getString("timetable"), rs.getString("description"), rs.getString("syllabus"),
-						rs.getInt("prereqCoreCourse"), rs.getInt("cost"), rs.getInt("discount"),
+						rs.getString("prereqCoreCourse"), rs.getInt("cost"), rs.getInt("discount"),
 						rs.getString("classroom"), rs.getInt("maxStudents"), rs.getInt("minStudents"),
-						rs.getInt("credits"), rs.getString("idCourseCore"),
+						rs.getInt("credits"), rs.getInt("idCourseCore"),rs.getString("courseCore"),
 						Field.valueOf(rs.getString("field")));
 				courses.add(newCourse);
 			}
@@ -102,9 +105,9 @@ public class CourseDao {
 				Course newCourse = new Course(rs.getInt("courseID"), rs.getString("title"), rs.getDate("startDate"),
 						rs.getDate("endDate"), CourseStatus.valueOf(rs.getString("status")), rs.getInt("totalHours"),
 						rs.getString("timetable"), rs.getString("description"), rs.getString("syllabus"),
-						rs.getInt("prereqCoreCourse"), rs.getInt("cost"), rs.getInt("discount"),
+						rs.getString("prereqCoreCourse"), rs.getInt("cost"), rs.getInt("discount"),
 						rs.getString("classroom"), rs.getInt("maxStudents"), rs.getInt("minStudents"),
-						rs.getInt("credits"), rs.getString("idCourseCore"),
+						rs.getInt("credits"), rs.getInt("idCourseCore"),rs.getString("courseCore"),
 						Field.valueOf(rs.getString("field")));
 				studentCourses.add(newCourse);
 			}
@@ -129,9 +132,9 @@ public class CourseDao {
 				Course newCourse = new Course(rs.getInt("courseID"), rs.getString("title"), rs.getDate("startDate"),
 						rs.getDate("endDate"), CourseStatus.valueOf(rs.getString("status")), rs.getInt("totalHours"),
 						rs.getString("timetable"), rs.getString("description"), rs.getString("syllabus"),
-						rs.getInt("prereqCoreCourse"), rs.getInt("cost"), rs.getInt("discount"),
+						rs.getString("prereqCoreCourse"), rs.getInt("cost"), rs.getInt("discount"),
 						rs.getString("classroom"), rs.getInt("maxStudents"), rs.getInt("minStudents"),
-						rs.getInt("credits"), rs.getString("idCourseCore"),
+						rs.getInt("credits"),rs.getInt("idCourseCore"),rs.getString("courseCore"),
 						Field.valueOf(rs.getString("field")));
 				courses.add(newCourse);
 			}
@@ -140,4 +143,28 @@ public class CourseDao {
 		}
 		return courses;
 	}
+
+/**
+ * find all the teachers that teach a course
+ * @return a list with the teachers that teach a course 
+ */
+public List<Teacher> getCourseTeacher() {
+	Connection conn = ConnectionFactory.getConnection();
+	List<Teacher> courseTeacher = new ArrayList<Teacher>();
+	try {
+		PreparedStatement stm = conn.prepareStatement("select * from course inner join coursecore on coursecore.idcourseCore=course.idCourseCore inner join courseteacher on courseteacher.courseID=course.courseID inner join teacher on teacher.teacherID=courseteacher.teacherID inner join person on person.personID=teacher.teacherID");
+		ResultSet rs = stm.executeQuery();
+		while (rs.next()) {
+			Teacher newCourseTeacher = new Teacher(rs.getInt("personID"), rs.getString("name"), rs.getString("surname"), 
+					rs.getString("email"), rs.getString("phone"),Sex.valueOf(rs.getString("sex")),rs.getString("address"), 
+					rs.getDate("dob"),rs.getString("username"),rs.getString("password"),rs.getString("taxNumber"),rs.getString("iban"),
+					Role.valueOf(rs.getString("role")),rs.getString("cv"),Field.valueOf(rs.getString("field")),rs.getInt("courseID"),
+					rs.getString("title"));
+			courseTeacher.add(newCourseTeacher);
+		}
+	} catch (SQLException e) {
+		e.printStackTrace();
+	}
+	return courseTeacher;
+}
 }
