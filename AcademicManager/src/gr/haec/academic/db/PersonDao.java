@@ -221,14 +221,15 @@ public class PersonDao {
 		Connection conn = ConnectionFactory.getConnection();
 		List<Teacher> teachers = new ArrayList<Teacher>();
 		try {
-			PreparedStatement stm = conn.prepareStatement("SELECT * from person  WHERE personID IN (SELECT distinct personID FROM person JOIN courseteacherapplication WHERE personID=teacherID");
+			PreparedStatement stm = conn.prepareStatement("SELECT * FROM person inner join teacher on teacher.teacherID=person.personID inner join courseteacherapplication on courseteacherapplication.teacherID=teacher.teacherID");
 			ResultSet rs = stm.executeQuery();
 			
 			while (rs.next()) {
 				Teacher newTeacher = new Teacher (rs.getInt("personID"), rs.getString("name"), rs.getString("surname"),
 						rs.getString("email"), rs.getString("phone"), Sex.valueOf(rs.getString("sex")),
 						rs.getString("address"), rs.getDate("dob"), rs.getString("username"), rs.getString("taxNumber"),
-						rs.getString("iban"), Role.valueOf(rs.getString("role")),rs.getString("cv"),Field.valueOf(rs.getString("field")));
+						rs.getString("iban"), Role.valueOf(rs.getString("role")),rs.getString("cv"),Field.valueOf(rs.getString("field"))
+						,rs.getInt("courseID"),rs.getDate("applicationDate"));
 				teachers.add(newTeacher);
 			}
 		} catch (SQLException e) {
@@ -352,7 +353,7 @@ public class PersonDao {
 			Connection conn = ConnectionFactory.getConnection();
 			List<Teacher> teachers = new ArrayList<Teacher>();
 			try {
-				PreparedStatement stm = conn.prepareStatement("SELECT * FROM person WHERE personID IN (SELECT DISTINCT personID FROM person JOIN course WHERE status='active' AND role='teacher'");
+				PreparedStatement stm = conn.prepareStatement("SELECT * FROM person inner join teacher on teacher.teacherID=person.personID inner join courseteacher on courseteacher.teacherID=teacher.teacherID inner join course on course.courseID=courseteacher.courseID where course.status='active' and person.role='teacher'");
 				ResultSet rs = stm.executeQuery();
 				
 				while (rs.next()) {
