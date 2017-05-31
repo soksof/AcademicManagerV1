@@ -422,4 +422,32 @@ public class PersonDao {
 			}
 			return courseTeacher;
 		}
+		/**
+		 * 
+		 * @return
+		 */
+		public List<Student> getApplicantStudent() {
+			// TODO Auto-generated method stub
+			Connection conn = ConnectionFactory.getConnection();
+			List<Student> students = new ArrayList<Student>();
+			try {
+				PreparedStatement stm = conn.prepareStatement("SELECT * FROM person where role = 'student' JOIN courseapplication");
+				ResultSet rs = stm.executeQuery();
+				
+				while (rs.next()) {
+					Student newStudent = new Student (rs.getInt("personID"), rs.getString("name"), rs.getString("surname"),
+							rs.getString("email"), rs.getString("phone"), Sex.valueOf(rs.getString("sex")),
+							rs.getString("address"), rs.getDate("dob"), rs.getString("username"), rs.getString("taxNumber"),
+							rs.getString("iban"), Role.valueOf(rs.getString("role")),Field.valueOf(rs.getString("field"))
+							,rs.getInt("courseID"),rs.getDate("applicationDate"));
+					students.add(newStudent);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			return students;
+			
+
+			return null;
+		}
 }
