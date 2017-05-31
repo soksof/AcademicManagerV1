@@ -10,11 +10,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import gr.haec.academic.db.CourseDao;
-import gr.haec.academic.model.Teacher;
+import gr.haec.academic.db.PersonDao;
 
 @WebServlet(urlPatterns = { "/CourseThatTeacherTeach" })
-
 public class CourseThatTeacherTeach extends HttpServlet {
 private static final long serialVersionUID = 7491965238817284255L;
 protected void doGet(HttpServletRequest request,
@@ -23,8 +21,8 @@ protected void doGet(HttpServletRequest request,
 }
 protected void doPost(HttpServletRequest request,
 		HttpServletResponse response) throws ServletException, IOException {
-	CourseDao d= new CourseDao();
-	List<Teacher> list = d.getCourseTeacher();
+	PersonDao d= new PersonDao();
+	List<Object[]> list = d.getCourseTeacher();
 	request.setAttribute("teacherCoursesList",list);
 	RequestDispatcher rd; 
 	rd=request.getRequestDispatcher("/WEB-INF/jsp/viewcoursethatteacherteach.jsp");

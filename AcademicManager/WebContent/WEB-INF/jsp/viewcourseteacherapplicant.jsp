@@ -21,11 +21,11 @@
 	
 	<c:forEach items="${courseTeacherApplicantList}" var="ApplicantList">
 	<tr>
-		<td>${ApplicantList.getName()}</td>
-		<td>${ApplicantList.getSurname()}</td>
-		<td>${ApplicantList.getCv()}</td>
-		<td>${ApplicantList.getField()}</td>
-		<td>${ApplicantList.getApplicationDate()}</td>
+		<td>${ApplicantList[0].getName()}</td>
+		<td>${ApplicantList[0].getSurname()}</td>
+		<td>${ApplicantList[0].getCv()}</td>
+		<td>${ApplicantList[0].getField()}</td>
+		<td>${ApplicantList[1]}</td>
 	</tr>
 	</c:forEach>
 	</table>

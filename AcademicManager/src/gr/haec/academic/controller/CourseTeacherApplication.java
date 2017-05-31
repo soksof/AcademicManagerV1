@@ -24,7 +24,7 @@ protected void doGet(HttpServletRequest request,
 protected void doPost(HttpServletRequest request,
 		HttpServletResponse response) throws ServletException, IOException {
 	PersonDao d= new PersonDao();
-	List<Teacher> list = d.getApplicantCourseTeachers();
+	List<Object[]> list = d.getApplicantCourseTeachers();
 	request.setAttribute("courseTeacherApplicantList",list);
 	RequestDispatcher rd; 
 	rd=request.getRequestDispatcher("/WEB-INF/jsp/viewcourseteacherapplicant.jsp");

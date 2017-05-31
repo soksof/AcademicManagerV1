@@ -217,9 +217,9 @@ public class PersonDao {
 	 * @return A List with all the teachers that have applied to teach any course (if none the list will be empty)
 	 *@author Stella
 	 */
-	public List<Teacher> getApplicantCourseTeachers(){
+	public List<Object[]> getApplicantCourseTeachers(){
 		Connection conn = ConnectionFactory.getConnection();
-		List<Teacher> teachers = new ArrayList<Teacher>();
+		List<Object[]> teachers = new ArrayList<Object[]>();
 		try {
 			PreparedStatement stm = conn.prepareStatement("SELECT * FROM person inner join teacher on teacher.teacherID=person.personID inner join courseteacherapplication on courseteacherapplication.teacherID=teacher.teacherID");
 			ResultSet rs = stm.executeQuery();
@@ -228,9 +228,11 @@ public class PersonDao {
 				Teacher newTeacher = new Teacher (rs.getInt("personID"), rs.getString("name"), rs.getString("surname"),
 						rs.getString("email"), rs.getString("phone"), Sex.valueOf(rs.getString("sex")),
 						rs.getString("address"), rs.getDate("dob"), rs.getString("username"), rs.getString("taxNumber"),
-						rs.getString("iban"), Role.valueOf(rs.getString("role")),rs.getString("cv"),Field.valueOf(rs.getString("field"))
-						,rs.getInt("courseID"),rs.getDate("applicationDate"));
-				teachers.add(newTeacher);
+						rs.getString("iban"), Role.valueOf(rs.getString("role")),rs.getString("cv"),Field.valueOf(rs.getString("field")));
+				Object[] ret=new Object[2];
+				ret[0]=newTeacher;
+				ret[1]=rs.getDate("applicationDate");
+				teachers.add(ret);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -393,5 +395,31 @@ public class PersonDao {
 				e.printStackTrace();
 			}
 			return teachers;
+		}
+		/**
+		 * find all the teachers that teach a course
+		 * @return a list with the teachers that teach a course 
+		 */
+		public List<Object[]> getCourseTeacher() {
+			Connection conn = ConnectionFactory.getConnection();
+			List<Object[]> courseTeacher = new ArrayList<Object[]>();
+			try {
+				PreparedStatement stm = conn.prepareStatement("select * from course inner join coursecore on coursecore.idcourseCore=course.idCourseCore inner join courseteacher on courseteacher.courseID=course.courseID inner join teacher on teacher.teacherID=courseteacher.teacherID inner join person on person.personID=teacher.teacherID");
+				ResultSet rs = stm.executeQuery();
+				while (rs.next()) {
+					Teacher newCourseTeacher = new Teacher(rs.getInt("personID"), rs.getString("name"), rs.getString("surname"), 
+							rs.getString("email"), rs.getString("phone"),Sex.valueOf(rs.getString("sex")),rs.getString("address"), 
+							rs.getDate("dob"),rs.getString("username"),rs.getString("password"),rs.getString("taxNumber"),rs.getString("iban"),
+							Role.valueOf(rs.getString("role")),rs.getString("cv"),Field.valueOf(rs.getString("field")));
+					String courseTitle=rs.getString("title");
+					Object[] ret=new Object[2];
+					ret[0]=newCourseTeacher;
+					ret[1]=courseTitle;
+					courseTeacher.add(ret);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			return courseTeacher;
 		}
 }
