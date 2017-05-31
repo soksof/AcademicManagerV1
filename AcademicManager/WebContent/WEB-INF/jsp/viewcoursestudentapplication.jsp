@@ -20,10 +20,9 @@
 	
 	<c:forEach items="${applicantList}" var="applicants">
 	<tr>
-		<td>${applicants.getName()}</td>
-		<td>${applicants.getSurname()}</td>
-		<td>${applicants.getCourseID()}</td>
-		<td>${applicants.getApplication Date()}</td>
+	<td><a target="_blank" href="ViewPerson?personID=${applicants[0].getPersonID()}">${applicants[0].getName()} ${applicants[0].getSurname()}</a></td>
+		<td>${applicants[1]}</td>
+		<td>${applicants[2]}</td>
 	</tr>
 	</c:forEach>
 	</table>

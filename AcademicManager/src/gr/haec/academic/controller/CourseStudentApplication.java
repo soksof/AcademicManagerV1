@@ -28,7 +28,7 @@ public class CourseStudentApplication extends HttpServlet {
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		PersonDao d= new PersonDao();
-		List <Student> list = d.getApplicantStudent();
+		List <Object[]> list = d.getApplicantStudent();
 		request.setAttribute("applicantList",list);
 		RequestDispatcher rd; 
 		rd=request.getRequestDispatcher("/WEB-INF/jsp/viewcoursestudentapplication.jsp");
