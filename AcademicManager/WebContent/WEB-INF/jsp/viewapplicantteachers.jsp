@@ -13,15 +13,13 @@
 	<table>
 	<tr>
 		<th>Name</th>
-		<th>Surname</th>
 		<th>CV</th>
 		<th>Field</th>
 	</tr>
 	
 	<c:forEach items="${applicantList}" var="applicants">
 	<tr>
-		<td>${applicants.getName()}</td>
-		<td>${applicants.getSurname()}</td>
+		<td><a target="_blank" href="ViewPerson?personID=${applicants.getPersonID()}">${applicants.getName()} ${applicants.getSurname()}</a></td>
 		<td>${applicants.getCv()}</td>
 		<td>${applicants.getField()}</td>
 	</tr>

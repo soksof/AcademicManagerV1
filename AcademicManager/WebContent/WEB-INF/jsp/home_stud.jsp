@@ -45,7 +45,7 @@
 	
 	<section id="middle">
 	<!--Αρχική σελίδα του φοιτητή-->
-    <jsp:include page="viewperson.jsp"></jsp:include>
+    <jsp:include page="viewprofile.jsp"></jsp:include>
 	</section>
 
 	<footer>

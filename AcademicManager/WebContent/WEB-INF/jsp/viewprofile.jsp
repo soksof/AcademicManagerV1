@@ -10,7 +10,7 @@
 <title>AcademicManager</title>
 </head>
 <body>
-	<c:set var="person" value='${requestScope.personq}'/>
+	<c:set var="person" value='${sessionScope["person"]}' />
 	<h3>Personal Information</h3>
 	<p>
 		Name:
