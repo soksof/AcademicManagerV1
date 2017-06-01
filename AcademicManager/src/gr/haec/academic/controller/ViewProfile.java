@@ -27,7 +27,7 @@ public class ViewProfile extends HttpServlet {
 		if (p==null)
 			rd = request.getRequestDispatcher("/index.html");
 		else
-			rd = request.getRequestDispatcher("/WEB-INF/jsp/viewperson.jsp");
+			rd = request.getRequestDispatcher("/WEB-INF/jsp/viewprofile.jsp");
 		rd.forward(request, response);
 	}
 	/**
