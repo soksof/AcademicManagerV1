@@ -491,4 +491,35 @@ public class PersonDao {
 		}
 		return Applicantstudents;
 	}
+	
+	/**
+	 * Returns all teachers that have applied to teach the course with id
+	 * courseID
+	 * 
+	 * @param courseID
+	 * @return A List with all the teachers hat have applied to teach the course with id courseID (if
+	 *         none the list will be empty)
+	 *         @author Stella
+	 */
+	public List<Teacher> getCourseApplicantTeachers(int courseID) {
+		Connection conn = ConnectionFactory.getConnection();
+		List<Teacher> teachers = new ArrayList<Teacher>();
+		try {
+			PreparedStatement stm = conn.prepareStatement(
+					"SELECT * FROM person INNER JOIN courseteacherapplication c WHERE personID=c.teacherID AND courseID=?");
+			ResultSet rs = stm.executeQuery();
+
+			while (rs.next()) {
+				Teacher newTeacher = new Teacher(rs.getInt("personID"), rs.getString("name"), rs.getString("surname"),
+						rs.getString("email"), rs.getString("phone"), Sex.valueOf(rs.getString("sex")),
+						rs.getString("address"), rs.getDate("dob"), rs.getString("username"), rs.getString("taxNumber"),
+						rs.getString("iban"), Role.valueOf(rs.getString("role")), rs.getString("cv"),
+						Field.valueOf(rs.getString("field")));
+				teachers.add(newTeacher);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return teachers;
+	}
 }
