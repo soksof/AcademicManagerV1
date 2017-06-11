@@ -24,7 +24,7 @@
     <li> <a href="javascript:ml('ViewProfile')">Home</a></li>
     <li> <a href="#">Courses</a>
       <ul>
-        <li><a href="javascript:ml('CourseList')">Active Courses</a></li>
+        <li><a href="javascript:ml('StudentActiveCourses')">Active Courses</a></li>
 		<li><a href="">Past Courses</a></li>
 		<li><a href="">Register New</a></li>
       </ul>
