@@ -10,9 +10,6 @@ import java.util.List;
 import gr.haec.academic.model.Course;
 import gr.haec.academic.model.CourseStatus;
 import gr.haec.academic.model.Field;
-import gr.haec.academic.model.Role;
-import gr.haec.academic.model.Sex;
-import gr.haec.academic.model.Teacher;
 
 /**
  * sql queries regarding the course data taking

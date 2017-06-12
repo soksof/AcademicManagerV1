@@ -522,4 +522,69 @@ public class PersonDao {
 		}
 		return teachers;
 	}
+	/**
+	 * Searching for the completed courses evaluation for a student
+	 * @param personID
+	 * @return a  list of completed courses evaluation for student with id personID 
+	 */
+	public List<Student> getStudentEvaluations(int personID) {
+		Connection conn = ConnectionFactory.getConnection();
+		List<Student> studentEvaluations = new ArrayList<Student>();
+		try {
+			PreparedStatement stm = conn.prepareStatement(
+					"SELECT * FROM person " 
+			                + "inner join coursestudent on coursestudent.studentID=person.personID "
+							+ "inner join course on course.courseID=coursestudent.courseID "
+							+ "inner join coursecore on coursecore.idcourseCore=course.idCourseCore "
+							+ "where personID=? AND status='complete'");
+			stm.setInt(1, personID);
+			ResultSet rs = stm.executeQuery();
+			while (rs.next()) {
+				Student newStudent = new Student(rs.getInt("personID"), rs.getString("name"), rs.getString("surname"),
+						rs.getString("email"), rs.getString("phone"), Sex.valueOf(rs.getString("sex")),
+						rs.getString("address"), rs.getDate("dob"), rs.getString("username"), rs.getString("taxNumber"),
+						rs.getString("iban"), Role.valueOf(rs.getString("role")),rs.getInt("courseID"),rs.getString("evaluation"));
+				studentEvaluations.add(newStudent);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return studentEvaluations;
+}
+	/**
+	 * Searching for the completed courses evaluation for a student
+	 * @param personID
+	 * @return a  list of completed courses evaluation for student with id personID 
+	 */
+	public List<Object[]>getCompleteStudentCourses(int personID) {
+		Connection conn = ConnectionFactory.getConnection();
+		List<Object[]> studentComplete = new ArrayList<Object[]>();
+		try {
+			PreparedStatement stm = conn.prepareStatement(
+					"SELECT * FROM person " 
+			                + "inner join coursestudent on coursestudent.studentID=person.personID "
+							+ "inner join course on course.courseID=coursestudent.courseID "
+							+ "inner join coursecore on coursecore.idcourseCore=course.idCourseCore "
+							+ "where personID=? AND status='complete'");
+			stm.setInt(1, personID);
+			ResultSet rs = stm.executeQuery();
+			while (rs.next()) {
+				Student newStudent = new Student(rs.getInt("personID"), rs.getString("name"), rs.getString("surname"),
+						rs.getString("email"), rs.getString("phone"), Sex.valueOf(rs.getString("sex")),
+						rs.getString("address"), rs.getDate("dob"), rs.getString("username"), rs.getString("taxNumber"),
+						rs.getString("iban"), Role.valueOf(rs.getString("role")),rs.getInt("courseID"),rs.getString("evaluation"),
+						rs.getFloat("finalGrade"));
+				String courseClassroom = rs.getString("classroom");
+				String  courseTitle = rs.getString("title");
+				Object[] obj = new Object[3];
+				obj[0] = newStudent;
+				obj[1] = courseClassroom;
+				obj[2] = courseTitle;
+				studentComplete.add(obj);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return studentComplete;
+}	
 }

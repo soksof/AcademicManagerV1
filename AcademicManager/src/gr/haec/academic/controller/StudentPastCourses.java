@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 import gr.haec.academic.db.PersonDao;
 import gr.haec.academic.model.Person;
 
+
 @WebServlet(urlPatterns = { "/StudentPastCourses" })
 
 public class StudentPastCourses extends HttpServlet {

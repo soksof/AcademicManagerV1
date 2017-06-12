@@ -24,8 +24,7 @@ public class StudentEvaluations extends HttpServlet {
         HttpSession session = request.getSession();
 		Person p=(Person)session.getAttribute("person");
 		PersonDao c= new PersonDao();
-		List<Student> list=c.getStudentEvaluations(1282);
-		//List<Student> list=c.getStudentEvaluations(p.getPersonID());
+		List<Student> list=c.getStudentEvaluations(p.getPersonID());
 		request.setAttribute("StudentEvaluations",list);
 		RequestDispatcher rd; 
 		rd=request.getRequestDispatcher("/WEB-INF/jsp/viewstudentevaluation.jsp");

@@ -25,7 +25,7 @@
     <li> <a href="#">Courses</a>
       <ul>
         <li><a href="javascript:ml('StudentActiveCourses')">Active Courses</a></li>
-		<li><a href="">Past Courses</a></li>
+		<li><a href="javascript:ml('StudentPastCourses')">Past Courses</a></li>
 		<li><a href="">Register New</a></li>
       </ul>
     </li>

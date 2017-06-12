@@ -9,9 +9,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import gr.haec.academic.db.CourseDao;
 import gr.haec.academic.model.Course;
+import gr.haec.academic.model.Person;
 
 @WebServlet(urlPatterns = { "/StudentActiveCourses" })
 
@@ -24,7 +26,9 @@ public class StudentActiveCourses extends HttpServlet {
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		CourseDao c= new CourseDao();
-		List<Course> list = c.getStudentCourses(Integer.parseInt(request.getParameter("personID")));
+		HttpSession session = request.getSession();
+		Person p=(Person)session.getAttribute("person");
+		List<Course> list = c.getStudentCourses(p.getPersonID());
 		request.setAttribute("StudentActiveCourses",list);
 		RequestDispatcher rd; 
 		rd=request.getRequestDispatcher("/WEB-INF/jsp/viewstudentactivecourses.jsp");
