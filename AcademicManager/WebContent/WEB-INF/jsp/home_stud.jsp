@@ -21,13 +21,12 @@
 	<!-- Side Menu accordion -->
 <nav id="menu_box">
  <ul class="menu">
-    <li> <a href="home_stud.jsp">Home</a></li>
+    <li> <a href="javascript:ml('ViewProfile')">Home</a></li>
     <li> <a href="#">Courses</a>
       <ul>
-        <li><a href="">Reports</a></li>
-		<li><a href="">History</a></li>
-		<li><a href="">Evaluation</a></li>
-		<li><a href="">Registration</a></li>
+        <li><a href="javascript:ml('StudentActiveCourses')">Active Courses</a></li>
+		<li><a href="javascript:ml('StudentPastCourses')">Past Courses</a></li>
+		<li><a href="">Register New</a></li>
       </ul>
     </li>
     <li><a id="linkdisabled" href="#">Payments</a>
@@ -45,7 +44,7 @@
 	
 	<section id="middle">
 	<!--Αρχική σελίδα του φοιτητή-->
-    <jsp:include page="viewperson.jsp"></jsp:include>
+    <jsp:include page="viewprofile.jsp"></jsp:include>
 	</section>
 
 	<footer>

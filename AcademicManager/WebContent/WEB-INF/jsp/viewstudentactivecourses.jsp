@@ -13,18 +13,18 @@
 <body>
 	<table>
 		<tr>
-			<th>Name</th>
-			<th>CV</th>
-			<th>Field</th>
+			<th>CourseID</th>
+			<th>Title</th>
+			<th>Classroom</th>
+			<th>Timetable</th>
 		</tr>
 
-		<c:forEach items="${teacherActiveList}" var="teacher">
+		<c:forEach items="${StudentActiveCourses}" var="studentActive">
 			<tr>
-				<td><a target="_blank"
-					href="ViewPerson?personID=${teacher.getPersonID()}">${teacher.getName()}
-						${teacher.getSurname()}</a></td>
-				<td>${teacher.getCv()}</td>
-				<td>${teacher.getField()}</td>
+			<td>${studentActive.getCourseID()}</td>	
+			<td>${studentActive.getTitle()}</td>	
+			<td>${studentActive.getClassroom()}</td>	
+			<td>${studentActive.getTimetable()}</td>		
 			</tr>
 		</c:forEach>
 	</table>

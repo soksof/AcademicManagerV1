@@ -8,25 +8,19 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="style.css">
 <title>AcademicManager</title>
-
 </head>
 <body>
 	<table>
 		<tr>
-			<th>Name</th>
-			<th>CV</th>
-			<th>Field</th>
+			<th>Evaluation</th>
 		</tr>
 
-		<c:forEach items="${teacherActiveList}" var="teacher">
+		<c:forEach items="${StudentEvaluations}" var="studentEvaluations">
 			<tr>
-				<td><a target="_blank"
-					href="ViewPerson?personID=${teacher.getPersonID()}">${teacher.getName()}
-						${teacher.getSurname()}</a></td>
-				<td>${teacher.getCv()}</td>
-				<td>${teacher.getField()}</td>
+			<td>${studentEvaluations.getEvaluation()}</td>		
 			</tr>
 		</c:forEach>
 	</table>
+
 </body>
 </html>

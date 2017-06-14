@@ -41,7 +41,7 @@
 
 		<section id="middle"> 
 		<!--Αρχική σελίδα του καθηγητή-->
-        <jsp:include page="viewperson.jsp"></jsp:include>
+        <jsp:include page="viewprofile.jsp"></jsp:include>
 		</section>
 
 		<footer>

@@ -14,19 +14,17 @@
 	<table>
 		<tr>
 			<th>Name</th>
-			<th>CV</th>
-			<th>Field</th>
-			<th>Date Of Application</th>
+			<th>CourseID</th>
+			<th>Application Date</th>
 		</tr>
 
-		<c:forEach items="${courseTeacherApplicantList}" var="applicants">
+		<c:forEach items="${applicantList}" var="applicants">
 			<tr>
 				<td><a target="_blank"
 					href="ViewPerson?personID=${applicants[0].getPersonID()}">${applicants[0].getName()}
 						${applicants[0].getSurname()}</a></td>
-				<td>${applicants[0].getCv()}</td>
-				<td>${applicants[0].getField()}</td>
 				<td>${applicants[1]}</td>
+				<td>${applicants[2]}</td>
 			</tr>
 		</c:forEach>
 	</table>

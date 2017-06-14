@@ -19,9 +19,9 @@
 	
 	<c:forEach items="${teacherCoursesList}" var="teachList">
 	<tr>
-		<td>${teachList.getName()}</td>
-		<td>${teachList.getSurname()}</td>
-		<td>${teachList.getTitle()}</td>
+		<td>${teachList[0].getName()}</td>
+		<td>${teachList[0].getSurname()}</td>
+		<td>${teachList[1]}</td>
 	</tr>
 	</c:forEach>
 	</table>

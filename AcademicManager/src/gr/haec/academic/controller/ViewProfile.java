@@ -10,11 +10,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import gr.haec.academic.db.PersonDao;
 import gr.haec.academic.model.Person;
 
-@WebServlet(urlPatterns = { "/ViewPerson" }) 
-public class ViewPerson extends HttpServlet {
+@WebServlet(urlPatterns = { "/ViewProfile" }) 
+public class ViewProfile extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	/**
 	 * 
@@ -22,12 +21,13 @@ public class ViewPerson extends HttpServlet {
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 
-		RequestDispatcher rd=null;
-		PersonDao pd=new PersonDao();
-		Person p=pd.getPersonID(Integer.parseInt(request.getParameter("personID")));
-		request.setAttribute("personq", p);
-		if (p!=null)
-			rd = request.getRequestDispatcher("/WEB-INF/jsp/viewperson.jsp");
+		RequestDispatcher rd;
+		HttpSession session = request.getSession();
+		Person p=(Person)session.getAttribute("person");
+		if (p==null)
+			rd = request.getRequestDispatcher("/index.html");
+		else
+			rd = request.getRequestDispatcher("/WEB-INF/jsp/viewprofile.jsp");
 		rd.forward(request, response);
 	}
 	/**

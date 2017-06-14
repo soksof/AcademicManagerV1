@@ -12,13 +12,12 @@ public class Student extends Person {
 	protected Date applicationDate;
 	protected String evaluation;
 	protected float assignmentGrades;
-	protected float finalGrade;
 	protected int assignmentID;
-	protected float grades;
 	protected Date submitDate;
 	protected int teacherID;
 	protected int studentID;
 	protected String evaluationTeacher;
+	protected float finalGrade;
 	
 	public int getCourseID() {
 		return courseID;
@@ -68,14 +67,6 @@ public class Student extends Person {
 		this.assignmentID = assignmentID;
 	}
 
-	public float getGrades() {
-		return grades;
-	}
-
-	public void setGrades(float grades) {
-		this.grades = grades;
-	}
-
 	public Date getSubmitDate() {
 		return submitDate;
 	}
@@ -110,8 +101,8 @@ public class Student extends Person {
 
 	public Student(int personID, String name, String surname, String email, String phone, Sex sex, String address,
 			Date dob, String username, String password, String taxNumber, String iban, Role role, int courseID,
-			Date applicationDate, String evaluation, float assignmentGrades, float finalGrade, int assignmentID, float grades, Date submitDate, 
-			int teacherID, int studentID, String evaluationTeacher) {
+			Date applicationDate, String evaluation, float assignmentGrades, int assignmentID, Date submitDate, 
+			int teacherID, int studentID, String evaluationTeacher, float finalGrade) {
 		super(personID, name, surname, email, phone, sex, address, dob, username, taxNumber, iban, role);
 		this.courseID = courseID;
 		this.applicationDate = applicationDate;
@@ -119,7 +110,6 @@ public class Student extends Person {
 		this.assignmentGrades=assignmentGrades;
 		this.finalGrade=finalGrade;
 		this.assignmentID=assignmentID;
-		this.grades=grades;
 		this.submitDate=submitDate;
 		this.teacherID=teacherID;
 		this.studentID=studentID;
@@ -129,6 +119,19 @@ public class Student extends Person {
 	public Student(int personID, String name, String surname, String email, String phone, Sex sex, String address,
 			Date dob, String username, String taxNumber, String iban, Role role) {
 		super(personID, name, surname, email, phone, sex, address, dob, username, taxNumber, iban, role);
+	}
+	public Student(int personID, String name, String surname, String email, String phone, Sex sex, String address,
+			Date dob, String username,String taxNumber, String iban, Role role, int courseID, String evaluation) {
+		super(personID, name, surname, email, phone, sex, address, dob, username, taxNumber, iban, role);
+		this.courseID = courseID;
+		this.evaluation = evaluation;
+	}
+	public Student(int personID, String name, String surname, String email, String phone, Sex sex, String address,
+			Date dob, String username,String taxNumber, String iban, Role role, int courseID, String evaluation,float finalGrade) {
+		super(personID, name, surname, email, phone, sex, address, dob, username, taxNumber, iban, role);
+		this.courseID = courseID;
+		this.evaluation = evaluation;
+		this.finalGrade=finalGrade;
 	}
 }
 	
