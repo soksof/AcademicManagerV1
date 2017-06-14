@@ -543,7 +543,32 @@ public class PersonDao {
 				Student newStudent = new Student(rs.getInt("personID"), rs.getString("name"), rs.getString("surname"),
 						rs.getString("email"), rs.getString("phone"), Sex.valueOf(rs.getString("sex")),
 						rs.getString("address"), rs.getDate("dob"), rs.getString("username"), rs.getString("taxNumber"),
-						rs.getString("iban"), Role.valueOf(rs.getString("role")),rs.getInt("courseID"),rs.getString("evaluation"));
+						rs.getString("iban"), Role.valueOf(rs.getString("role")),rs.getString("evaluation"));
+				studentEvaluations.add(newStudent);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return studentEvaluations;
+}
+	public List<Student> getStudentEvaluation(int personID, int courseID) {
+		Connection conn = ConnectionFactory.getConnection();
+		List<Student> studentEvaluations = new ArrayList<Student>();
+		try {
+			PreparedStatement stm = conn.prepareStatement(
+					"SELECT * FROM person " 
+			                + "inner join coursestudent on coursestudent.studentID=person.personID "
+							+ "inner join course on course.courseID=coursestudent.courseID "
+							+ "inner join coursecore on coursecore.idcourseCore=course.idCourseCore "
+							+ "where personID=? AND course.courseID=? AND status='complete'");
+			stm.setInt(1, personID);
+			stm.setInt(2, courseID);
+			ResultSet rs = stm.executeQuery();
+			while (rs.next()) {
+				Student newStudent = new Student(rs.getInt("personID"), rs.getString("name"), rs.getString("surname"),
+						rs.getString("email"), rs.getString("phone"), Sex.valueOf(rs.getString("sex")),
+						rs.getString("address"), rs.getDate("dob"), rs.getString("username"), rs.getString("taxNumber"),
+						rs.getString("iban"), Role.valueOf(rs.getString("role")),rs.getString("evaluation"));
 				studentEvaluations.add(newStudent);
 			}
 		} catch (SQLException e) {
@@ -572,14 +597,21 @@ public class PersonDao {
 				Student newStudent = new Student(rs.getInt("personID"), rs.getString("name"), rs.getString("surname"),
 						rs.getString("email"), rs.getString("phone"), Sex.valueOf(rs.getString("sex")),
 						rs.getString("address"), rs.getDate("dob"), rs.getString("username"), rs.getString("taxNumber"),
-						rs.getString("iban"), Role.valueOf(rs.getString("role")),rs.getInt("courseID"),rs.getString("evaluation"),
+						rs.getString("iban"), Role.valueOf(rs.getString("role")),rs.getString("evaluation"),
 						rs.getFloat("finalGrade"));
 				String courseClassroom = rs.getString("classroom");
-				String  courseTitle = rs.getString("title");
-				Object[] obj = new Object[3];
+				String courseTitle = rs.getString("title");
+				String courseStartDate = rs.getString("startDate");
+				String courseEndDate = rs.getString("endDate");
+				int courseCourseID= rs.getInt("courseID");
+				Object[] obj = new Object[6];
 				obj[0] = newStudent;
 				obj[1] = courseClassroom;
 				obj[2] = courseTitle;
+				obj[3] = courseCourseID;
+				obj[4] = courseStartDate;
+				obj[5] = courseEndDate;
+				
 				studentComplete.add(obj);
 			}
 		} catch (SQLException e) {

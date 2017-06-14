@@ -21,10 +21,14 @@ public class StudentEvaluations extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	protected void doGet(HttpServletRequest request,
 		HttpServletResponse response) throws ServletException, IOException {
-        HttpSession session = request.getSession();
-		Person p=(Person)session.getAttribute("person");
+        
+		
+		int pid=Integer.parseInt(request.getParameter("personID"));
+		int cid=Integer.parseInt(request.getParameter("courseID"));
+
+		
 		PersonDao c= new PersonDao();
-		List<Student> list=c.getStudentEvaluations(p.getPersonID());
+		List<Student> list=c.getStudentEvaluation(pid, cid);
 		request.setAttribute("StudentEvaluations",list);
 		RequestDispatcher rd; 
 		rd=request.getRequestDispatcher("/WEB-INF/jsp/viewstudentevaluation.jsp");
