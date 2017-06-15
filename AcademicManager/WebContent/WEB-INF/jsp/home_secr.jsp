@@ -22,7 +22,7 @@
 			<!-- Side Menu accordion -->
 			<nav id="menu_box">
 				<ul class="menu">
-					<li><a href="javascript:ml('ViewProfile')">Home</a></li>
+					<li><a href="javascript:ml('person?action=profile')">Home</a></li>
 					<li><a id="linkdisabled" href="#">Courses</a>
 						<ul>
 							<li><a href="javascript:ml('')">Add Course</a></li>
@@ -32,11 +32,13 @@
 						<ul>
 							<li><a href="javascript:ml('teacher?action=listApplicants')">View
 									Applicants</a></li>
-							<li><a href="javascript:ml('teacher?action=courseApplicants')">Course
+							<li><a
+								href="javascript:ml('teacher?action=courseApplicants')">Course
 									Applications</a></li>
 							<li><a href="javascript:ml('teacher?action=courseTeachers')">Course
 									Teachers</a></li>
-							<li><a href="javascript:ml('teacher?action=teachActiveCourses')">Active
+							<li><a
+								href="javascript:ml('teacher?action=teachActiveCourses')">Active
 									Course Teachers</a></li>
 							<li><a href="javascript:ml('')">Teachers' Evaluation</a></li>
 							<li><a href="javascript:ml('')">Update Profile</a></li>
@@ -48,6 +50,9 @@
 							<li><a href="javascript:ml('')">Payments</a></li>
 							<li><a href="javascript:ml('')">Students' Evaluation</a></li>
 						</ul></li>
+					<li><a
+						href="javascript:ml('person?action=edit&personID=${person.getPersonID()}')">Update
+							Profile</a></li>
 				</ul>
 			</nav>
 
