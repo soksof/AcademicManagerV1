@@ -30,7 +30,7 @@
 			<td>${studentActive[4]}</td>
 			<td>${studentActive[5]}</td>
 			<td>${studentActive[0].getFinalGrade()}</td>	
-			<td><a target="_blank" href="StudentEvaluations?personID=${studentActive[0].getPersonID()}&courseID=${studentActive[3]}">Evaluation</a></td>		
+			<td><a target="_blank" href="student?action=courseEvaluation&personID=${studentActive[0].getPersonID()}&courseID=${studentActive[3]}">Evaluation</a></td>		
 			</tr>
 		</c:forEach>
 	</table>

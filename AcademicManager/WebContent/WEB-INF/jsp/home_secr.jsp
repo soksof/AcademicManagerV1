@@ -30,13 +30,13 @@
 						</ul></li>
 					<li><a id="linkdisabled" href="#">Teachers</a>
 						<ul>
-							<li><a href="javascript:ml('ApplicantTeachers')">View
+							<li><a href="javascript:ml('teacher?action=listApplicants')">View
 									Applicants</a></li>
-							<li><a href="javascript:ml('CourseTeacherApplication')">Course
+							<li><a href="javascript:ml('teacher?action=courseApplicants')">Course
 									Applications</a></li>
-							<li><a href="javascript:ml('CourseTeachers')">Course
+							<li><a href="javascript:ml('teacher?action=courseTeachers')">Course
 									Teachers</a></li>
-							<li><a href="javascript:ml('TeacherTeachActiveCourses')">Active
+							<li><a href="javascript:ml('teacher?action=teachActiveCourses')">Active
 									Course Teachers</a></li>
 							<li><a href="javascript:ml('')">Teachers' Evaluation</a></li>
 							<li><a href="javascript:ml('')">Update Profile</a></li>
