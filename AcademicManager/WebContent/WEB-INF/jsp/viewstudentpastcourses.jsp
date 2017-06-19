@@ -16,17 +16,21 @@
 			<th>CourseID</th>
 			<th>Title</th>
 			<th>Classroom</th>
+			<th>Start Date</th>
+			<th>End Date</th>
 			<th>Grades</th>
 			<th>Evaluation</th>
 		</tr>
 
 		<c:forEach items="${StudentActiveCourses}" var="studentActive">
 			<tr>
-			<td>${studentActive[0].getCourseID()}</td>
+			<td>${studentActive[3]}</td>
 			<td>${studentActive[2]}</td>	
-			<td>${studentActive[1]}</td>	
+			<td>${studentActive[1]}</td>
+			<td>${studentActive[4]}</td>
+			<td>${studentActive[5]}</td>
 			<td>${studentActive[0].getFinalGrade()}</td>	
-			<td><a target="_blank" href="StudentEvaluations?personID=${studentActive[0].getPersonID()}">Evaluation</a></td>		
+			<td><a target="_blank" href="student?action=courseEvaluation&personID=${studentActive[0].getPersonID()}&courseID=${studentActive[3]}">Evaluation</a></td>		
 			</tr>
 		</c:forEach>
 	</table>

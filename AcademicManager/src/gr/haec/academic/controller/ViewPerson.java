@@ -19,9 +19,8 @@ public class ViewPerson extends HttpServlet {
 	/**
 	 * 
 	 */
-	protected void doGet(HttpServletRequest request,
+	protected void viewPerson(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-
 		RequestDispatcher rd=null;
 		PersonDao pd=new PersonDao();
 		Person p=pd.getPersonID(Integer.parseInt(request.getParameter("personID")));

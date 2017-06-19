@@ -21,11 +21,11 @@
 	<!-- Side Menu accordion -->
 <nav id="menu_box">
  <ul class="menu">
-    <li> <a href="javascript:ml('ViewProfile')">Home</a></li>
+    <li> <a href="javascript:ml('person?action=profile')">Home</a></li>
     <li> <a href="#">Courses</a>
       <ul>
-        <li><a href="javascript:ml('StudentActiveCourses')">Active Courses</a></li>
-		<li><a href="javascript:ml('StudentPastCourses')">Past Courses</a></li>
+        <li><a href="javascript:ml('student?action=activeCourses')">Active Courses</a></li>
+		<li><a href="javascript:ml('student?action=pastCourses')">Past Courses</a></li>
 		<li><a href="">Register New</a></li>
       </ul>
     </li>
@@ -36,7 +36,7 @@
       </ul>
     </li>
     <li><a href="">Messages</a> </li>
-	<li><a href="">Account Settings</a></li>
+	<li><a href="javascript:ml('person?action=edit&personID=${person.getPersonID()}')">Update Profile</a></li>
 </ul> 
 </nav>
 	

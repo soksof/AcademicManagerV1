@@ -21,7 +21,7 @@
 		<c:forEach items="${applicantList}" var="applicants">
 			<tr>
 				<td><a target="_blank"
-					href="ViewPerson?personID=${applicants[0].getPersonID()}">${applicants[0].getName()}
+					href="person?action=view&personID=${applicants[0].getPersonID()}">${applicants[0].getName()}
 						${applicants[0].getSurname()}</a></td>
 				<td>${applicants[1]}</td>
 				<td>${applicants[2]}</td>

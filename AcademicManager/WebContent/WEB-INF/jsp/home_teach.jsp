@@ -22,11 +22,11 @@
 		<aside id="left"> <!-- Side Menu accordion --> <nav
 			id="menu_box">
 		<ul class="menu">
-			<li><a href="home_teach.jsp">Home</a></li>
+			<li><a href="javascript:ml('person?action=profile')">Home</a></li>
 			<li><a href="coursesT.jsp">Courses</a>
 				<ul>
 					<li><a href="apply.jsp">Apply</a></li>
-					<li><a href="">Course History</a></li>
+					<li><a href="javascript:ml('teacher?action=courseThatTeacherTeaches')">Course History</a></li>
 				</ul></li>
 			<li><a href="">Reports</a>
 				<ul>
@@ -35,7 +35,7 @@
 				</ul></li>
 			<li><a href="">Student Evaluation</a></li>
 			<li><a href="">Messages</a>
-			<li><a href="">Account Settings</a></li>
+			<li><a href="javascript:ml('person?action=edit&personID=${person.getPersonID()}')">Update Profile</a></li>
 		</ul>
 		</nav> </aside>
 
