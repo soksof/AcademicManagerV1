@@ -48,7 +48,23 @@ public class PersonController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		this.doGet(request, response);
+			updatePerson(request, response);
+			String personID = request.getParameter("personID");
+			if (personID!=null)
+				updatePerson(request, response);
+			else 
+				insertPerson(request, response);
+	}
+	/**
+	 * method to a new person in the database
+	 * @param request
+	 * @param response
+	 * @throws ServletException
+	 * @throws IOException
+	 */
+	private void insertPerson(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		 
 	}
 	/**
 	 * method to edit the profile of a person
@@ -59,7 +75,7 @@ public class PersonController extends HttpServlet {
 	 */
 	private void updatePerson(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-
+		 
 	}
 	/**
 	 * method to view the profile of a person
