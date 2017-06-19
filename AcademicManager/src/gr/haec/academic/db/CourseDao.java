@@ -140,4 +140,10 @@ public class CourseDao {
 		}
 		return courses;
 	}
+	/**
+	 * Method to insert a new course core in the database
+	 */
+	public void insertCourseCore(int ccid, String ccname, String cctitle, String ccdescr){
+		
+	}
 }
