@@ -37,6 +37,9 @@ public class TeacherController extends HttpServlet {
 		case "listApplicants":
 			listApplicantTeachers(request, response);
 			break;
+		case "courseThatTeacherTeaches":
+			courseThatTeacherTeaches(request, response);
+			break;
 		case "view":
 			viewTeacher(request, response);
 			break;
@@ -89,6 +92,24 @@ public class TeacherController extends HttpServlet {
 	}
 
 	/**
+	 * Returns the courses that the teacher is currently(??) teaching
+	 * 
+	 * @param request
+	 * @param response
+	 * @throws IOException
+	 * @throws ServletException
+	 */
+	private void courseThatTeacherTeaches(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		PersonDao d = new PersonDao();
+		List<Object[]> list = d.getCourseTeacher();
+		request.setAttribute("teacherCoursesList", list);
+		RequestDispatcher rd;
+		rd = request.getRequestDispatcher("/WEB-INF/jsp/viewcoursethatteacherteach.jsp");
+		rd.forward(request, response);
+	}
+
+	/**
 	 * Returns all teachers that teach a course
 	 * 
 	 * @param request
@@ -105,6 +126,7 @@ public class TeacherController extends HttpServlet {
 		rd = request.getRequestDispatcher("/WEB-INF/jsp/viewcourseteachers.jsp");
 		rd.forward(request, response);
 	}
+
 	/**
 	 * Returns all teachers that teach a course
 	 * 
@@ -122,8 +144,10 @@ public class TeacherController extends HttpServlet {
 		rd = request.getRequestDispatcher("/WEB-INF/jsp/viewteacheractivecourses.jsp");
 		rd.forward(request, response);
 	}
+
 	/**
 	 * Lists all people that have applied to register as teachers
+	 * 
 	 * @param request
 	 * @param response
 	 * @throws ServletException
@@ -131,11 +155,11 @@ public class TeacherController extends HttpServlet {
 	 */
 	private void listApplicantTeachers(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		PersonDao d= new PersonDao();
+		PersonDao d = new PersonDao();
 		List<Teacher> list = d.getApplicantTeachers();
-		request.setAttribute("applicantList",list);
-		RequestDispatcher rd; 
-		rd=request.getRequestDispatcher("/WEB-INF/jsp/viewapplicantteachers.jsp");
+		request.setAttribute("applicantList", list);
+		RequestDispatcher rd;
+		rd = request.getRequestDispatcher("/WEB-INF/jsp/viewapplicantteachers.jsp");
 		rd.forward(request, response);
 	}
 }

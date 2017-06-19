@@ -26,7 +26,7 @@
 			<li><a href="coursesT.jsp">Courses</a>
 				<ul>
 					<li><a href="apply.jsp">Apply</a></li>
-					<li><a href="">Course History</a></li>
+					<li><a href="javascript:ml('teacher?action=courseThatTeacherTeaches')">Course History</a></li>
 				</ul></li>
 			<li><a href="">Reports</a>
 				<ul>
