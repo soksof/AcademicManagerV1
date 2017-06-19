@@ -49,6 +49,7 @@
 									Applications</a></li>
 							<li><a href="javascript:ml('')">Payments</a></li>
 							<li><a href="javascript:ml('')">Students' Evaluation</a></li>
+							<li><a href="javascript:ml('student?action=listcoursestudappl')">All Course Applications</a></li>
 						</ul></li>
 					<li><a
 						href="javascript:ml('person?action=edit&personID=${person.getPersonID()}')">Update

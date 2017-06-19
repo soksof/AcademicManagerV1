@@ -42,16 +42,16 @@ public class StudentController extends HttpServlet {
 		case "new":
 			break;
 		case "courseEvaluation":
-			System.out.println("ASDASDSADASD");
 			courseEvaluation(request, response);
 			break;
 		case "activeCourses":
-			System.out.println("ASDASDSADASDsssss");
 			activeCourses(request, response);
 			break;
 		case "pastCourses":
-			System.out.println("ASDASDSADASD222222222");
 			pastCourses(request, response);
+			break;
+		case "listcoursestudappl":
+			listCourseStudAppl(request, response);
 			break;
 		}
 	}
@@ -146,6 +146,15 @@ public class StudentController extends HttpServlet {
 		request.setAttribute("StudentActiveCourses", list);
 		RequestDispatcher rd;
 		rd = request.getRequestDispatcher("/WEB-INF/jsp/viewstudentpastcourses.jsp");
+		rd.forward(request, response);
+	}
+	private void listCourseStudAppl(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		PersonDao d= new PersonDao();
+		List <Object[]> list = d.getApplicantStudent();
+		request.setAttribute("applicantList",list);
+		RequestDispatcher rd; 
+		rd=request.getRequestDispatcher("/WEB-INF/jsp/viewcoursestudentapplication.jsp");
 		rd.forward(request, response);
 	}
 }
