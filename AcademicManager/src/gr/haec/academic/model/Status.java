@@ -1,5 +1,9 @@
 package gr.haec.academic.model;
 
+/**
+ *  declaring the ENUM choices for the teacher status.
+ */
+
 public enum Status {
 	Teacher_Applicant("Teacher Applicant"),
 	Teacher_Course_Applicant("Teacher Course Applicant"),

@@ -2,6 +2,10 @@ package gr.haec.academic.model;
 
 import java.sql.Date;
 
+/**
+ *declaring the variables which we have taken from the data base tables of course and courseCore.
+ */
+
 public class Course {
 
 	protected int courseID;
@@ -23,7 +27,14 @@ public class Course {
 	protected int minStudents;
 	protected int credits;
 	protected Field field;
+	//evaluations for the courses from the students and the date which they have been submited. 
+	protected String evaluation;
+	protected String evaluationDate;
 
+ /**
+ *Setters and Getters for all the variables. 
+ */
+	
 	public Field getField() {
 	return field;
 	}
@@ -35,112 +46,168 @@ public class Course {
 	public int getCourseID() {
 		return courseID;
 	}
+	
 	public void setCourseID(int courseID) {
 		this.courseID = courseID;
 	}
+	
 	public String getTitle() {
 		return title;
 	}
+	
 	public void setTitle(String title) {
 		this.title = title;
 	}
+	
 	public Date getStartDate() {
 		return startDate;
 	}
+	
 	public void setStartDate(Date startDate) {
 		this.startDate = startDate;
 	}
+	
 	public Date getEndDate() {
 		return endDate;
 	}
+	
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
 	}
+	
 	public CourseStatus getStatus() {
 		return status;
 	}
+	
 	public void setStatus(CourseStatus status) {
 		this.status = status;
 	}
+	
 	public int getTotalHours() {
 		return totalHours;
 	}
+	
 	public void setTotalHours(int totalHours) {
 		this.totalHours = totalHours;
 	}
+	
 	public String getTimetable() {
 		return timetable;
 	}
+	
 	public void setTimetable(String timetable) {
 		this.timetable = timetable;
 	}
+	
 	public String getDescription() {
 		return description;
 	}
+	
 	public void setDescription(String description) {
 		this.description = description;
 	}
+	
 	public String getSyllabus() {
 		return syllabus;
 	}
+	
 	public void setSyllabus(String syllabus) {
 		this.syllabus = syllabus;
 	}
+	
 	public String getPrereqCourseID() {
 		return prereqCoreCourse;
 	}
+	
 	public void setPrereqCourseID(String prereqCoreCourse) {
 		this.prereqCoreCourse = prereqCoreCourse ;
 	}
+	
 	public int getCost() {
 		return cost;
 	}
+	
 	public void setCost(int cost) {
 		this.cost = cost;
 	}
+	
 	public int getDiscount() {
 		return discount;
 	}
+	
 	public void setDiscount(int discount) {
 		this.discount = discount;
 	}
+	
 	public String getClassroom() {
 		return classroom;
 	}
+	
 	public void setClassroom(String classroom) {
 		this.classroom = classroom;
 	}
+	
 	public int getMaxStudents() {
 		return maxStudents;
 	}
+	
 	public void setMaxStudents(int maxStudents) {
 		this.maxStudents = maxStudents;
 	}
+	
 	public int getMinStudents() {
 		return minStudents;
 	}
+	
 	public void setMinStudents(int minStudents) {
 		this.minStudents = minStudents;
 	}
+	
 	public int getCredits() {
 		return credits;
 	}
+	
 	public void setCredits(int credits) {
 		this.credits = credits;
 	}
+	
 	public String getcourseCore() {
 		return timetable;
 	}
+	
 	public void setcourseCore(String courseCore) {
 		this.courseCore = courseCore;
 	}
-public int getIdCourseCore() {
-	return idCourseCore;
-}
-public void setIdCourseCore(int idCourseCore) {
-	this.idCourseCore = idCourseCore;
-}
 	
+    public int getIdCourseCore() {
+	return idCourseCore;
+    }
+    
+    public void setIdCourseCore(int idCourseCore) {
+	    this.idCourseCore = idCourseCore;
+    }
+    
+    public String getEvaluation() {
+	return evaluation;
+    }
+    
+    public void setEvaluation(String evaluation) {
+  	   this.evaluation = evaluation;
+    }
+    
+    public String getEvaluationDate() {
+	return evaluationDate;
+    }
+    
+    public void setEvaluationDate(String evaluationDate) {
+	   this.evaluationDate = evaluationDate;
+    }
+
+/**
+ * Constructor for all the informations of a course.
+ * Used at courseDao at every query except the ones with the evaluations.	
+ */
+
 	public Course(int courseID, String title, Date startDate,Date endDate, CourseStatus status, int totalHours, String timetable, 
 			String description, String syllabus, String prereqCoreCourse, int cost, int discount, String classroom, int maxStudents, 
 			int minStudents, int credits, int idCourseCore, String courseCore,Field field){
@@ -164,4 +231,17 @@ public void setIdCourseCore(int idCourseCore) {
 		this.courseCore=courseCore;
 		this.field=field;
 	}
+	
+	/**
+	 * Constructor for the evaluation of the courses from every student. 
+	 * Used at courseDao at the getCourseEvaluation query.
+	 */
+	
+	public Course(int courseID , String title ,String evaluation ,String evaluationDate){
+		this.courseID=courseID;
+		this.title=title;
+		this.evaluation=evaluation;
+		this.evaluationDate=evaluationDate;
+	}
+	
 }

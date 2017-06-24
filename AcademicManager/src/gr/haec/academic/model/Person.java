@@ -2,6 +2,10 @@ package gr.haec.academic.model;
 
 import java.util.Date;
 
+/**
+ * declaring the variables which we have taken from the data base table of person.
+ */
+
 public class Person {
 
 	protected int personID;
@@ -18,6 +22,10 @@ public class Person {
 	protected String iban;
 	protected Role role;
 
+	/**
+	 *Setters and Getters for all the variables. 
+	 */
+	
 	public int getPersonID() {
 		return personID;
 	}
@@ -103,6 +111,10 @@ public class Person {
 		this.role = role;
 	}
 	
+	/**
+	 * This constructor contains all the informations of a person.
+	 * Currently don't used at any query of personDao.
+	 */
 	
 	public Person(int personID, String name, String surname, String email, String phone, Sex sex, String address,
 			Date dob, String username, String password, String taxNumber, String iban, Role role) {
@@ -120,7 +132,12 @@ public class Person {
 		this.iban = iban;
 		this.role = role;
 	}
-	//constructor to use for session variable person
+	
+	/**
+	 * This constructor contains all the informations of a person without the password.
+	 * Currently used at every query of personDao.
+	 */
+	
 	public Person(int personID, String name, String surname, String email, String phone, Sex sex, String address,
 			Date dob, String username, String taxNumber, String iban, Role role) {
 		this.personID = personID;
@@ -136,15 +153,20 @@ public class Person {
 		this.iban = iban;
 		this.role = role;
 	}
+	/**
+	 * This constructor contains only the personID,name,surname and role of a person.
+	 */
 	public Person(int personID, String name, String surname,Role role){
 		this.personID = personID;
 		this.name = name;
 		this.surname = surname;
 		this.role = role;
 	}
+	
 	/**
-	 * Overriding toString method
+	 * Overriding toString method.
 	 */
+	
 	public String toString(){
 		return this.name+" "+this.surname+" is a "+this.role;
 	}
