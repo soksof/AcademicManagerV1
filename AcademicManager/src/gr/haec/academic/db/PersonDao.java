@@ -595,5 +595,25 @@ public class PersonDao {
 			e.printStackTrace();
 		}
 		return studentComplete;
-}	
+}
+	//auto ftia3e
+	public Person updatePerson(int personID) {
+		Connection conn = ConnectionFactory.getConnection();
+		try {
+			PreparedStatement stm = conn.prepareStatement("");
+			stm.setInt(1, id);
+			ResultSet rs = stm.executeQuery();
+
+			while (rs.next()) {
+				Person newPerson = new Person(rs.getInt("personID"), rs.getString("name"), rs.getString("surname"),
+						rs.getString("email"), rs.getString("phone"), Sex.valueOf(rs.getString("sex")),
+						rs.getString("address"), rs.getDate("dob"), rs.getString("username"), rs.getString("taxNumber"),
+						rs.getString("iban"), Role.valueOf(rs.getString("role")));
+				return newPerson;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}	
 }

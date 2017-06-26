@@ -64,7 +64,7 @@
 				<!-- Load sex enum values -->
 				<c:set var="sexValues"
 					value="<%=gr.haec.academic.model.Sex.values()%>" />
-				<td><select>
+				<td><select name = "sex">
 						<c:forEach var="val" items="${sexValues}">
 
 							<c:choose>

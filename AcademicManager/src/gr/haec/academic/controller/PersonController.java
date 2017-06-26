@@ -1,6 +1,9 @@
 package gr.haec.academic.controller;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -49,7 +52,7 @@ public class PersonController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 			updatePerson(request, response);
-			String personID = request.getParameter("personID");
+			String personID = request.getParameter("personid");
 			if (personID!=null)
 				updatePerson(request, response);
 			else 
@@ -73,9 +76,27 @@ public class PersonController extends HttpServlet {
 	 * @throws ServletException
 	 * @throws IOException
 	 */
+	//auto ftiae
 	private void updatePerson(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		 
+		String name = request.getParameter("name");
+		String surname = request.getParameter("surname");
+		String personID =request.getParameter("personid");
+		String email = request.getParameter("email");
+		String phone = request.getParameter("phone");
+		String sdob  = request.getParameter("dob");
+		Date dob =null;
+		try {
+			dob = new SimpleDateFormat ("yyyy-MM-dd").parse(sdob);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		String taxnumber = request.getParameter("taxnumber");
+		String iban = request.getParameter("iban");
+		String address = request.getParameter("address");
+		String sex = request.getParameter("sex");
+		
 	}
 	/**
 	 * method to view the profile of a person
