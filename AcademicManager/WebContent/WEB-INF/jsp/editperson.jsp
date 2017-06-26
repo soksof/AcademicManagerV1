@@ -13,12 +13,17 @@
 	<c:set var="person" value='${requestScope.personq}' />
 	<h3>Editing</h3>
 	<p>
-	<form action="" method="post">
+	<form action="person" method="post">
 		<table>
 			<tr>
 				<td>Name</td>
 				<td><input id="input1" type="text" name="name"
 					value="${person.getName()}" required></td>
+			</tr>
+			<tr>
+				<td>personID</td>
+				<td><input id="input1" type="hidden" name="personid"
+					value="${person.personID()}" required></td>
 			</tr>
 			<tr>
 				<td>Surname</td>
@@ -37,12 +42,12 @@
 			</tr>
 			<tr>
 				<td>Date of Birth</td>
-				<td><input id="input1" type="text" name="dob"
-					"${person.getDob()}" required></td>
+				<td><input id="input1" type="date" name="dob"
+					value="${person.getDob()}" required></td>
 			<tr>
 				<td>Tax Number</td>
 				<td><input id="input1" type="text" name="taxnumber"
-					"${person.getTaxNumber()}" required></td>
+					value="${person.getTaxNumber()}" required></td>
 			</tr>
 			<tr>
 				<td>IBAN</td>

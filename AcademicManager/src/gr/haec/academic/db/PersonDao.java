@@ -4,11 +4,11 @@ import gr.haec.academic.model.Field;
 import gr.haec.academic.model.Person;
 import gr.haec.academic.model.Role;
 import gr.haec.academic.model.Sex;
+import gr.haec.academic.model.Status;
 import gr.haec.academic.model.Student;
 import gr.haec.academic.model.Teacher;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -123,7 +123,7 @@ public class PersonDao {
 				Teacher newTeacher = new Teacher(rs.getInt("personID"), rs.getString("name"), rs.getString("surname"),
 						rs.getString("email"), rs.getString("phone"), Sex.valueOf(rs.getString("sex")),
 						rs.getString("address"), rs.getDate("dob"), rs.getString("username"), rs.getString("taxNumber"),
-						rs.getString("iban"), Role.valueOf(rs.getString("role")), rs.getString("cv"),
+						rs.getString("iban"), Role.valueOf(rs.getString("role")),Status.valueOf(rs.getString("status")), rs.getString("cv"),
 						Field.valueOf(rs.getString("field")));
 				teachers.add(newTeacher);
 			}
@@ -239,7 +239,7 @@ public class PersonDao {
 				Teacher newTeacher = new Teacher(rs.getInt("personID"), rs.getString("name"), rs.getString("surname"),
 						rs.getString("email"), rs.getString("phone"), Sex.valueOf(rs.getString("sex")),
 						rs.getString("address"), rs.getDate("dob"), rs.getString("username"), rs.getString("taxNumber"),
-						rs.getString("iban"), Role.valueOf(rs.getString("role")), rs.getString("cv"),
+						rs.getString("iban"), Role.valueOf(rs.getString("role")),Status.valueOf(rs.getString("status")), rs.getString("cv"),
 						Field.valueOf(rs.getString("field")));
 				Object[] ret = new Object[2];
 				ret[0] = newTeacher;
@@ -272,7 +272,7 @@ public class PersonDao {
 				Teacher newTeacher = new Teacher(rs.getInt("personID"), rs.getString("name"), rs.getString("surname"),
 						rs.getString("email"), rs.getString("phone"), Sex.valueOf(rs.getString("sex")),
 						rs.getString("address"), rs.getDate("dob"), rs.getString("username"), rs.getString("taxNumber"),
-						rs.getString("iban"), Role.valueOf(rs.getString("role")), rs.getString("cv"),
+						rs.getString("iban"), Role.valueOf(rs.getString("role")),Status.valueOf(rs.getString("status")), rs.getString("cv"),
 						Field.valueOf(rs.getString("field")));
 				teachers.add(newTeacher);
 			}
@@ -331,7 +331,7 @@ public class PersonDao {
 				Teacher newTeacher = new Teacher(rs.getInt("personID"), rs.getString("name"), rs.getString("surname"),
 						rs.getString("email"), rs.getString("phone"), Sex.valueOf(rs.getString("sex")),
 						rs.getString("address"), rs.getDate("dob"), rs.getString("username"), rs.getString("taxNumber"),
-						rs.getString("iban"), Role.valueOf(rs.getString("role")), rs.getString("cv"),
+						rs.getString("iban"), Role.valueOf(rs.getString("role")),Status.valueOf(rs.getString("status")), rs.getString("cv"),
 						Field.valueOf(rs.getString("field")));
 				teachers.add(newTeacher);
 			}
@@ -361,7 +361,7 @@ public class PersonDao {
 				Teacher newTeacher = new Teacher(rs.getInt("personID"), rs.getString("name"), rs.getString("surname"),
 						rs.getString("email"), rs.getString("phone"), Sex.valueOf(rs.getString("sex")),
 						rs.getString("address"), rs.getDate("dob"), rs.getString("username"), rs.getString("taxNumber"),
-						rs.getString("iban"), Role.valueOf(rs.getString("role")), rs.getString("cv"),
+						rs.getString("iban"), Role.valueOf(rs.getString("role")),Status.valueOf(rs.getString("status")), rs.getString("cv"),
 						Field.valueOf(rs.getString("field")));
 				teachers.add(newTeacher);
 			}
@@ -391,7 +391,7 @@ public class PersonDao {
 				Teacher newTeacher = new Teacher(rs.getInt("personID"), rs.getString("name"), rs.getString("surname"),
 						rs.getString("email"), rs.getString("phone"), Sex.valueOf(rs.getString("sex")),
 						rs.getString("address"), rs.getDate("dob"), rs.getString("username"), rs.getString("taxNumber"),
-						rs.getString("iban"), Role.valueOf(rs.getString("role")), rs.getString("cv"),
+						rs.getString("iban"), Role.valueOf(rs.getString("role")),Status.valueOf(rs.getString("status")), rs.getString("cv"),
 						Field.valueOf(rs.getString("field")));
 				teachers.add(newTeacher);
 			}
@@ -420,7 +420,7 @@ public class PersonDao {
 				Teacher newTeacher = new Teacher(rs.getInt("personID"), rs.getString("name"), rs.getString("surname"),
 						rs.getString("email"), rs.getString("phone"), Sex.valueOf(rs.getString("sex")),
 						rs.getString("address"), rs.getDate("dob"), rs.getString("username"), rs.getString("taxNumber"),
-						rs.getString("iban"), Role.valueOf(rs.getString("role")), rs.getString("cv"),
+						rs.getString("iban"), Role.valueOf(rs.getString("role")),Status.valueOf(rs.getString("status")), rs.getString("cv"),
 						Field.valueOf(rs.getString("field")));
 				teachers.add(newTeacher);
 			}
@@ -446,8 +446,8 @@ public class PersonDao {
 				Teacher newCourseTeacher = new Teacher(rs.getInt("personID"), rs.getString("name"),
 						rs.getString("surname"), rs.getString("email"), rs.getString("phone"),
 						Sex.valueOf(rs.getString("sex")), rs.getString("address"), rs.getDate("dob"),
-						rs.getString("username"), rs.getString("password"), rs.getString("taxNumber"),
-						rs.getString("iban"), Role.valueOf(rs.getString("role")), rs.getString("cv"),
+						rs.getString("username"), rs.getString("taxNumber"),
+						rs.getString("iban"), Role.valueOf(rs.getString("role")),Status.valueOf(rs.getString("status")), rs.getString("cv"),
 						Field.valueOf(rs.getString("field")));
 				String courseTitle = rs.getString("title");
 				Object[] ret = new Object[2];
@@ -462,7 +462,7 @@ public class PersonDao {
 	}
 
 	/**
-	 * 
+	 * Find all students that have applied for a certain course.
 	 * @return
 	 */
 	public List<Object[]> getApplicantStudent() {
@@ -477,13 +477,11 @@ public class PersonDao {
 				Student newStudent = new Student(rs.getInt("personID"), rs.getString("name"), rs.getString("surname"),
 						rs.getString("email"), rs.getString("phone"), Sex.valueOf(rs.getString("sex")),
 						rs.getString("address"), rs.getDate("dob"), rs.getString("username"), rs.getString("taxNumber"),
-						rs.getString("iban"), Role.valueOf(rs.getString("role")));
+						rs.getString("iban"), Role.valueOf(rs.getString("role")),rs.getDate("applicationDate"),rs.getInt("studentID"));
 				int courseId = rs.getInt("courseID");
-				Date appDate = rs.getDate("applicationDate");
 				Object[] obj = new Object[3];
 				obj[0] = newStudent;
 				obj[1] = courseId;
-				obj[2] = appDate;
 				Applicantstudents.add(obj);
 			}
 		} catch (SQLException e) {
@@ -514,7 +512,7 @@ public class PersonDao {
 						rs.getString("email"), rs.getString("phone"), Sex.valueOf(rs.getString("sex")),
 						rs.getString("address"), rs.getDate("dob"), rs.getString("username"), rs.getString("taxNumber"),
 						rs.getString("iban"), Role.valueOf(rs.getString("role")), rs.getString("cv"),
-						Field.valueOf(rs.getString("field")));
+						Field.valueOf(rs.getString("field")),Status.valueOf(rs.getString("status")),rs.getDate("applicationDate"));
 				teachers.add(newTeacher);
 			}
 		} catch (SQLException e) {
@@ -522,35 +520,14 @@ public class PersonDao {
 		}
 		return teachers;
 	}
+	
 	/**
-	 * Searching for the completed courses evaluation for a student
+	 * Seatching for the completed courses evaluation for a student for a certain course.
 	 * @param personID
-	 * @return a  list of completed courses evaluation for student with id personID 
+	 * @param courseID
+	 * @return
 	 */
-	public List<Student> getStudentEvaluations(int personID) {
-		Connection conn = ConnectionFactory.getConnection();
-		List<Student> studentEvaluations = new ArrayList<Student>();
-		try {
-			PreparedStatement stm = conn.prepareStatement(
-					"SELECT * FROM person " 
-			                + "inner join coursestudent on coursestudent.studentID=person.personID "
-							+ "inner join course on course.courseID=coursestudent.courseID "
-							+ "inner join coursecore on coursecore.idcourseCore=course.idCourseCore "
-							+ "where personID=? AND status='complete'");
-			stm.setInt(1, personID);
-			ResultSet rs = stm.executeQuery();
-			while (rs.next()) {
-				Student newStudent = new Student(rs.getInt("personID"), rs.getString("name"), rs.getString("surname"),
-						rs.getString("email"), rs.getString("phone"), Sex.valueOf(rs.getString("sex")),
-						rs.getString("address"), rs.getDate("dob"), rs.getString("username"), rs.getString("taxNumber"),
-						rs.getString("iban"), Role.valueOf(rs.getString("role")),rs.getString("evaluation"));
-				studentEvaluations.add(newStudent);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return studentEvaluations;
-}
+	
 	public List<Student> getStudentEvaluation(int personID, int courseID) {
 		Connection conn = ConnectionFactory.getConnection();
 		List<Student> studentEvaluations = new ArrayList<Student>();
@@ -568,7 +545,7 @@ public class PersonDao {
 				Student newStudent = new Student(rs.getInt("personID"), rs.getString("name"), rs.getString("surname"),
 						rs.getString("email"), rs.getString("phone"), Sex.valueOf(rs.getString("sex")),
 						rs.getString("address"), rs.getDate("dob"), rs.getString("username"), rs.getString("taxNumber"),
-						rs.getString("iban"), Role.valueOf(rs.getString("role")),rs.getString("evaluation"));
+						rs.getString("iban"), Role.valueOf(rs.getString("role")),rs.getString("evaluation"),rs.getFloat("finalGrade"));
 				studentEvaluations.add(newStudent);
 			}
 		} catch (SQLException e) {
