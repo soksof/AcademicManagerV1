@@ -23,7 +23,7 @@
 			<tr>
 				<td>personID</td>
 				<td><input id="input1" type="hidden" name="personid"
-					value="${person.personID()}" required></td>
+					value="${person.getPersonID()}" required></td>
 			</tr>
 			<tr>
 				<td>Surname</td>
