@@ -13,6 +13,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -596,12 +597,34 @@ public class PersonDao {
 		}
 		return studentComplete;
 }
-	//auto ftia3e
-	public Person updatePerson(int personID) {
+/**
+ * Updating the persons personal informations.
+ * @param name
+ * @param surname
+ * @param email
+ * @param phone
+ * @param sex
+ * @param address
+ * @param dob
+ * @param taxnumber
+ * @param iban
+ * @param personID
+ * @return
+ */
+	public Person updatePerson(String name,String surname,String email,String phone,String sex,String address,Date dob,String taxnumber,String iban,String personID) {
 		Connection conn = ConnectionFactory.getConnection();
 		try {
-			PreparedStatement stm = conn.prepareStatement("");
-			stm.setInt(1, id);
+			PreparedStatement stm = conn.prepareStatement("UPDATE person SET name=?,surname=?,email=?,phone=?,sex=?,address=?,dob=?,taxnumber=?,iban=? WHERE personID=?");
+			stm.setString(1,name);
+			stm.setString(2,surname);
+			stm.setString(3,email);
+			stm.setString(4,phone);
+			stm.setString(5,sex);
+			stm.setString(6,address);
+			stm.setDate(7,dob);
+			stm.setString(8,taxnumber);
+			stm.setString(9,iban);
+			stm.setString(10,personID);
 			ResultSet rs = stm.executeQuery();
 
 			while (rs.next()) {

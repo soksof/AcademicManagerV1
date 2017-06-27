@@ -96,7 +96,9 @@ public class PersonController extends HttpServlet {
 		String iban = request.getParameter("iban");
 		String address = request.getParameter("address");
 		String sex = request.getParameter("sex");
-		
+		PersonDao pd=new PersonDao();
+		Person p=pd.updatePerson(name,surname,email,phone,sex,address,dob,taxnumber,iban,request.getParameter(personID));
+		request.setAttribute("personq", p);
 	}
 	/**
 	 * method to view the profile of a person
