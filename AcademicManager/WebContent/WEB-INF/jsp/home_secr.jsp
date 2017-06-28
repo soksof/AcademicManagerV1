@@ -26,6 +26,7 @@
 					<li><a id="linkdisabled" href="#">Courses</a>
 						<ul>
 							<li><a href="javascript:ml('')">Add Course</a></li>
+							<li><a href="javascript:ml('coursecore?action=add')">Add Course Core</a></li>
 							<li><a href="javascript:ml('')">Courses' Evaluation</a></li>
 						</ul></li>
 					<li><a id="linkdisabled" href="#">Teachers</a>
@@ -49,6 +50,7 @@
 									Applications</a></li>
 							<li><a href="javascript:ml('')">Payments</a></li>
 							<li><a href="javascript:ml('')">Students' Evaluation</a></li>
+							<li><a href="javascript:ml('student?action=listcoursestudappl')">All Course Applications</a></li>
 						</ul></li>
 					<li><a
 						href="javascript:ml('person?action=edit&personID=${person.getPersonID()}')">Update

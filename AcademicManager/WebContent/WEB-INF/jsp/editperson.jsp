@@ -13,12 +13,17 @@
 	<c:set var="person" value='${requestScope.personq}' />
 	<h3>Editing</h3>
 	<p>
-	<form action="" method="post">
+	<form action="person" method="post">
 		<table>
 			<tr>
 				<td>Name</td>
 				<td><input id="input1" type="text" name="name"
 					value="${person.getName()}" required></td>
+			</tr>
+			<tr>
+				<td>personID</td>
+				<td><input id="input1" type="hidden" name="personid"
+					value="${person.getPersonID()}" required></td>
 			</tr>
 			<tr>
 				<td>Surname</td>
@@ -37,12 +42,12 @@
 			</tr>
 			<tr>
 				<td>Date of Birth</td>
-				<td><input id="input1" type="text" name="dob"
-					"${person.getDob()}" required></td>
+				<td><input id="input1" type="date" name="dob"
+					value="${person.getDob()}" required></td>
 			<tr>
 				<td>Tax Number</td>
 				<td><input id="input1" type="text" name="taxnumber"
-					"${person.getTaxNumber()}" required></td>
+					value="${person.getTaxNumber()}" required></td>
 			</tr>
 			<tr>
 				<td>IBAN</td>
@@ -59,7 +64,7 @@
 				<!-- Load sex enum values -->
 				<c:set var="sexValues"
 					value="<%=gr.haec.academic.model.Sex.values()%>" />
-				<td><select>
+				<td><select name = "sex">
 						<c:forEach var="val" items="${sexValues}">
 
 							<c:choose>
@@ -75,7 +80,7 @@
 			</tr>
 			<tr>
 				<td><input id="submitbutton" type="submit" value="Update"></td>
-				<td><input id="submitbutton" type="reset" value="Cancel"></td>
+				<td><input id="submitbutton" type="reset" value="Cancel" onclick="javascript:ml('person?action=profile')"></td>
 			</tr>
 		</table>
 	</form>

@@ -1,13 +1,17 @@
 package gr.haec.academic.model;
 
+/**
+ *  declaring the ENUM choices for the teacher status.
+ */
+
 public enum Status {
 	Teacher_Applicant("Teacher Applicant"),
 	Teacher_Course_Applicant("Teacher Course Applicant"),
 	Course_Teacher("Course Teacher");
 	
-	private String longForm;
+	private final String longForm;
 	
-	Status(String longForm){
+	Status(final String longForm){
 		this.longForm=longForm;
 	}
 	
@@ -18,4 +22,12 @@ public enum Status {
 	public String toString(){
 		return this.longForm;
 	}
+	public static Status getValue(String s) {
+		  for(Status e: Status.values()) {
+		    if(e.longForm.compareTo(s)==0) {
+		      return e;
+		    }
+		  }
+		  return null;// not found
+		}
 }

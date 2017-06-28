@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import gr.haec.academic.model.Course;
+import gr.haec.academic.model.CourseCore;
 import gr.haec.academic.model.CourseStatus;
 import gr.haec.academic.model.Field;
 
@@ -38,7 +39,7 @@ public class CourseDao {
 						rs.getString("timetable"), rs.getString("description"), rs.getString("syllabus"),
 						rs.getString("prereqCoreCourse"), rs.getInt("cost"), rs.getInt("discount"),
 						rs.getString("classroom"), rs.getInt("maxStudents"), rs.getInt("minStudents"),
-						rs.getInt("credits"), rs.getInt("idCourseCore"),rs.getString("courseCore"),
+						rs.getInt("credits"), rs.getInt("idCourseCore"), rs.getString("courseCore"),
 						Field.valueOf(rs.getString("field")));
 				return newCourse;
 			}
@@ -49,17 +50,18 @@ public class CourseDao {
 	}
 
 	/**
-	 * Searching for the courses that a teacher is currently teaching  
+	 * Searching for the courses that a teacher is currently teaching
+	 * 
 	 * @param personID
-	 * @return a list with the informations of the courses that the teacher with id personID is teaching
+	 * @return a list with the informations of the courses that the teacher with
+	 *         id personID is teaching
 	 */
 	public List<Course> getCourses(int personID) {
 		Connection conn = ConnectionFactory.getConnection();
 		List<Course> courses = new ArrayList<Course>();
 		try {
 			PreparedStatement stm = conn.prepareStatement(
-					"SELECT * FROM person " 
-			                + "inner join courseteacher on courseteacher.teacherID=person.personID "
+					"SELECT * FROM person " + "inner join courseteacher on courseteacher.teacherID=person.personID "
 							+ "inner join course on course.courseID=courseteacher.courseID "
 							+ "inner join coursecore on coursecore.idcourseCore=course.idCourseCore "
 							+ " where personID=? AND role='teacher'");
@@ -71,7 +73,7 @@ public class CourseDao {
 						rs.getString("timetable"), rs.getString("description"), rs.getString("syllabus"),
 						rs.getString("prereqCoreCourse"), rs.getInt("cost"), rs.getInt("discount"),
 						rs.getString("classroom"), rs.getInt("maxStudents"), rs.getInt("minStudents"),
-						rs.getInt("credits"), rs.getInt("idCourseCore"),rs.getString("courseCore"),
+						rs.getInt("credits"), rs.getInt("idCourseCore"), rs.getString("courseCore"),
 						Field.valueOf(rs.getString("field")));
 				courses.add(newCourse);
 			}
@@ -82,17 +84,19 @@ public class CourseDao {
 	}
 
 	/**
-	 * Searching for the active courses that a student is attending this semester
+	 * Searching for the active courses that a student is attending this
+	 * semester
+	 * 
 	 * @param personID
-	 * @return a  list of active courses that the student with id personID is attending
+	 * @return a list of active courses that the student with id personID is
+	 *         attending
 	 */
 	public List<Course> getStudentCourses(int personID) {
 		Connection conn = ConnectionFactory.getConnection();
 		List<Course> studentCourses = new ArrayList<Course>();
 		try {
 			PreparedStatement stm = conn.prepareStatement(
-					"SELECT * FROM person " 
-			                + "inner join coursestudent on coursestudent.studentID=person.personID "
+					"SELECT * FROM person " + "inner join coursestudent on coursestudent.studentID=person.personID "
 							+ "inner join course on course.courseID=coursestudent.courseID "
 							+ "inner join coursecore on coursecore.idcourseCore=course.idCourseCore "
 							+ "where personID=? AND status='active'");
@@ -104,7 +108,7 @@ public class CourseDao {
 						rs.getString("timetable"), rs.getString("description"), rs.getString("syllabus"),
 						rs.getString("prereqCoreCourse"), rs.getInt("cost"), rs.getInt("discount"),
 						rs.getString("classroom"), rs.getInt("maxStudents"), rs.getInt("minStudents"),
-						rs.getInt("credits"), rs.getInt("idCourseCore"),rs.getString("courseCore"),
+						rs.getInt("credits"), rs.getInt("idCourseCore"), rs.getString("courseCore"),
 						Field.valueOf(rs.getString("field")));
 				studentCourses.add(newCourse);
 			}
@@ -113,8 +117,10 @@ public class CourseDao {
 		}
 		return studentCourses;
 	}
+
 	/**
-	 * Returns a list with all courses  
+	 * Returns a list with all courses
+	 * 
 	 * @return a list with the informations of the courses
 	 */
 	public List<Course> getAllCourses() {
@@ -122,8 +128,7 @@ public class CourseDao {
 		List<Course> courses = new ArrayList<Course>();
 		try {
 			PreparedStatement stm = conn.prepareStatement(
-					"SELECT * FROM course " 
-							+ "inner join coursecore on coursecore.idcourseCore=course.idCourseCore");
+					"SELECT * FROM course " + "inner join coursecore on coursecore.idcourseCore=course.idCourseCore");
 			ResultSet rs = stm.executeQuery();
 			while (rs.next()) {
 				Course newCourse = new Course(rs.getInt("courseID"), rs.getString("title"), rs.getDate("startDate"),
@@ -131,7 +136,7 @@ public class CourseDao {
 						rs.getString("timetable"), rs.getString("description"), rs.getString("syllabus"),
 						rs.getString("prereqCoreCourse"), rs.getInt("cost"), rs.getInt("discount"),
 						rs.getString("classroom"), rs.getInt("maxStudents"), rs.getInt("minStudents"),
-						rs.getInt("credits"),rs.getInt("idCourseCore"),rs.getString("courseCore"),
+						rs.getInt("credits"), rs.getInt("idCourseCore"), rs.getString("courseCore"),
 						Field.valueOf(rs.getString("field")));
 				courses.add(newCourse);
 			}
@@ -139,5 +144,49 @@ public class CourseDao {
 			e.printStackTrace();
 		}
 		return courses;
+	}
+
+	/**
+	 * Returns a list with all coursecore entries
+	 * 
+	 * @return a list with the informations of the coursecore entries
+	 */
+	public List<CourseCore> getAllCourseCore() {
+		Connection conn = ConnectionFactory.getConnection();
+		List<CourseCore> ccs = new ArrayList<CourseCore>();
+		try {
+			PreparedStatement stm = conn.prepareStatement("SELECT * FROM coursecore");
+			ResultSet rs = stm.executeQuery();
+			while (rs.next()) {
+				CourseCore newCc = new CourseCore(rs.getInt("idcourseCore"), rs.getString("courseCore"),
+						rs.getString("title"), rs.getString("description"), rs.getString("prereqCoreCourse"),
+						Field.valueOf(rs.getString("field")));
+				ccs.add(newCc);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return ccs;
+	}
+
+	/**
+	 * Method to insert a new course core in the database
+	 */
+	public boolean insertCourseCore(String ccname, String cctitle, String ccdescr, String field,String prereq) {
+		Connection conn = ConnectionFactory.getConnection();
+		try {
+			PreparedStatement stm = conn.prepareStatement(
+					"INSERT INTO coursecore (courseCore,title,description,field,prereqCoreCourse)" + "VALUES(?,?,?,?,?)");
+			stm.setString(1, ccname);
+			stm.setString(2, cctitle);
+			stm.setString(3, ccdescr);
+			stm.setString(4, field);
+			stm.setString(5, prereq);
+			stm.execute();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
 	}
 }
