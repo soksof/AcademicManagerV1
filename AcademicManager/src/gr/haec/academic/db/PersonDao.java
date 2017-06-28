@@ -13,7 +13,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 
 /**
@@ -613,6 +613,7 @@ public class PersonDao {
  */
 	public Person updatePerson(String name,String surname,String email,String phone,String sex,String address,Date dob,String taxnumber,String iban,String personID) {
 		Connection conn = ConnectionFactory.getConnection();
+		Person p=null;
 		try {
 			PreparedStatement stm = conn.prepareStatement("UPDATE person SET name=?,surname=?,email=?,phone=?,sex=?,address=?,dob=?,taxnumber=?,iban=? WHERE personID=?");
 			stm.setString(1,name);
@@ -625,18 +626,11 @@ public class PersonDao {
 			stm.setString(8,taxnumber);
 			stm.setString(9,iban);
 			stm.setString(10,personID);
-			ResultSet rs = stm.executeQuery();
-
-			while (rs.next()) {
-				Person newPerson = new Person(rs.getInt("personID"), rs.getString("name"), rs.getString("surname"),
-						rs.getString("email"), rs.getString("phone"), Sex.valueOf(rs.getString("sex")),
-						rs.getString("address"), rs.getDate("dob"), rs.getString("username"), rs.getString("taxNumber"),
-						rs.getString("iban"), Role.valueOf(rs.getString("role")));
-				return newPerson;
-			}
+			stm.executeUpdate();
+			p=getPersonID(Integer.parseInt(personID));
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return null;
-	}	
+		return p;
+	}
 }
