@@ -48,8 +48,9 @@ public class CourseCoreController extends HttpServlet {
 		}
 		else
 			this.insertCourseCore(request, response);
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/home_secr.jsp");
+		rd.forward(request, response);
 	}
-
 	/**
 	 * method to view the information for a CourseCore
 	 * 
@@ -77,8 +78,9 @@ public class CourseCoreController extends HttpServlet {
 		String cctitle=request.getParameter("title");
 		String ccdescr=request.getParameter("description");
 		String field=request.getParameter("field");
+		String prereq=request.getParameter("prereq");
 		CourseDao cd=new CourseDao();
-		cd.insertCourseCore(ccname, cctitle, ccdescr, field);
+		cd.insertCourseCore(ccname, cctitle, ccdescr, field, prereq);
 	}
 	/**
 	 * method to update the information for a course

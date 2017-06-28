@@ -172,15 +172,16 @@ public class CourseDao {
 	/**
 	 * Method to insert a new course core in the database
 	 */
-	public void insertCourseCore(String ccname, String cctitle, String ccdescr, String field) {
+	public void insertCourseCore(String ccname, String cctitle, String ccdescr, String field,String prereq) {
 		Connection conn = ConnectionFactory.getConnection();
 		try {
 			PreparedStatement stm = conn.prepareStatement(
-					"INSERT INTO coursecore (courseCore,title,description,field)" + "VALUES(?,?,?,?)");
+					"INSERT INTO coursecore (courseCore,title,description,field,prereqCoreCourse)" + "VALUES(?,?,?,?,?)");
 			stm.setString(1, ccname);
 			stm.setString(2, cctitle);
 			stm.setString(3, ccdescr);
 			stm.setString(4, field);
+			stm.setString(5, prereq);
 			stm.execute();
 		} catch (SQLException e) {
 			e.printStackTrace();

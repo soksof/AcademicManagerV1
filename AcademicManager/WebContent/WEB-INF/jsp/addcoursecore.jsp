@@ -53,6 +53,7 @@
 				<jsp:useBean id="cdao" class="gr.haec.academic.db.CourseDao" />
 				<c:set var="CourseCoreList" value="<%=cdao.getAllCourseCore()%>" />
 				<td><select name="prereq">
+				<option value="">No Prerequisite Course</option>
 						<c:forEach var="cc" items="${CourseCoreList}">
 							<option value="${cc.getCcCode()}">${cc.getCcCode()} -
 								${cc.getCcTitle()}</option>
