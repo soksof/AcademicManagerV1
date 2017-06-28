@@ -172,7 +172,7 @@ public class CourseDao {
 	/**
 	 * Method to insert a new course core in the database
 	 */
-	public void insertCourseCore(String ccname, String cctitle, String ccdescr, String field,String prereq) {
+	public boolean insertCourseCore(String ccname, String cctitle, String ccdescr, String field,String prereq) {
 		Connection conn = ConnectionFactory.getConnection();
 		try {
 			PreparedStatement stm = conn.prepareStatement(
@@ -185,7 +185,8 @@ public class CourseDao {
 			stm.execute();
 		} catch (SQLException e) {
 			e.printStackTrace();
+			return false;
 		}
-
+		return true;
 	}
 }

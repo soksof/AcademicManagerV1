@@ -1,6 +1,7 @@
 package gr.haec.academic.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -42,14 +43,29 @@ public class CourseCoreController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String sCid=request.getParameter("courseID");
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/home_secr.jsp");
 		if(sCid!=null){
 			int ccid=Integer.parseInt(sCid);
 			this.updateCourseCore(request, response);
 		}
-		else
-			this.insertCourseCore(request, response);
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/home_secr.jsp");
-		rd.forward(request, response);
+		else{
+			boolean res=this.insertCourseCore(request, response);
+			//if(res==false)
+			if(!res){
+				PrintWriter out=response.getWriter();
+				out.println("<script language='javascript' type='text/javascript'>");
+				out.println("alert(\"The course core code alread exists! Please select a different one.\")");
+				out.println("</script>");
+				rd.include(request, response);
+			}
+			else{
+				PrintWriter out=response.getWriter();
+				out.println("<script language='javascript' type='text/javascript'>");
+				out.println("alert(\"The course core has been added to the database.\")");
+				out.println("</script>");
+				rd.include(request, response);
+			}
+		}
 	}
 	/**
 	 * method to view the information for a CourseCore
@@ -71,7 +87,7 @@ public class CourseCoreController extends HttpServlet {
 	 * @throws ServletException
 	 * @throws IOException
 	 */
-	private void insertCourseCore(HttpServletRequest request, HttpServletResponse response)
+	private boolean insertCourseCore(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		RequestDispatcher rd = null;
 		String ccname=request.getParameter("courseCore");
@@ -80,7 +96,7 @@ public class CourseCoreController extends HttpServlet {
 		String field=request.getParameter("field");
 		String prereq=request.getParameter("prereq");
 		CourseDao cd=new CourseDao();
-		cd.insertCourseCore(ccname, cctitle, ccdescr, field, prereq);
+		return cd.insertCourseCore(ccname, cctitle, ccdescr, field, prereq);
 	}
 	/**
 	 * method to update the information for a course
