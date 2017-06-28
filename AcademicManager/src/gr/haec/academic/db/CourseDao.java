@@ -48,6 +48,29 @@ public class CourseDao {
 		}
 		return null;
 	}
+	/**
+	 * Give all the information for a a certain course core
+	 * @param courseID
+	 * @return all the informations for a certain courseID
+	 */
+	public CourseCore getCourseCoreID(int ccID) {
+		Connection conn = ConnectionFactory.getConnection();
+		try {
+			PreparedStatement stm = conn.prepareStatement("SELECT * from coursecore where idcourseCore=?");
+			stm.setInt(1, ccID);
+			ResultSet rs = stm.executeQuery();
+
+			while (rs.next()) {
+				CourseCore newCc = new CourseCore(rs.getInt("idcourseCore"), rs.getString("courseCore"),
+						rs.getString("title"), rs.getString("description"), rs.getString("prereqCoreCourse"),
+						Field.valueOf(rs.getString("field")));
+				return newCc;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 
 	/**
 	 * Searching for the courses that a teacher is currently teaching
@@ -172,11 +195,12 @@ public class CourseDao {
 	/**
 	 * Method to insert a new course core in the database
 	 */
-	public boolean insertCourseCore(String ccname, String cctitle, String ccdescr, String field,String prereq) {
+	public boolean insertCourseCore(String ccname, String cctitle, String ccdescr, String field, String prereq) {
 		Connection conn = ConnectionFactory.getConnection();
 		try {
-			PreparedStatement stm = conn.prepareStatement(
-					"INSERT INTO coursecore (courseCore,title,description,field,prereqCoreCourse)" + "VALUES(?,?,?,?,?)");
+			PreparedStatement stm = conn
+					.prepareStatement("INSERT INTO coursecore (courseCore,title,description,field,prereqCoreCourse)"
+							+ "VALUES(?,?,?,?,?)");
 			stm.setString(1, ccname);
 			stm.setString(2, cctitle);
 			stm.setString(3, ccdescr);

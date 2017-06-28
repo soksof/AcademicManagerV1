@@ -2,6 +2,7 @@ package gr.haec.academic.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,8 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import gr.haec.academic.db.CourseDao;
-import gr.haec.academic.db.PersonDao;
-import gr.haec.academic.model.Course;
+import gr.haec.academic.model.CourseCore;
 import gr.haec.academic.model.Person;
 
 @WebServlet(urlPatterns = { "/coursecore" })
@@ -33,7 +33,12 @@ public class CourseCoreController extends HttpServlet {
 		case "add":
 			addCourseCore(request, response);
 			break;
-	
+		case "edit":
+			editCourseCore(request, response);
+			break;
+		case "update":
+			updateCourseCore(request, response);
+			break;
 		}
 	}
 
@@ -108,7 +113,12 @@ public class CourseCoreController extends HttpServlet {
 	 */
 	private void updateCourseCore(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		String ccID=request.getParameter("courseID");
+		CourseDao cd=new CourseDao();
+		CourseCore cc = cd.getCourseCoreID(Integer.parseInt(ccID));
+		request.setAttribute("cc", cc);
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/editcoursecore.jsp");
+		rd.forward(request, response);
 	}
 	/**
 	 * method to insert a new course core
@@ -122,6 +132,22 @@ public class CourseCoreController extends HttpServlet {
 			throws ServletException, IOException {
 		RequestDispatcher rd=null;
 		rd = request.getRequestDispatcher("/WEB-INF/jsp/addcoursecore.jsp");
+		rd.forward(request, response);
+	}
+	/**
+	 * method to edit an existing course core
+	 * 
+	 * @param request
+	 * @param response
+	 * @throws ServletException
+	 * @throws IOException
+	 */
+	private void editCourseCore(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		CourseDao d= new CourseDao();
+		List<CourseCore> list = d.getAllCourseCore();
+		request.setAttribute("coursecoreList",list);
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/courseCoreList.jsp");
 		rd.forward(request, response);
 	}
 }
