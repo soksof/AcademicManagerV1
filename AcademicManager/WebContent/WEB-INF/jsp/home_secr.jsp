@@ -25,7 +25,7 @@
 					<li><a href="javascript:ml('person?action=profile')">Home</a></li>
 					<li><a id="linkdisabled" href="#">Courses</a>
 						<ul>
-							<li><a href="javascript:ml('')">Add Course</a></li>
+							<li><a href="javascript:ml('course?action=add')">Add Course</a></li>
 							<li><a href="javascript:ml('coursecore?action=add')">Add Course Core</a></li>
 							<li><a href="javascript:ml('coursecore?action=edit')">Edit Course Core</a></li>
 							<li><a href="javascript:ml('')">Courses' Evaluation</a></li>

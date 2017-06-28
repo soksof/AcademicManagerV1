@@ -1,6 +1,7 @@
 package gr.haec.academic.db;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -213,4 +214,50 @@ public class CourseDao {
 		}
 		return true;
 	}
+	/**
+	 * method to insert a new course in the data base.
+	 * @param courseID
+	 * @param startDate
+	 * @param endDate
+	 * @param status
+	 * @param totalHours
+	 * @param timetable
+	 * @param syllabus
+	 * @param cost
+	 * @param discount
+	 * @param classroom
+	 * @param maxStudents
+	 * @param minStudents
+	 * @param credits
+	 * @param idCourseCore
+	 * @return
+	 */
+	public Course addCourse(String courseID,Date startDate,Date endDate,String status,String totalHours,String timetable,
+			String syllabus,String cost,String discount,String classroom,String maxStudents,String minStudents,String credits,String idCourseCore){
+		Connection conn = ConnectionFactory.getConnection();
+		Course c=null;
+		try {
+			PreparedStatement stm = conn.prepareStatement("INSERT INTO course(courseID,startDate,endDate,status,totalHours"
+					+ "timetable,syllabus,cost,discount,classroom,maxStudents,minStudents,credits,idCourseCore) "
+					+ "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+			stm.setString(1,courseID);
+			stm.setDate(2,startDate);
+			stm.setDate(3,endDate);
+			stm.setString(4,status);
+			stm.setString(5,totalHours);
+			stm.setString(6,timetable);
+			stm.setString(7,syllabus);
+			stm.setString(8,cost);
+			stm.setString(9,discount);
+			stm.setString(10,classroom);
+			stm.setString(11,maxStudents);
+			stm.setString(12,minStudents);
+			stm.setString(13,credits);
+			stm.setString(14,idCourseCore);
+			ResultSet rs = stm.executeQuery();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return c;
+}
 }
