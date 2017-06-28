@@ -27,6 +27,7 @@
 						<ul>
 							<li><a href="javascript:ml('')">Add Course</a></li>
 							<li><a href="javascript:ml('coursecore?action=add')">Add Course Core</a></li>
+							<li><a href="javascript:ml('coursecore?action=edit')">Edit Course Core</a></li>
 							<li><a href="javascript:ml('')">Courses' Evaluation</a></li>
 						</ul></li>
 					<li><a id="linkdisabled" href="#">Teachers</a>
