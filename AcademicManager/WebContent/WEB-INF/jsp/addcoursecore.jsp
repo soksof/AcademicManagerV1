@@ -18,7 +18,8 @@
 		<table>
 			<tr>
 				<td></td>
-				<td><input id="input1" type="hidden" name="idcourseCore" value=""></td>
+				<td><input id="input1" type="hidden" name="idcourseCore"
+					value=""></td>
 			</tr>
 			<tr>
 				<td>Course Core</td>
@@ -47,8 +48,20 @@
 				</select></td>
 			</tr>
 			<tr>
+				<td>Prerequisite Course</td>
+				<!-- Load list of course cores -->
+				<jsp:useBean id="cdao" class="gr.haec.academic.db.CourseDao" />
+				<c:set var="CourseCoreList" value="<%=cdao.getAllCourseCore()%>" />
+				<td><select name="prereq">
+						<c:forEach var="cc" items="${CourseCoreList}">
+							<option value="${cc.getCcCode()}">${cc.getCcCode()} -
+								${cc.getCcTitle()}</option>
+						</c:forEach>
+				</select></td>
+			</tr>
+			<tr>
 				<td><input id="submitbutton" type="submit" value="Save"></td>
-				<td><input id="submitbutton" type="reset" value="Cancel"></td>
+				<td><input id="cancelbutton" type="button" value="Cancel" onclick="javascript:ml('person?action=profile')"></td>
 			</tr>
 		</table>
 

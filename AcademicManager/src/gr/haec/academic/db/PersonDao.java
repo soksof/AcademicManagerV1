@@ -124,7 +124,7 @@ public class PersonDao {
 				Teacher newTeacher = new Teacher(rs.getInt("personID"), rs.getString("name"), rs.getString("surname"),
 						rs.getString("email"), rs.getString("phone"), Sex.valueOf(rs.getString("sex")),
 						rs.getString("address"), rs.getDate("dob"), rs.getString("username"), rs.getString("taxNumber"),
-						rs.getString("iban"), Role.valueOf(rs.getString("role")),Status.valueOf(rs.getString("status")), rs.getString("cv"),
+						rs.getString("iban"), Role.valueOf(rs.getString("role")),Status.getValue(rs.getString("status")), rs.getString("cv"),
 						Field.valueOf(rs.getString("field")));
 				teachers.add(newTeacher);
 			}
@@ -240,7 +240,7 @@ public class PersonDao {
 				Teacher newTeacher = new Teacher(rs.getInt("personID"), rs.getString("name"), rs.getString("surname"),
 						rs.getString("email"), rs.getString("phone"), Sex.valueOf(rs.getString("sex")),
 						rs.getString("address"), rs.getDate("dob"), rs.getString("username"), rs.getString("taxNumber"),
-						rs.getString("iban"), Role.valueOf(rs.getString("role")),Status.valueOf(rs.getString("status")), rs.getString("cv"),
+						rs.getString("iban"), Role.valueOf(rs.getString("role")),Status.getValue(rs.getString("status")), rs.getString("cv"),
 						Field.valueOf(rs.getString("field")));
 				Object[] ret = new Object[2];
 				ret[0] = newTeacher;
@@ -273,7 +273,7 @@ public class PersonDao {
 				Teacher newTeacher = new Teacher(rs.getInt("personID"), rs.getString("name"), rs.getString("surname"),
 						rs.getString("email"), rs.getString("phone"), Sex.valueOf(rs.getString("sex")),
 						rs.getString("address"), rs.getDate("dob"), rs.getString("username"), rs.getString("taxNumber"),
-						rs.getString("iban"), Role.valueOf(rs.getString("role")),Status.valueOf(rs.getString("status")), rs.getString("cv"),
+						rs.getString("iban"), Role.valueOf(rs.getString("role")),Status.getValue(rs.getString("status")), rs.getString("cv"),
 						Field.valueOf(rs.getString("field")));
 				teachers.add(newTeacher);
 			}
@@ -332,7 +332,7 @@ public class PersonDao {
 				Teacher newTeacher = new Teacher(rs.getInt("personID"), rs.getString("name"), rs.getString("surname"),
 						rs.getString("email"), rs.getString("phone"), Sex.valueOf(rs.getString("sex")),
 						rs.getString("address"), rs.getDate("dob"), rs.getString("username"), rs.getString("taxNumber"),
-						rs.getString("iban"), Role.valueOf(rs.getString("role")),Status.valueOf(rs.getString("status")), rs.getString("cv"),
+						rs.getString("iban"), Role.valueOf(rs.getString("role")),Status.getValue(rs.getString("status")), rs.getString("cv"),
 						Field.valueOf(rs.getString("field")));
 				teachers.add(newTeacher);
 			}
@@ -362,7 +362,7 @@ public class PersonDao {
 				Teacher newTeacher = new Teacher(rs.getInt("personID"), rs.getString("name"), rs.getString("surname"),
 						rs.getString("email"), rs.getString("phone"), Sex.valueOf(rs.getString("sex")),
 						rs.getString("address"), rs.getDate("dob"), rs.getString("username"), rs.getString("taxNumber"),
-						rs.getString("iban"), Role.valueOf(rs.getString("role")),Status.valueOf(rs.getString("status")), rs.getString("cv"),
+						rs.getString("iban"), Role.valueOf(rs.getString("role")),Status.getValue(rs.getString("status")), rs.getString("cv"),
 						Field.valueOf(rs.getString("field")));
 				teachers.add(newTeacher);
 			}
@@ -392,7 +392,7 @@ public class PersonDao {
 				Teacher newTeacher = new Teacher(rs.getInt("personID"), rs.getString("name"), rs.getString("surname"),
 						rs.getString("email"), rs.getString("phone"), Sex.valueOf(rs.getString("sex")),
 						rs.getString("address"), rs.getDate("dob"), rs.getString("username"), rs.getString("taxNumber"),
-						rs.getString("iban"), Role.valueOf(rs.getString("role")),Status.valueOf(rs.getString("status")), rs.getString("cv"),
+						rs.getString("iban"), Role.valueOf(rs.getString("role")),Status.getValue(rs.getString("status")), rs.getString("cv"),
 						Field.valueOf(rs.getString("field")));
 				teachers.add(newTeacher);
 			}
@@ -421,7 +421,7 @@ public class PersonDao {
 				Teacher newTeacher = new Teacher(rs.getInt("personID"), rs.getString("name"), rs.getString("surname"),
 						rs.getString("email"), rs.getString("phone"), Sex.valueOf(rs.getString("sex")),
 						rs.getString("address"), rs.getDate("dob"), rs.getString("username"), rs.getString("taxNumber"),
-						rs.getString("iban"), Role.valueOf(rs.getString("role")),Status.valueOf(rs.getString("status")), rs.getString("cv"),
+						rs.getString("iban"), Role.valueOf(rs.getString("role")),Status.getValue(rs.getString("status")), rs.getString("cv"),
 						Field.valueOf(rs.getString("field")));
 				teachers.add(newTeacher);
 			}
@@ -448,7 +448,7 @@ public class PersonDao {
 						rs.getString("surname"), rs.getString("email"), rs.getString("phone"),
 						Sex.valueOf(rs.getString("sex")), rs.getString("address"), rs.getDate("dob"),
 						rs.getString("username"), rs.getString("taxNumber"),
-						rs.getString("iban"), Role.valueOf(rs.getString("role")),Status.valueOf(rs.getString("status")), rs.getString("cv"),
+						rs.getString("iban"), Role.valueOf(rs.getString("role")),Status.getValue(rs.getString("status")), rs.getString("cv"),
 						Field.valueOf(rs.getString("field")));
 				String courseTitle = rs.getString("title");
 				Object[] ret = new Object[2];
@@ -513,7 +513,7 @@ public class PersonDao {
 						rs.getString("email"), rs.getString("phone"), Sex.valueOf(rs.getString("sex")),
 						rs.getString("address"), rs.getDate("dob"), rs.getString("username"), rs.getString("taxNumber"),
 						rs.getString("iban"), Role.valueOf(rs.getString("role")), rs.getString("cv"),
-						Field.valueOf(rs.getString("field")),Status.valueOf(rs.getString("status")),rs.getDate("applicationDate"));
+						Field.valueOf(rs.getString("field")),Status.getValue(rs.getString("status")),rs.getDate("applicationDate"));
 				teachers.add(newTeacher);
 			}
 		} catch (SQLException e) {

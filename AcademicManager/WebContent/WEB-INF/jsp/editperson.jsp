@@ -80,7 +80,7 @@
 			</tr>
 			<tr>
 				<td><input id="submitbutton" type="submit" value="Update"></td>
-				<td><input id="submitbutton" type="reset" value="Cancel"></td>
+				<td><input id="submitbutton" type="reset" value="Cancel" onclick="javascript:ml('person?action=profile')"></td>
 			</tr>
 		</table>
 	</form>
