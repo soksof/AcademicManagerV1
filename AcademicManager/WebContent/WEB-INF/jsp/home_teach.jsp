@@ -25,7 +25,7 @@
 			<li><a href="javascript:ml('person?action=profile')">Home</a></li>
 			<li><a href="coursesT.jsp">Courses</a>
 				<ul>
-					<li><a href="apply.jsp">Apply</a></li>
+					<li><a href="">Apply</a></li>
 					<li><a href="javascript:ml('teacher?action=courseThatTeacherTeaches')">Course History</a></li>
 				</ul></li>
 			<li><a href="">Reports</a>

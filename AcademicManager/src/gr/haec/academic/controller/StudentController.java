@@ -148,6 +148,7 @@ public class StudentController extends HttpServlet {
 		rd = request.getRequestDispatcher("/WEB-INF/jsp/viewstudentpastcourses.jsp");
 		rd.forward(request, response);
 	}
+	
 	private void listCourseStudAppl(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		PersonDao d= new PersonDao();
