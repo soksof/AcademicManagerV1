@@ -3,6 +3,7 @@ package gr.haec.academic.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,7 +13,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import gr.haec.academic.db.CourseDao;
+import gr.haec.academic.db.PersonDao;
 import gr.haec.academic.model.Course;
+import gr.haec.academic.model.Student;
 
 @WebServlet(urlPatterns = { "/course" })
 
@@ -39,7 +42,9 @@ public class CourseController extends HttpServlet {
 			break;
 		case "new":
 			break;
-
+		case "coursesEvaluation":
+			coursesEvaluation(request, response);
+			break;
 		}
 	}
 
@@ -53,10 +58,24 @@ public class CourseController extends HttpServlet {
 		if (sCid != null) {
 			this.updateCourse(request, response);
 		} else {
-			this.insertCourse(request, response);
-			rd.forward(request, response);
+			boolean res=this.insertCourse(request, response);
+			//if(res==false)
+			if(!res){
+				PrintWriter out=response.getWriter();
+				out.println("<script language='javascript' type='text/javascript'>");
+				out.println("alert(\"The add course failed.\")");
+				out.println("</script>");
+				rd.include(request, response);
+			}
+			else{
+				PrintWriter out=response.getWriter();
+				out.println("<script language='javascript' type='text/javascript'>");
+				out.println("alert(\"The course has been added to the database.\")");
+				out.println("</script>");
+				rd.include(request, response);
+			}
 		}
-	}
+		}
 
 	/**
 	 * method to view the information for a course
@@ -97,7 +116,7 @@ public class CourseController extends HttpServlet {
 		rd.forward(request, response);
 	}
 
-	private Course insertCourse(HttpServletRequest request, HttpServletResponse response)
+	 private boolean insertCourse(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String courseID = request.getParameter("courseid");
 		String sstartDate = request.getParameter("startdate");
@@ -120,4 +139,14 @@ public class CourseController extends HttpServlet {
 		return pd.addCourse(courseID, startDate, endDate, status, totalHours, timetable, syllabus, cost, discount,
 				classroom, maxStudents, MinStudents, credits, idCourseCore);
 	}
+
+	  private void coursesEvaluation(HttpServletRequest request, HttpServletResponse response)
+				throws ServletException, IOException{
+			CourseDao c= new CourseDao();
+			List<Object[]> list = c.getCourseEvaluation();
+			request.setAttribute("CoursesEvaluations", list);
+			RequestDispatcher rd;
+			rd = request.getRequestDispatcher("/WEB-INF/jsp/viewcoursesevaluation.jsp");
+			rd.forward(request, response);
+			}
 }

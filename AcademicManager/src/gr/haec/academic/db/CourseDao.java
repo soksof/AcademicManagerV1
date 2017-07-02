@@ -232,10 +232,9 @@ public class CourseDao {
 	 * @param idCourseCore
 	 * @return
 	 */
-	public Course addCourse(String courseID,Date startDate,Date endDate,String status,String totalHours,String timetable,
+	public boolean addCourse(String courseID,Date startDate,Date endDate,String status,String totalHours,String timetable,
 			String syllabus,String cost,String discount,String classroom,String maxStudents,String minStudents,String credits,String idCourseCore){
 		Connection conn = ConnectionFactory.getConnection();
-		Course c=null;
 		try {
 			PreparedStatement stm = conn.prepareStatement("INSERT INTO course(courseID,startDate,endDate,status,totalHours"
 					+ "timetable,syllabus,cost,discount,classroom,maxStudents,minStudents,credits,idCourseCore) "
@@ -254,10 +253,44 @@ public class CourseDao {
 			stm.setString(12,minStudents);
 			stm.setString(13,credits);
 			stm.setString(14,idCourseCore);
+		    stm.execute();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+}
+	
+/**
+ * Searching for all courses evaluations from the students
+ * @return a list with all the courses evaluations 
+ */
+	public List<Object[]> getCourseEvaluation() {
+		Connection conn = ConnectionFactory.getConnection();
+		List<Object[]> coursesEvaluation = new ArrayList<Object[]>();
+		try {
+			PreparedStatement stm = conn.prepareStatement("SELECT * FROM person "
+					+ "inner join courseevaluation on courseevaluation.studentID=person.personID "
+					+ "inner join course on course.courseID=courseevaluation.courseID  "
+					+ "inner join coursecore on coursecore.idcourseCore=course.idCourseCore ");
 			ResultSet rs = stm.executeQuery();
+			while (rs.next()) {
+				Course newCourse = new Course(rs.getInt("courseID"), rs.getString("title"),rs.getString("evaluation"),
+						rs.getDate("evaluationDate"));
+				String studentName=rs.getString("name");
+				String studentSurname=rs.getString("surname");
+				int personID=rs.getInt("personID");
+				Object[] obj = new Object[4];
+				obj[0] = newCourse;
+				obj[1] = studentName;
+				obj[2] = studentSurname;
+				obj[3] = personID;
+				coursesEvaluation.add(obj);
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return c;
-}
+		return coursesEvaluation;
+	}	
+	
 }

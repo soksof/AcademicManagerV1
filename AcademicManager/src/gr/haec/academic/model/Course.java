@@ -29,7 +29,7 @@ public class Course {
 	protected Field field;
 	//evaluations for the courses from the students and the date which they have been submited. 
 	protected String evaluation;
-	protected String evaluationDate;
+	protected Date evaluationDate;
 
  /**
  *Setters and Getters for all the variables. 
@@ -195,11 +195,11 @@ public class Course {
   	   this.evaluation = evaluation;
     }
     
-    public String getEvaluationDate() {
+    public Date getEvaluationDate() {
 	return evaluationDate;
     }
     
-    public void setEvaluationDate(String evaluationDate) {
+    public void setEvaluationDate(Date evaluationDate) {
 	   this.evaluationDate = evaluationDate;
     }
 
@@ -237,7 +237,7 @@ public class Course {
 	 * Used at courseDao at the getCourseEvaluation query.
 	 */
 	
-	public Course(int courseID , String title ,String evaluation ,String evaluationDate){
+	public Course(int courseID , String title ,String evaluation ,Date evaluationDate){
 		this.courseID=courseID;
 		this.title=title;
 		this.evaluation=evaluation;

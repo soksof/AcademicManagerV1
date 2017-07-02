@@ -8,7 +8,7 @@ public class Assignments {
 	 * declaring the variables which we have taken from the data base table of assignments and studentassignments.
 	 */
 	
-	protected float grades;
+	protected float assignmentGrades;
 	protected int assignmentID;
 	protected Date submitDate;
 	protected String description;
@@ -21,12 +21,12 @@ public class Assignments {
 	 *Setters and Getters for all the variables. 
 	 */
 	
-	public float getGrades() {
-		return grades;
+	public float getAssignmentGrades() {
+		return assignmentGrades;
 	}
 
-	public void setGrades(float grades) {
-		this.grades = grades;
+	public void setAssignmentGrades(float assignmentGrades) {
+		this.assignmentGrades = assignmentGrades;
 	}
 	
 	public int getAssignmentID() {
@@ -90,10 +90,10 @@ public class Assignments {
 	 * 
 	 */
 	
-	public Assignments(float grades,int assignmentID, Date submitDate,String description,Date startDate,Date endDate,
+	public Assignments(float assignmentGrades,int assignmentID, Date submitDate,String description,Date startDate,Date endDate,
 			String answer,String comments){
 		
-		this.grades=grades;
+		this.assignmentGrades=assignmentGrades;
 		this.assignmentID=assignmentID;
 		this.submitDate=submitDate;
 		this. description= description;

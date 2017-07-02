@@ -31,8 +31,8 @@
     </li>
     <li><a id="linkdisabled" href="#">Payments</a>
       <ul>
-        <li><a href="">Pending</a></li>
-		<li><a href="">History</a></li>
+        <li><a href="javascript:ml('student?action=pendingPayments')">Pending</a></li>
+		<li><a href="javascript:ml('student?action=historyPayments')">History</a></li>
       </ul>
     </li>
     <li><a href="">Messages</a> </li>

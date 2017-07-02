@@ -463,7 +463,7 @@ public class PersonDao {
 	}
 
 	/**
-	 * Find all students that have applied for a certain course.
+	 * Find all students that have applied for a course.
 	 * @return
 	 */
 	public List<Object[]> getApplicantStudent() {
@@ -471,7 +471,7 @@ public class PersonDao {
 		List<Object[]> Applicantstudents = new ArrayList<Object[]>();
 		try {
 			PreparedStatement stm = conn
-					.prepareStatement("SELECT * FROM person INNER JOIN courseapplication ON courseapplication.studentid=person.personid");
+					.prepareStatement("SELECT * FROM person INNER JOIN courseapplication ON courseapplication.studentid=person.personid INNER JOIN course on course.courseID=courseapplication.courseID INNER JOIN coursecore on coursecore.idcourseCore=course.idCourseCore ");
 			ResultSet rs = stm.executeQuery();
 
 			while (rs.next()) {
@@ -479,10 +479,12 @@ public class PersonDao {
 						rs.getString("email"), rs.getString("phone"), Sex.valueOf(rs.getString("sex")),
 						rs.getString("address"), rs.getDate("dob"), rs.getString("username"), rs.getString("taxNumber"),
 						rs.getString("iban"), Role.valueOf(rs.getString("role")),rs.getDate("applicationDate"),rs.getInt("studentID"));
-				int courseId = rs.getInt("courseID");
+				int courseID = rs.getInt("courseID");
+				String courseTitle=rs.getString("title");
 				Object[] obj = new Object[3];
 				obj[0] = newStudent;
-				obj[1] = courseId;
+				obj[1] = courseID;
+				obj[2] = courseTitle;
 				Applicantstudents.add(obj);
 			}
 		} catch (SQLException e) {
@@ -523,7 +525,7 @@ public class PersonDao {
 	}
 	
 	/**
-	 * Seatching for the completed courses evaluation for a student for a certain course.
+	 * Searching for the completed courses evaluation for a student for a certain course.
 	 * @param personID
 	 * @param courseID
 	 * @return
@@ -633,4 +635,163 @@ public class PersonDao {
 		}
 		return p;
 	}
+	/**
+	 * Searching for all the teachers evaluation from the students.
+	 * @return
+	 */
+	public List<Object[]> getTeachersEvaluation() {
+		Connection conn = ConnectionFactory.getConnection();
+		List<Object[]> teachersEvaluation= new ArrayList<Object[]>();
+		try {
+			PreparedStatement stm = conn.prepareStatement(
+			"SELECT* FROM coursecore inner join course on course.idCourseCore=courseCore.idcourseCore inner join evaluationteachers on evaluationteachers.courseID=course.courseID inner join person on person.personID=evaluationteachers.teacherID");
+			ResultSet rs = stm.executeQuery();
+			while (rs.next()) {
+				Teacher newTeacher = new Teacher(rs.getInt("personID"), rs.getString("name"), rs.getString("surname"),
+						rs.getString("email"), rs.getString("phone"), Sex.valueOf(rs.getString("sex")),
+						rs.getString("address"), rs.getDate("dob"), rs.getString("username"), rs.getString("taxNumber"),
+						rs.getString("iban"), Role.valueOf(rs.getString("role")),rs.getString("evaluation"));
+				String courseTitle = rs.getString("title");
+				int studentID = rs.getInt("studentID");
+				int courseID= rs.getInt("courseID");
+				Object[] obj = new Object[4];
+				obj[0] = newTeacher;
+				obj[1] = studentID;
+				obj[2] = courseTitle;
+				obj[3] = courseID;
+				teachersEvaluation.add(obj);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return teachersEvaluation;
+}
+/**
+ * searching for the evaluations of all the students.
+ * @return a list with the evaluations of all students with their grades for the completed courses.
+ */
+	public List<Object[]> getAllStudentsEvaluation() {
+		Connection conn = ConnectionFactory.getConnection();
+		List<Object[]> allStudentsEvaluation= new ArrayList<Object[]>();
+		try {
+			PreparedStatement stm = conn.prepareStatement("SELECT* FROM person INNER JOIN coursestudent on coursestudent.studentID=person.personID INNER JOIN course on course.courseID=coursestudent.courseID INNER JOIN coursecore on coursecore.idcourseCore=course.idCourseCore WHERE status='complete'");
+			ResultSet rs = stm.executeQuery();
+			while (rs.next()) {
+				Student newStudent = new Student(rs.getInt("personID"), rs.getString("name"), rs.getString("surname"),
+						rs.getString("email"), rs.getString("phone"), Sex.valueOf(rs.getString("sex")),
+						rs.getString("address"), rs.getDate("dob"), rs.getString("username"), rs.getString("taxNumber"),
+						rs.getString("iban"), Role.valueOf(rs.getString("role")),rs.getString("evaluation"),
+						rs.getFloat("finalGrade"));
+				String courseTitle = rs.getString("title");
+				int courseID= rs.getInt("courseID");
+				float assignmnetGrades=rs.getFloat("assignmentGrades");
+				Object[] obj = new Object[4];
+				obj[0] = newStudent;
+				obj[1] = courseTitle;
+				obj[2] = courseID;
+				obj[3]= assignmnetGrades;
+				allStudentsEvaluation.add(obj);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return allStudentsEvaluation;
+}
+/**
+ * searching for all the payments the students have done.
+ * @return alist with the courses and the payment status of them for each student.
+ */
+	public List<Object[]> getPaymentStudent() {
+		Connection conn = ConnectionFactory.getConnection();
+		List<Object[]>PaymentStudent = new ArrayList<Object[]>();
+		try {
+			PreparedStatement stm = conn
+					.prepareStatement("SELECT* FROM person INNER JOIN coursestudent on coursestudent.studentID=person.personID INNER JOIN course on course.courseID=coursestudent.courseID INNER JOIN coursecore on coursecore.idcourseCore=course.idCourseCore");
+			ResultSet rs = stm.executeQuery();
+
+			while (rs.next()) {
+				Student newStudent = new Student(rs.getInt("personID"), rs.getString("name"), rs.getString("surname"),
+						rs.getString("email"), rs.getString("phone"), Sex.valueOf(rs.getString("sex")),
+						rs.getString("address"), rs.getDate("dob"), rs.getString("username"), rs.getString("taxNumber"),
+						rs.getString("iban"), Role.valueOf(rs.getString("role")),rs.getInt("studentID"),rs.getString("payment"));
+				int courseID = rs.getInt("courseID");
+				String courseTitle=rs.getString("title");
+				Object[] obj = new Object[3];
+				obj[0] = newStudent;
+				obj[1] = courseID;
+				obj[2] = courseTitle;
+				PaymentStudent.add(obj);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return PaymentStudent;
+	}
+	/**
+	 * searching for all the payments of a student thai have not been paid.
+	 * @param personID
+	 * @return a list with courses that have not been paid.
+	 */
+	public List<Object[]> getPendingPayment(int personID) {
+		Connection conn = ConnectionFactory.getConnection();
+		List<Object[]>PendingPayments = new ArrayList<Object[]>();
+		try {
+			PreparedStatement stm = conn
+					.prepareStatement("SELECT* FROM person INNER JOIN coursestudent on coursestudent.studentID=person.personID INNER JOIN course on course.courseID=coursestudent.courseID INNER JOIN coursecore on coursecore.idcourseCore=course.idCourseCore WHERE personID=? AND payment='0'");
+			stm.setInt(1, personID);
+			ResultSet rs = stm.executeQuery();
+			while (rs.next()) {
+				Student newStudent = new Student(rs.getInt("personID"), rs.getString("name"), rs.getString("surname"),
+						rs.getString("email"), rs.getString("phone"), Sex.valueOf(rs.getString("sex")),
+						rs.getString("address"), rs.getDate("dob"), rs.getString("username"), rs.getString("taxNumber"),
+						rs.getString("iban"), Role.valueOf(rs.getString("role")),rs.getInt("studentID"),rs.getString("payment"));
+				int courseID = rs.getInt("courseID");
+				int discount =rs.getInt("discount");
+				int cost =rs.getInt("cost");
+				String courseTitle=rs.getString("title");
+				Object[] obj = new Object[5];
+				obj[0] = newStudent;
+				obj[1] = courseID;
+				obj[2] = courseTitle;
+				obj[3] = discount;
+				obj[4] = cost;
+				PendingPayments.add(obj);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return PendingPayments;
+	}
+	
+	public List<Object[]> getHistoryPayment(int personID) {
+		Connection conn = ConnectionFactory.getConnection();
+		List<Object[]>historyPayments = new ArrayList<Object[]>();
+		try {
+			PreparedStatement stm = conn
+					.prepareStatement("SELECT* FROM person INNER JOIN coursestudent on coursestudent.studentID=person.personID INNER JOIN course on course.courseID=coursestudent.courseID INNER JOIN coursecore on coursecore.idcourseCore=course.idCourseCore WHERE personID=? AND payment='1'");
+			stm.setInt(1, personID);
+			ResultSet rs = stm.executeQuery();
+			while (rs.next()) {
+				Student newStudent = new Student(rs.getInt("personID"), rs.getString("name"), rs.getString("surname"),
+						rs.getString("email"), rs.getString("phone"), Sex.valueOf(rs.getString("sex")),
+						rs.getString("address"), rs.getDate("dob"), rs.getString("username"), rs.getString("taxNumber"),
+						rs.getString("iban"), Role.valueOf(rs.getString("role")),rs.getInt("studentID"),rs.getString("payment"));
+				int courseID = rs.getInt("courseID");
+				int discount =rs.getInt("discount");
+				int cost =rs.getInt("cost");
+				String courseTitle=rs.getString("title");
+				Object[] obj = new Object[5];
+				obj[0] = newStudent;
+				obj[1] = courseID;
+				obj[2] = courseTitle;
+				obj[3] = discount;
+				obj[4] = cost;
+				historyPayments.add(obj);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return historyPayments;
+	}
+	
 }

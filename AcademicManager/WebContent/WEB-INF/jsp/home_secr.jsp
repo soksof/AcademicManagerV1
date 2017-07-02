@@ -25,9 +25,9 @@
 					<li><a href="javascript:ml('person?action=profile')">Home</a></li>
 					<li><a id="linkdisabled" href="#">Courses</a>
 						<ul>
-							<li><a href="javascript:ml('')">Add Course</a></li>
+							<li><a href="javascript:ml('course?action=add')">Add Course</a></li>
 							<li><a href="javascript:ml('coursecore?action=add')">Add Course Core</a></li>
-							<li><a href="javascript:ml('')">Courses' Evaluation</a></li>
+							<li><a href="javascript:ml('course?action=coursesEvaluation')">Courses' Evaluation</a></li>
 						</ul></li>
 					<li><a id="linkdisabled" href="#">Teachers</a>
 						<ul>
@@ -41,15 +41,15 @@
 							<li><a
 								href="javascript:ml('teacher?action=teachActiveCourses')">Active
 									Course Teachers</a></li>
-							<li><a href="javascript:ml('')">Teachers' Evaluation</a></li>
+							<li><a href="javascript:ml('teacher?action=teachersEvaluation')">Teachers' Evaluation</a></li>
 							<li><a href="javascript:ml('')">Update Profile</a></li>
 						</ul></li>
 					<li><a id="linkdisabled" href="#">Students</a>
 						<ul>
-							<li><a href="javascript:ml('')">Course
+							<li><a href="javascript:ml('student?action=studentApllication')">Course
 									Applications</a></li>
-							<li><a href="javascript:ml('')">Payments</a></li>
-							<li><a href="javascript:ml('')">Students' Evaluation</a></li>
+							<li><a href="javascript:ml('student?action=studentPayments')">Payments</a></li>
+							<li><a href="javascript:ml('student?action=allStudentEvaluation')">Students' Evaluation</a></li>
 							<li><a href="javascript:ml('student?action=listcoursestudappl')">All Course Applications</a></li>
 						</ul></li>
 					<li><a

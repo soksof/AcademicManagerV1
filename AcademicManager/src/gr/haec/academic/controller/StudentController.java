@@ -47,14 +47,29 @@ public class StudentController extends HttpServlet {
 		case "activeCourses":
 			activeCourses(request, response);
 			break;
+		case "studentApllication":
+			studentApllication(request, response);
+			break;
 		case "pastCourses":
 			pastCourses(request, response);
 			break;
 		case "listcoursestudappl":
 			listCourseStudAppl(request, response);
 			break;
+		case "allStudentEvaluation":
+			allStudentEvaluation(request, response);
+			break;
+		case "studentPayments":
+			studentPayments(request, response);
+			break;
+		case "pendingPayments":
+			pendingPayments(request, response);
+			break;
+		case "historyPayments":
+			historyPayments(request, response);
+			break;
 		}
-	}
+		}
 
 	/**
 	 * Process POST request
@@ -148,7 +163,14 @@ public class StudentController extends HttpServlet {
 		rd = request.getRequestDispatcher("/WEB-INF/jsp/viewstudentpastcourses.jsp");
 		rd.forward(request, response);
 	}
-	
+	/**
+	 * method to view all student applications.
+	 * παρότι είναι ίδιο με το από κάτω χρησιμοποιούνται διαφορετικά.
+	 * @param request
+	 * @param response
+	 * @throws ServletException
+	 * @throws IOException
+	 */
 	private void listCourseStudAppl(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		PersonDao d= new PersonDao();
@@ -158,4 +180,83 @@ public class StudentController extends HttpServlet {
 		rd=request.getRequestDispatcher("/WEB-INF/jsp/viewcoursestudentapplication.jsp");
 		rd.forward(request, response);
 	}
+	/**
+	 * method to view all student applications.
+	 * @param request
+	 * @param response
+	 * @throws ServletException
+	 * @throws IOException
+	 */
+	private void studentApllication(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		PersonDao c = new PersonDao();
+		List<Object[]> list = c.getApplicantStudent();
+		request.setAttribute("applicantStudent", list);
+		RequestDispatcher rd;
+		rd = request.getRequestDispatcher("/WEB-INF/jsp/viewstudentapplications.jsp");
+		rd.forward(request, response);
+	}
+	/**
+	 * servlet for all the students evaluation
+	 * @param request
+	 * @param response
+	 * @throws ServletException
+	 * @throws IOException
+	 */
+	private void allStudentEvaluation(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		PersonDao c = new PersonDao();
+		List<Object[]> list = c.getAllStudentsEvaluation() ;
+		request.setAttribute("studentEvaluation", list);
+		RequestDispatcher rd;
+		rd = request.getRequestDispatcher("/WEB-INF/jsp/viewallstudentevaluation.jsp");
+		rd.forward(request, response);
+	}
+	/**
+	 * method for all the payment informations for each student
+	 * @param request
+	 * @param response
+	 * @throws ServletException
+	 * @throws IOException
+	 */
+	private void studentPayments(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		PersonDao c = new PersonDao();
+		List<Object[]> list = c.getPaymentStudent() ;
+		request.setAttribute("paymentStudent", list);
+		RequestDispatcher rd;
+		rd = request.getRequestDispatcher("/WEB-INF/jsp/viewstudentpayments.jsp");
+		rd.forward(request, response);
+	}
+	/**
+	 * method for all the pending payments of a student.
+	 * @param request
+	 * @param response
+	 * @throws ServletException
+	 * @throws IOException
+	 */
+	private void pendingPayments(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		Person p = (Person) session.getAttribute("person");
+		PersonDao pd = new PersonDao();
+		List<Object[]> list = pd.getPendingPayment(p.getPersonID());
+		request.setAttribute("pendingPayment",list);
+		RequestDispatcher rd;
+		rd = request.getRequestDispatcher("/WEB-INF/jsp/viewpendingpayment.jsp");
+		rd.forward(request, response);
+	}
+	
+	private void historyPayments(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		Person p = (Person) session.getAttribute("person");
+		PersonDao pd = new PersonDao();
+		List<Object[]> list = pd.getHistoryPayment(p.getPersonID());
+		request.setAttribute("historyPayment",list);
+		RequestDispatcher rd;
+		rd = request.getRequestDispatcher("/WEB-INF/jsp/viewhistorypayment.jsp");
+		rd.forward(request, response);
+	}
+	
 }

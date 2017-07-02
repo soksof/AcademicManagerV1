@@ -40,6 +40,9 @@ public class TeacherController extends HttpServlet {
 		case "courseThatTeacherTeaches":
 			courseThatTeacherTeaches(request, response);
 			break;
+		case "teachersEvaluation":
+			teachersEvaluation(request, response);
+			break;
 		case "view":
 			viewTeacher(request, response);
 			break;
@@ -160,6 +163,22 @@ public class TeacherController extends HttpServlet {
 		request.setAttribute("applicantList", list);
 		RequestDispatcher rd;
 		rd = request.getRequestDispatcher("/WEB-INF/jsp/viewapplicantteachers.jsp");
+		rd.forward(request, response);
+	}
+	/**
+	 * list of evaluations for a teacher per course from every student.
+	 * @param request
+	 * @param response
+	 * @throws ServletException
+	 * @throws IOException
+	 */
+	private void teachersEvaluation(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		PersonDao d = new PersonDao();
+		List<Object[]> list = d.getTeachersEvaluation();
+		request.setAttribute("teacherEvaluation", list);
+		RequestDispatcher rd;
+		rd = request.getRequestDispatcher("/WEB-INF/jsp/viewteacherevaluation.jsp");
 		rd.forward(request, response);
 	}
 }
