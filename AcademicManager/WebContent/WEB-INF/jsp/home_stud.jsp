@@ -35,7 +35,6 @@
 		<li><a href="javascript:ml('student?action=historyPayments')">History</a></li>
       </ul>
     </li>
-    <li><a href="">Messages</a> </li>
 	<li><a href="javascript:ml('person?action=edit&personID=${person.getPersonID()}')">Update Profile</a></li>
 </ul> 
 </nav>

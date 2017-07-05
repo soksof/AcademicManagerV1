@@ -42,7 +42,6 @@
 								href="javascript:ml('teacher?action=teachActiveCourses')">Active
 									Course Teachers</a></li>
 							<li><a href="javascript:ml('teacher?action=teachersEvaluation')">Teachers' Evaluation</a></li>
-							<li><a href="javascript:ml('')">Update Profile</a></li>
 						</ul></li>
 					<li><a id="linkdisabled" href="#">Students</a>
 						<ul>

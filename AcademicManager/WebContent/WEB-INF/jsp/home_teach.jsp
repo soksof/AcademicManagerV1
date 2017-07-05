@@ -34,7 +34,6 @@
 					<li><a href="">Student Grades For Past Courses</a></li>
 				</ul></li>
 			<li><a href="">Student Evaluation</a></li>
-			<li><a href="">Messages</a>
 			<li><a href="javascript:ml('person?action=edit&personID=${person.getPersonID()}')">Update Profile</a></li>
 		</ul>
 		</nav> </aside>

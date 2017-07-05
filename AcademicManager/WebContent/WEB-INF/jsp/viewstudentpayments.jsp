@@ -20,7 +20,7 @@
 		</tr>
 
 		<c:forEach items="${paymentStudent}" var="paymentStudent">
-			 <c:if test="${paymentStudent[0].getPayment()=='1'}">
+			 <c:if test="${paymentStudent[0].getPayment()=='0'}">
 			<tr>
 				<td><a target="_blank"
 					href="person?action=view&personID=${paymentStudent[0].getPersonID()}">${paymentStudent[0].getName()}
