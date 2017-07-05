@@ -11,12 +11,12 @@
 
 </head>
 <body>
+<p> List of students that have not paid yet</p>
 	<table>
 		<tr>
 			<th>Name</th>
 			<th>CourseID</th>
 			<th>Course Title</th>
-			<th>Payment</th>
 		</tr>
 
 		<c:forEach items="${paymentStudent}" var="paymentStudent">
