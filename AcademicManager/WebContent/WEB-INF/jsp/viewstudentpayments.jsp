@@ -20,14 +20,15 @@
 		</tr>
 
 		<c:forEach items="${paymentStudent}" var="paymentStudent">
+			 <c:if test="${paymentStudent[0].getPayment()=='1'}">
 			<tr>
 				<td><a target="_blank"
 					href="person?action=view&personID=${paymentStudent[0].getPersonID()}">${paymentStudent[0].getName()}
 						${paymentStudent[0].getSurname()}</a></td>
 				<td>${paymentStudent[1]}</td>
 				<td>${paymentStudent[2]}</td>
-				<td>${paymentStudent[0].getPayment()}</td>
 			</tr>
+			</c:if>
 		</c:forEach>
 	</table>
 </body>
