@@ -762,6 +762,12 @@ public class PersonDao {
 		}
 		return PendingPayments;
 	}
+
+	/**
+	 * searching for all the course that has been paid.
+	 * @param personID
+	 * @return a list of the courses that a student has paid.
+	 */
 	
 	public List<Object[]> getHistoryPayment(int personID) {
 		Connection conn = ConnectionFactory.getConnection();
@@ -792,6 +798,41 @@ public class PersonDao {
 			e.printStackTrace();
 		}
 		return historyPayments;
+	}
+	/**
+	 * searching for all the students that are attending a certain course which is teaching a certain teacher.  
+	 * @param teacherID
+	 * @return a list for all the students that are attending a certain course which is teaching a certain teacher. 
+	 */
+	public List<Object[]> getCourseStudents(int personID) {
+		Connection conn = ConnectionFactory.getConnection();
+		List<Object[]> courseStudents = new ArrayList<Object[]>();
+		try {
+			PreparedStatement stm = conn
+					.prepareStatement("SELECT * FROM person INNER JOIN coursestudent ON coursestudent.studentID=person.personID INNER JOIN courseteacher ON courseteacher.courseID=coursestudent.courseID INNER JOIN course ON course.courseID=courseteacher.courseID INNER JOIN coursecore ON coursecore.idcourseCore=course.idCourseCore WHERE teacherID=?");
+			stm.setInt(1, personID);
+			ResultSet rs = stm.executeQuery();
+			while (rs.next()) {
+				Student newStudent = new Student(rs.getInt("personID"), rs.getString("name"), rs.getString("surname"),
+						rs.getString("email"), rs.getString("phone"), Sex.valueOf(rs.getString("sex")),
+						rs.getString("address"), rs.getDate("dob"), rs.getString("username"), rs.getString("taxNumber"),
+						rs.getString("iban"), Role.valueOf(rs.getString("role")));
+				int courseID = rs.getInt("courseID");
+				int studentID = rs.getInt("studentID");
+				String courseTitle=rs.getString("title");
+				String courseTimeTable=rs.getString("timetable");
+				Object[] obj = new Object[5];
+				obj[0] = newStudent;
+				obj[1] = courseID;
+				obj[2] = courseTitle;
+				obj[3] = courseTimeTable;
+				obj[4] = studentID;
+				courseStudents.add(obj);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return courseStudents;
 	}
 	
 }

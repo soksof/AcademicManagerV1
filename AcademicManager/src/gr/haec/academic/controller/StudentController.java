@@ -16,6 +16,7 @@ import gr.haec.academic.db.PersonDao;
 import gr.haec.academic.model.Course;
 import gr.haec.academic.model.Person;
 import gr.haec.academic.model.Student;
+import gr.haec.academic.model.Teacher;
 
 @WebServlet(urlPatterns = { "/student" })
 
@@ -67,6 +68,9 @@ public class StudentController extends HttpServlet {
 			break;
 		case "historyPayments":
 			historyPayments(request, response);
+			break;
+		case "courseStudents":
+			courseStudents(request, response);
 			break;
 		}
 		}
@@ -246,7 +250,13 @@ public class StudentController extends HttpServlet {
 		rd = request.getRequestDispatcher("/WEB-INF/jsp/viewpendingpayment.jsp");
 		rd.forward(request, response);
 	}
-	
+	/**
+	 * method for all the complete payments of a student.
+	 * @param request
+	 * @param response
+	 * @throws ServletException
+	 * @throws IOException
+	 */
 	private void historyPayments(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
@@ -256,6 +266,24 @@ public class StudentController extends HttpServlet {
 		request.setAttribute("historyPayment",list);
 		RequestDispatcher rd;
 		rd = request.getRequestDispatcher("/WEB-INF/jsp/viewhistorypayment.jsp");
+		rd.forward(request, response);
+	}
+	/**
+	 * method to find all the students that attending a certain course which is teached from a certain teacher.
+	 * @param request
+	 * @param response
+	 * @throws ServletException
+	 * @throws IOException
+	 */
+	private void courseStudents(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		Person p = (Person) session.getAttribute("person");
+		PersonDao pd = new PersonDao();
+		List<Object[]> list = pd.getCourseStudents(p.getPersonID());
+		request.setAttribute("courseStudents",list);
+		RequestDispatcher rd;
+		rd = request.getRequestDispatcher("/WEB-INF/jsp/viewcoursestudents.jsp");
 		rd.forward(request, response);
 	}
 	

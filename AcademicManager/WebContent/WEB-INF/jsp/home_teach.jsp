@@ -30,7 +30,7 @@
 				</ul></li>
 			<li><a href="">Reports</a>
 				<ul>
-					<li><a href="">Students List For Each Course</a></li>
+					<li><a href="javascript:ml('student?action=courseStudents')">Students List For Each Course</a></li>
 					<li><a href="">Student Grades For Past Courses</a></li>
 				</ul></li>
 			<li><a href="">Student Evaluation</a></li>
