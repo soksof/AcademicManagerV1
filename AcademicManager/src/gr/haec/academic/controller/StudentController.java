@@ -72,6 +72,9 @@ public class StudentController extends HttpServlet {
 		case "courseStudents":
 			courseStudents(request, response);
 			break;
+		case "pastGradesStudents":
+			pastGradesStudents(request, response);
+			break;
 		}
 		}
 
@@ -284,6 +287,18 @@ public class StudentController extends HttpServlet {
 		request.setAttribute("courseStudents",list);
 		RequestDispatcher rd;
 		rd = request.getRequestDispatcher("/WEB-INF/jsp/viewcoursestudents.jsp");
+		rd.forward(request, response);
+	}
+	
+	private void pastGradesStudents(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		Person p = (Person) session.getAttribute("person");
+		PersonDao pd = new PersonDao();
+		List<Object[]> list = pd.getStudentGrades(p.getPersonID());
+		request.setAttribute("studentGrades",list);
+		RequestDispatcher rd;
+		rd = request.getRequestDispatcher("/WEB-INF/jsp/viewstudentpastgrades.jsp");
 		rd.forward(request, response);
 	}
 	

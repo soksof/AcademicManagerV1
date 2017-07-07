@@ -808,8 +808,7 @@ public class PersonDao {
 		Connection conn = ConnectionFactory.getConnection();
 		List<Object[]> courseStudents = new ArrayList<Object[]>();
 		try {
-			PreparedStatement stm = conn
-					.prepareStatement("SELECT * FROM person INNER JOIN coursestudent ON coursestudent.studentID=person.personID INNER JOIN courseteacher ON courseteacher.courseID=coursestudent.courseID INNER JOIN course ON course.courseID=courseteacher.courseID INNER JOIN coursecore ON coursecore.idcourseCore=course.idCourseCore WHERE teacherID=?");
+			PreparedStatement stm = conn.prepareStatement("SELECT * FROM person INNER JOIN coursestudent ON coursestudent.studentID=person.personID INNER JOIN courseteacher ON courseteacher.courseID=coursestudent.courseID INNER JOIN course ON course.courseID=courseteacher.courseID INNER JOIN coursecore ON coursecore.idcourseCore=course.idCourseCore WHERE teacherID=?");
 			stm.setInt(1, personID);
 			ResultSet rs = stm.executeQuery();
 			while (rs.next()) {
@@ -833,6 +832,41 @@ public class PersonDao {
 			e.printStackTrace();
 		}
 		return courseStudents;
+	}
+	/**
+	 * Searching for the grades of the completed courses for all students that they are attending a certain teachers courses.
+	 * @param personID
+	 * @return a list of the grades of the completed courses for all students that they are attending a certain teachers courses.
+	 */
+	public List<Object[]> getStudentGrades(int personID) {
+		Connection conn = ConnectionFactory.getConnection();
+		List<Object[]> StudentGrades = new ArrayList<Object[]>();
+		try {
+			PreparedStatement stm = conn.prepareStatement("SELECT * FROM person INNER JOIN coursestudent ON coursestudent.studentID=person.personID INNER JOIN courseteacher ON courseteacher.courseID=coursestudent.courseID INNER JOIN course ON course.courseID=courseteacher.courseID INNER JOIN coursecore ON coursecore.idcourseCore=course.idCourseCore WHERE teacherID=? AND course.status='complete'");
+			stm.setInt(1, personID);
+			ResultSet rs = stm.executeQuery();
+			while (rs.next()) {
+				Student newStudent = new Student(rs.getInt("personID"), rs.getString("name"), rs.getString("surname"),
+						rs.getString("email"), rs.getString("phone"), Sex.valueOf(rs.getString("sex")),
+						rs.getString("address"), rs.getDate("dob"), rs.getString("username"), rs.getString("taxNumber"),
+						rs.getString("iban"), Role.valueOf(rs.getString("role")),rs.getString("evaluation"),
+						rs.getFloat("finalGrade"));
+				int courseID = rs.getInt("courseID");
+				int studentID = rs.getInt("studentID");
+				String courseTitle=rs.getString("title");
+				float assignmnetGrades=rs.getFloat("assignmentGrades");
+				Object[] obj = new Object[5];
+				obj[0] = newStudent;
+				obj[1] = courseID;
+				obj[2] = courseTitle;
+				obj[3] = assignmnetGrades;
+				obj[4] = studentID;
+				StudentGrades.add(obj);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return StudentGrades;
 	}
 	
 }
