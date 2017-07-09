@@ -16,8 +16,6 @@
 			<th>CourseID</th>
 			<th>Course Title</th>
 			<th>Cost</th>
-			<th>Discount</th>
-			<th>Payment</th>
 		</tr>
 
 		<c:forEach items="${historyPayment}" var="historyPayment">
@@ -25,8 +23,6 @@
 				<td>${historyPayment[1]}</td>
 				<td>${historyPayment[2]}</td>
 				<td>${historyPayment[4]}</td>
-				<td>${historyPayment[3]}</td>
-				<td>${historyPayment[0].getPayment()}</td>
 			</tr>
 		</c:forEach>
 	</table>
