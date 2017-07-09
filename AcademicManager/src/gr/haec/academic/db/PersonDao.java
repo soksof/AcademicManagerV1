@@ -436,30 +436,37 @@ public class PersonDao {
 	 * 
 	 * @return a list with the teachers that teach a course
 	 */
-	public List<Object[]> getCourseTeacher() {
+	public List<Object[]> getPastCourseTeacher(int personID) {
 		Connection conn = ConnectionFactory.getConnection();
-		List<Object[]> courseTeacher = new ArrayList<Object[]>();
+		List<Object[]> pastCourseTeacher = new ArrayList<Object[]>();
 		try {
-			PreparedStatement stm = conn.prepareStatement(
-					"select * from course inner join coursecore on coursecore.idcourseCore=course.idCourseCore inner join courseteacher on courseteacher.courseID=course.courseID inner join teacher on teacher.teacherID=courseteacher.teacherID inner join person on person.personID=teacher.teacherID");
+			PreparedStatement stm = conn.prepareStatement("SELECT * FROM person INNER JOIN courseteacher on courseteacher.teacherID=person.personID INNER JOIN course on course.courseID=courseteacher.courseID INNER JOIN coursecore ON coursecore.idcourseCore=course.idCourseCore WHERE personID=? AND course.status='complete'");
+			stm.setInt(1, personID);
 			ResultSet rs = stm.executeQuery();
 			while (rs.next()) {
 				Teacher newCourseTeacher = new Teacher(rs.getInt("personID"), rs.getString("name"),
 						rs.getString("surname"), rs.getString("email"), rs.getString("phone"),
 						Sex.valueOf(rs.getString("sex")), rs.getString("address"), rs.getDate("dob"),
 						rs.getString("username"), rs.getString("taxNumber"),
-						rs.getString("iban"), Role.valueOf(rs.getString("role")),Status.getValue(rs.getString("status")), rs.getString("cv"),
-						Field.valueOf(rs.getString("field")));
+						rs.getString("iban"), Role.valueOf(rs.getString("role")));
 				String courseTitle = rs.getString("title");
-				Object[] ret = new Object[2];
+				int courseID = rs.getInt("courseID");
+				Date startDate= rs.getDate("startDate");
+				Date endDate= rs.getDate("endDate");
+				String courseCore = rs.getString("courseCore");
+				Object[] ret = new Object[6];
 				ret[0] = newCourseTeacher;
 				ret[1] = courseTitle;
-				courseTeacher.add(ret);
+				ret[2] = courseID;
+				ret[3] = courseCore;
+				ret[4] = startDate;
+				ret[5] = endDate;
+				pastCourseTeacher.add(ret);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return courseTeacher;
+		return pastCourseTeacher;
 	}
 
 	/**

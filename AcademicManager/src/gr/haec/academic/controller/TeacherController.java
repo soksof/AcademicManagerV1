@@ -9,8 +9,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import gr.haec.academic.db.PersonDao;
+import gr.haec.academic.model.Person;
 import gr.haec.academic.model.Teacher;
 
 @WebServlet(urlPatterns = { "/teacher" })
@@ -104,8 +106,10 @@ public class TeacherController extends HttpServlet {
 	 */
 	private void courseThatTeacherTeaches(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		Person p = (Person) session.getAttribute("person");
 		PersonDao d = new PersonDao();
-		List<Object[]> list = d.getCourseTeacher();
+		List<Object[]> list = d.getPastCourseTeacher(p.getPersonID());
 		request.setAttribute("teacherCoursesList", list);
 		RequestDispatcher rd;
 		rd = request.getRequestDispatcher("/WEB-INF/jsp/viewcoursethatteacherteach.jsp");

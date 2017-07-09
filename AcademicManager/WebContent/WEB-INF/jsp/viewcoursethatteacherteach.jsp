@@ -12,16 +12,20 @@
 <body>
 	<table>
 	<tr>
-		<th>Name</th>
-		<th>Surname</th>
-		<th>title</th>
+		<th>CourseID</th>
+		<th>Title</th>
+		<th>Course Core</th>
+		<th>Start Date</th>
+		<th>End Date</th>
 	</tr>
 	
 	<c:forEach items="${teacherCoursesList}" var="teachList">
 	<tr>
-		<td>${teachList[0].getName()}</td>
-		<td>${teachList[0].getSurname()}</td>
+		<td>${teachList[2]}</td>
 		<td>${teachList[1]}</td>
+		<td>${teachList[3]}</td>
+		<td>${teachList[4]}</td>
+		<td>${teachList[5]}</td>
 	</tr>
 	</c:forEach>
 	</table>
